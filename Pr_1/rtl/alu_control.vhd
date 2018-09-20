@@ -20,7 +20,16 @@ entity alu_control is
 end alu_control;
 
 architecture rtl of alu_control is
-   
+
 begin
+
+   process (ALUOp, Funct)
+   begin
+      case ALUOp is
+         when ---  => ---- <= ----;
+         when others => 
+
+      end case;
+   end process;
 
 end architecture;
