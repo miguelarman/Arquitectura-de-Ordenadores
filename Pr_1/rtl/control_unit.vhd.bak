@@ -102,7 +102,7 @@ begin
             Branch <= '0';
             MemRead <= '-';
             MemtoReg <= '-';
-            ALUOp <= "---";
+            ALUOp <= "-";
             MemWrite <= '0';
             ALUSrc <= '-';
             RegWrite <= '0';
