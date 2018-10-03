@@ -63,7 +63,7 @@ architecture rtl of processor is
 
    --Señales intermedias
    signal NextPC    : std_logic_vector(31 downto 0);
-   signal PC        : std_logic_vector(31 downto 0);
+   signal PC        : std_logic_vector(31 downto 0) := x"00000000";
    signal DRead     : std_logic_vector(31 downto 0);
    
    --Declaración de ALU para instanciarla
@@ -172,78 +172,64 @@ architecture rtl of processor is
        We3 => We3
     );
 
-   --Contador de programa
-   PCUpdate: process (Clk, Reset)
-      begin
-         if Reset = '1' then
-            PC <=x"00000000";
-         elsif rising_edge(Clk) then
-            PC <= NextPC;
-         end if;
-      end process;
-   
-   --Actualización del valor del contador de programa
-   NextPCMux: process (Branch, ZFlag)
-      begin
-         if (Branch = '1') and (ZFlag = '1') then
-            NextPC <= (PC + 4 + BranchSum);
-         else
-            NextPC <= PC + 4;
-         end if;
-      end process;
-   
-   --Calculo de la dirección de salto en caso de branch
-   BranchSumUpdate: process (IDataIn)
-   begin
-      BranchSum <= (others => IDataIn(15));
-      BranchSum(17 downto 2) <= IDataIn(15 downto 0);
-      BranchSum(1 downto 0) <= "00";
+procesador: process(Clk,Reset)
+    begin
+	--Contador de programa
+	if Reset = '1' then
+	   PC <=x"00000000";
+	elsif rising_edge(Clk) then
+	   PC <= NextPC;
+        end if;
+	   
+        --Actualización del valor del contador de programa
+	if (Branch = '1') and (ZFlag = '1') then
+	   NextPC <= (PC + 4 + BranchSum);
+	else
+	   NextPC <= PC + 4;
+	end if;
+	
+	--Extensión de signo y desplazamiento de dos bits a la izquierda de los 16 últimos bits de la instrucción
+        BranchSum <= (others => IDataIn(15));
+        BranchSum(17 downto 2) <= IDataIn(15 downto 0);
+        BranchSum(1 downto 0) <= "00";
+
+	IAddr <= PC;
+	We3 <= RegWrite;
+	OpCode <= IDataIn(31 downto 26);
+	A1 <= IDataIn(25 downto 21);
+	A2 <= IDataIn(20 downto 16);
+
+	--Multiplexor de A3
+	if RegDst = '0' then
+	   A3 <= IDataIn(20 downto 16);
+	else
+	   A3 <= IDataIn(15 downto 11);
+	end if;
+	
+        Funct <= IDataIn(5 downto 0);
+	OpA <= Rd1;
+
+	--Multiplexor de OpB
+	if ALUSrc = '0' then
+	   OpB <= Rd2;
+	else
+	   OpB <= (others => IDataIn(15)); 
+	   OpB(15 downto 0) <= IDataIn(15 downto 0);
+	end if;
+	
+	Control <= ALUcontrol;
+	DAddr <= Result;
+	DDataOut <= Rd2;
+	DWrEn <= MemWrite;
+	DRdEn <= MemRead;
+
+	--Multiplexor de Wd3    
+	if MemToReg = '0' then
+	   Wd3 <= Result;
+	else 
+	   Wd3 <= DRead;
+	end if;
+	
    end process;
 
-   IAddr <= PC;
-   We3 <= RegWrite;
-   OpCode <= IDataIn(31 downto 26);
-   A1 <= IDataIn(25 downto 21);
-   A2 <= IDataIn(20 downto 16);
-   
---??¿?¿?
-   A3Mux: process(IDataIn)
-       begin
-          if RegDst = '0' then
-             A3 <= IDataIn(20 downto 16);
-          else
-             A3 <= IDataIn(15 downto 11);
-          end if;
-       end process;
-  
-   Funct <= IDataIn(5 downto 0);
-   OpA <= Rd1;
-
-   OpBMux: process(IDataIn)
-       begin
-          if ALUSrc = '0' then
-             OpB <= Rd2;
-          else
-             OpB <= (others => IDataIn(15)); 
-	     OpB(15 downto 0) <= IDataIn(15 downto 0);
-          end if;
-       end process;
-
-    Control <= ALUcontrol;
-    DAddr <= Result;
-    DDataOut <= Rd2;
-    DWrEn <= MemWrite;
-    DRdEn <= MemRead;
-    
-    Wd3Mux: process(IDataIn)
-       begin
-          if MemToReg = '0' then
-             Wd3 <= Result;
-          else 
-             Wd3 <= DRead;
-          end if;
-       end process;
-
-
-    
 end architecture;
