@@ -64,7 +64,6 @@ architecture rtl of processor is
    --Señales intermedias
    signal NextPC         : std_logic_vector(31 downto 0);
    signal PC             : std_logic_vector(31 downto 0);
-   signal DRead          : std_logic_vector(31 downto 0);
    signal ExtensionSigno : std_logic_vector(31 downto 0);
    
    --Declaración de ALU para instanciarla
@@ -188,7 +187,7 @@ NextPC <= (PC + 4 + BranchSum) when (Branch = '1') and (ZFlag = '1') else
           PC + 4;
 
 --Extensión de signo y desplazamiento de dos bits a la izquierda de los 16 últimos bits de la instrucción
-BranchSum <= (others => IDataIn(15));
+BranchSum(31 downto 18) <= (others => IDataIn(15));
 BranchSum(17 downto 2) <= IDataIn(15 downto 0);
 BranchSum(1 downto 0) <= "00";
 
@@ -206,11 +205,10 @@ Funct <= IDataIn(5 downto 0);
 OpA <= Rd1;
 
 --Multiplexor de OpB
-ExtensionSigno <=(others => IDataIn(15));
+ExtensionSigno(31 downto 16) <=(others => IDataIn(15));
 ExtensionSigno(15 downto 0) <= IDataIn(15 downto 0);
 
-OpB <= Rd2 when ALUSrc = '0' else
-       ExtensionSigno;
+OpB <= Rd2 when ALUSrc = '0' else ExtensionSigno;
 
 Control <= ALUcontrol;
 DAddr <= Result;
@@ -220,7 +218,6 @@ DRdEn <= MemRead;
 
 --Multiplexor de Wd3    
 Wd3 <= Result when MemToReg = '0' else
-       Dread;
-
+       DDataIn;
 
 end architecture;
