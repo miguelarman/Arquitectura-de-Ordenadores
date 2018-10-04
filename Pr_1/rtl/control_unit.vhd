@@ -15,6 +15,7 @@ entity control_unit is
       OpCode  : in  std_logic_vector (5 downto 0);
       -- Seniales para el PC
       Branch : out  std_logic; -- 1=Ejecutandose instruccion branch
+      Jump   : out  std_logic; -- 1=Ejecutandose instruccion jump
       -- Seniales relativas a la memoria
       MemToReg : out  std_logic; -- 1=Escribir en registro la salida de la mem.
       MemWrite : out  std_logic; -- Escribir la memoria
@@ -35,6 +36,7 @@ architecture rtl of control_unit is
 
    -- Codigos de operacion para las diferentes instrucciones:
    constant OP_RTYPE  : t_opCode := "000000";
+   constant OP_JUMP   : t_opCode := "000010";
    constant OP_BEQ    : t_opCode := "000100";
    constant OP_SW     : t_opCode := "101011";
    constant OP_LW     : t_opCode := "100011";
@@ -61,6 +63,7 @@ begin
             MemWrite <= '0';
             ALUSrc <= '0';
             RegWrite <= '1';
+	    Jump <= '0';
          when OP_BEQ  =>
             RegDst <= '0';
             Branch <= '1';
@@ -70,6 +73,7 @@ begin
             MemWrite <= '0';
             ALUSrc <= '0';
             RegWrite <= '0';
+	    Jump <= '0';
          when OP_SW  =>
             RegDst <= '0';
             Branch <= '0';
@@ -79,6 +83,7 @@ begin
             MemWrite <= '1';
             ALUSrc <= '1';
             RegWrite <= '0'; 
+            Jump <= '0';
          when OP_LW  =>
             RegDst <= '0';
             Branch <= '0';
@@ -87,7 +92,8 @@ begin
             ALUOp <= MEM;
             MemWrite <= '0';
             ALUSrc <= '1';
-            RegWrite <= '1'; 
+            RegWrite <= '1';
+            Jump <= '0'; 
          when OP_LUI  =>
             RegDst <= '0';
             Branch <= '0';
@@ -96,7 +102,18 @@ begin
             ALUOp <= LUI;
             MemWrite <= '0';
             ALUSrc <= '1';
-            RegWrite <= '1';          
+            RegWrite <= '1';
+	    Jump <= '0'; 
+         when OP_JUMP =>   
+            RegDst <= '-';
+            Branch <= '0';
+            MemRead <= '-';
+            MemtoReg <= '-';
+            ALUOp <= "---";
+            MemWrite <= '0';
+            ALUSrc <= '-';
+            RegWrite <= '0';
+	    Jump <= '1';      
          when others =>
             RegDst <= '-';
             Branch <= '0';
