@@ -9,7 +9,7 @@ z2
 cModel Technology
 Z0 d/home/alumnos/e361902/Arquitectura-de-Ordenadores/Pr_1/sim
 Ealu
-Z1 w1538652072
+Z1 w1538675229
 Z2 DPx4 ieee 15 std_logic_arith 0 22 [G314=:2zXJ`VORJe1J@Z1
 Z3 DPx4 ieee 18 std_logic_unsigned 0 22 ;eZjO2D4ZDz<]0>8AL<ne1
 Z4 DPx3 std 6 textio 0 22 zE1`LPoLg^DX3Oz^4Fj1K3
@@ -23,9 +23,9 @@ VbE4YMILN5ef:fc]m]KY001
 !s100 PZenWJ@F@Xc]_f<F91A7N1
 Z8 OL;C;10.6c;65
 32
-Z9 !s110 1538657271
+Z9 !s110 1538676158
 !i10b 1
-Z10 !s108 1538657271.000000
+Z10 !s108 1538676158.000000
 Z11 !s90 -reportprogress|300|-work|work|-2002|-explicit|-check_synthesis|../rtl/alu.vhd|
 Z12 !s107 ../rtl/alu.vhd|
 !i113 0
@@ -105,8 +105,8 @@ Z19 8../rtl/control_unit.vhd
 Z20 F../rtl/control_unit.vhd
 l0
 L12
-V5>98E0H8bX=B4lOz9hKT80
-!s100 U_zRzLRCH^8Go^fJKbLU72
+VAdbg81<3:6g553:89JiAh0
+!s100 5;MbzVYJ=O_b3kSmlfR700
 R8
 32
 R9
@@ -122,13 +122,13 @@ R2
 R3
 R4
 R5
-DEx4 work 12 control_unit 0 22 5>98E0H8bX=B4lOz9hKT80
+DEx4 work 12 control_unit 0 22 Adbg81<3:6g553:89JiAh0
 32
 R9
-l50
-L31
-VQ4HcYhc<8UOjS`ElJk7YD1
-!s100 mXNK>AMI=AXB3UDFzBk5e3
+l52
+L32
+VG596cII^?<fAIzE;a3k_f2
+!s100 NQQCPbV9b4zQ`MYYD91Rc2
 R8
 !i10b 1
 R10
@@ -183,7 +183,7 @@ R27
 R28
 R14
 Eprocessor
-Z29 w1538657244
+Z29 w1538675633
 R2
 R3
 R4
@@ -213,10 +213,10 @@ R5
 DEx4 work 9 processor 0 22 hV6`3eAiG;h_8e=A4Szbm0
 32
 R9
-l130
+l133
 L28
-VcR6YY_kCc0zC=hlZ2HFQF2
-!s100 =h@Y_21Tjk3HZOaSU?c`Y2
+VL9i[Leg:dT2811Sk^K@9I0
+!s100 ^b5NG8Ec6>g_EF]Pe^kel3
 R8
 !i10b 1
 R10

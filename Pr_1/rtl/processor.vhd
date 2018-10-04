@@ -60,11 +60,14 @@ architecture rtl of processor is
    signal ALUSrc : std_logic; -- 0=oper.B es registro, 1=es valor inm.
    signal RegWrite : std_logic; -- 1=Escribir registro
    signal RegDst   : std_logic;  -- 0=Reg. destino es rt, 1=rd
+   signal Jump   : std_logic;  -- 1=Ejecutandose instruccion jump
 
    --Señales intermedias
    signal NextPC         : std_logic_vector(31 downto 0);
    signal PC             : std_logic_vector(31 downto 0);
+   signal PCPlus4        : std_logic_vector(31 downto 0);
    signal ExtensionSigno : std_logic_vector(31 downto 0);
+   signal JumpSum        : std_logic_vector(31 downto 0);
    
    --Declaración de ALU para instanciarla
    component alu 
@@ -193,7 +196,8 @@ BranchSum(17 downto 2) <= IDataIn(15 downto 0);
 BranchSum(1 downto 0) <= "00";
 
 --Cuidaoooooooooooooooooo
-JumpSum(31 downto 28) <= (PC + 4) (31 downto 28);
+PCPlus4 <= PC + 4;
+JumpSum(31 downto 28) <= PCPlus4(31 downto 28);
 JumpSum(27 downto 2) <= IDataIn(25 downto 0);
 JumpSum(1 downto 0) <= "00";
 
