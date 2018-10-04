@@ -12,10 +12,10 @@ use ieee.std_logic_unsigned.all;
 entity control_unit is
    port (
       -- Entrada = codigo de operacion en la instruccion:
-      OpCode  : in  std_logic_vector (5 downto 0);
+      OpCode   : in  std_logic_vector (5 downto 0);
       -- Seniales para el PC
-      Branch : out  std_logic; -- 1=Ejecutandose instruccion branch
-      Jump   : out  std_logic; -- 1=Ejecutandose instruccion jump
+      Branch   : out  std_logic; -- 1=Ejecutandose instruccion branch
+      Jump     : out  std_logic; -- 1=Ejecutandose instruccion jump
       -- Seniales relativas a la memoria
       MemToReg : out  std_logic; -- 1=Escribir en registro la salida de la mem.
       MemWrite : out  std_logic; -- Escribir la memoria
@@ -44,10 +44,10 @@ architecture rtl of control_unit is
 
    -- Codigos para ALUOp
    constant RTYPE : std_logic_vector (2 downto 0) := "000";
-   constant BEQ : std_logic_vector (2 downto 0) := "001";
-   constant ADDI : std_logic_vector (2 downto 0) := "010";
-   constant MEM : std_logic_vector (2 downto 0) := "011";
-   constant LUI : std_logic_vector (2 downto 0) := "100";
+   constant BEQ   : std_logic_vector (2 downto 0) := "001";
+   constant ADDI  : std_logic_vector (2 downto 0) := "010";
+   constant MEM   : std_logic_vector (2 downto 0) := "011";
+   constant LUI   : std_logic_vector (2 downto 0) := "100";
 
 begin
    
