@@ -184,12 +184,18 @@ procesador: process(Clk,Reset)
 	   
 --Actualización del valor del contador de programa
 NextPC <= (PC + 4 + BranchSum) when (Branch = '1') and (ZFlag = '1') else
+	  JumpSum when (Jump = '1') else
           PC + 4;
 
 --Extensión de signo y desplazamiento de dos bits a la izquierda de los 16 últimos bits de la instrucción
 BranchSum(31 downto 18) <= (others => IDataIn(15));
 BranchSum(17 downto 2) <= IDataIn(15 downto 0);
 BranchSum(1 downto 0) <= "00";
+
+--Cuidaoooooooooooooooooo
+JumpSum(31 downto 28) <= (PC + 4) (31 downto 28);
+JumpSum(27 downto 2) <= IDataIn(25 downto 0);
+JumpSum(1 downto 0) <= "00";
 
 IAddr <= PC;
 We3 <= RegWrite;
