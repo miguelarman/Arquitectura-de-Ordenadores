@@ -1,0 +1,313 @@
+m255
+K4
+z2
+13
+!s112 1.1
+!i10d 8192
+!i10e 25
+!i10f 100
+cModel Technology
+d/home/alumnos/e361902/Arquitectura-de-Ordenadores/Pr_1/sim
+Ealu
+Z0 w1538675229
+Z1 DPx4 ieee 15 std_logic_arith 0 22 [G314=:2zXJ`VORJe1J@Z1
+Z2 DPx4 ieee 18 std_logic_unsigned 0 22 ;eZjO2D4ZDz<]0>8AL<ne1
+Z3 DPx3 std 6 textio 0 22 zE1`LPoLg^DX3Oz^4Fj1K3
+Z4 DPx4 ieee 14 std_logic_1164 0 22 eNV`TJ_GofJTzYa?f<@Oe1
+Z5 d/home/alumnos/e361902/Arquitectura-de-Ordenadores/Pr_1/Segmentado/sim
+Z6 8/home/alumnos/e361902/Arquitectura-de-Ordenadores/Pr_1/Segmentado/rtl/alu.vhd
+Z7 F/home/alumnos/e361902/Arquitectura-de-Ordenadores/Pr_1/Segmentado/rtl/alu.vhd
+l0
+L15
+VcBa>0[5]EgBPoF[SY0W:S3
+!s100 PZenWJ@F@Xc]_f<F91A7N1
+Z8 OL;C;10.6c;65
+32
+Z9 !s110 1538682186
+!i10b 1
+Z10 !s108 1538682186.000000
+Z11 !s90 -reportprogress|300|-work|work|-2002|-explicit|-vopt|-stats=none|/home/alumnos/e361902/Arquitectura-de-Ordenadores/Pr_1/Segmentado/rtl/alu.vhd|
+Z12 !s107 /home/alumnos/e361902/Arquitectura-de-Ordenadores/Pr_1/Segmentado/rtl/alu.vhd|
+!i113 0
+Z13 o-work work -2002 -explicit
+Z14 tExplicit 1 CvgOpt 0
+Artl
+R1
+R2
+R3
+R4
+DEx4 work 3 alu 0 22 cBa>0[5]EgBPoF[SY0W:S3
+l44
+L25
+V^lNJ3g9RhaGRLjHMkJ2lS2
+!s100 PKQFSzcfC>Y<jTI_Ma2fe2
+R8
+32
+R9
+!i10b 1
+R10
+R11
+R12
+!i113 0
+R13
+R14
+Ealu_control
+R0
+R1
+R2
+R3
+R4
+R5
+Z15 8/home/alumnos/e361902/Arquitectura-de-Ordenadores/Pr_1/Segmentado/rtl/alu_control.vhd
+Z16 F/home/alumnos/e361902/Arquitectura-de-Ordenadores/Pr_1/Segmentado/rtl/alu_control.vhd
+l0
+L12
+VM_d=8C2I?[5K8VYK]41:[2
+!s100 R9Kf0QF=]j`[mbiT`SNBo0
+R8
+32
+R9
+!i10b 1
+R10
+Z17 !s90 -reportprogress|300|-work|work|-2002|-explicit|-vopt|-stats=none|/home/alumnos/e361902/Arquitectura-de-Ordenadores/Pr_1/Segmentado/rtl/alu_control.vhd|
+Z18 !s107 /home/alumnos/e361902/Arquitectura-de-Ordenadores/Pr_1/Segmentado/rtl/alu_control.vhd|
+!i113 0
+R13
+R14
+Artl
+R1
+R2
+R3
+R4
+DEx4 work 11 alu_control 0 22 M_d=8C2I?[5K8VYK]41:[2
+l50
+L22
+V0o2]7SnP;lP2Na5hXA6gc2
+!s100 _L]YF_`G^nUmCz29`3k1k3
+R8
+32
+R9
+!i10b 1
+R10
+R17
+R18
+!i113 0
+R13
+R14
+Econtrol_unit
+R0
+R1
+R2
+R3
+R4
+R5
+Z19 8/home/alumnos/e361902/Arquitectura-de-Ordenadores/Pr_1/Segmentado/rtl/control_unit.vhd
+Z20 F/home/alumnos/e361902/Arquitectura-de-Ordenadores/Pr_1/Segmentado/rtl/control_unit.vhd
+l0
+L12
+VHP2ABdScMdQCJ3KBV=az@3
+!s100 5;MbzVYJ=O_b3kSmlfR700
+R8
+32
+R9
+!i10b 1
+R10
+Z21 !s90 -reportprogress|300|-work|work|-2002|-explicit|-vopt|-stats=none|/home/alumnos/e361902/Arquitectura-de-Ordenadores/Pr_1/Segmentado/rtl/control_unit.vhd|
+Z22 !s107 /home/alumnos/e361902/Arquitectura-de-Ordenadores/Pr_1/Segmentado/rtl/control_unit.vhd|
+!i113 0
+R13
+R14
+Artl
+R1
+R2
+R3
+R4
+DEx4 work 12 control_unit 0 22 HP2ABdScMdQCJ3KBV=az@3
+l52
+L32
+V@z_LKGQZ;9mUZgEz3UbBZ0
+!s100 NQQCPbV9b4zQ`MYYD91Rc2
+R8
+32
+R9
+!i10b 1
+R10
+R21
+R22
+!i113 0
+R13
+R14
+Ememory
+R0
+Z23 DPx4 ieee 16 std_logic_textio 0 22 V5TSK`;aJKC<l]CEg1>mz1
+R2
+R1
+R4
+R3
+R5
+Z24 8/home/alumnos/e361902/Arquitectura-de-Ordenadores/Pr_1/Segmentado/sim/memory.vhd
+Z25 F/home/alumnos/e361902/Arquitectura-de-Ordenadores/Pr_1/Segmentado/sim/memory.vhd
+l0
+L18
+V]YhW>BF5M?16JPO:IjS;F2
+!s100 DWj_g:Oh1NEB9L?NJ3>S33
+R8
+32
+R9
+!i10b 1
+R10
+Z26 !s90 -reportprogress|300|-work|work|-2002|-explicit|-vopt|-stats=none|/home/alumnos/e361902/Arquitectura-de-Ordenadores/Pr_1/Segmentado/sim/memory.vhd|
+Z27 !s107 /home/alumnos/e361902/Arquitectura-de-Ordenadores/Pr_1/Segmentado/sim/memory.vhd|
+!i113 0
+R13
+R14
+Abehavioral
+R23
+R2
+R1
+R4
+R3
+DEx4 work 6 memory 0 22 ]YhW>BF5M?16JPO:IjS;F2
+l40
+L33
+Vj11BKgXej7U4k_dh7cPUY1
+!s100 YaS_m8K5SeB=1=lOb5eXb1
+R8
+32
+R9
+!i10b 1
+R10
+R26
+R27
+!i113 0
+R13
+R14
+Eprocessor
+Z28 w1538682181
+R1
+R2
+R3
+R4
+R5
+Z29 8/home/alumnos/e361902/Arquitectura-de-Ordenadores/Pr_1/Segmentado/rtl/processor.vhd
+Z30 F/home/alumnos/e361902/Arquitectura-de-Ordenadores/Pr_1/Segmentado/rtl/processor.vhd
+l0
+L12
+VFS@`^ATE_VSnafTH_XooA0
+!s100 7?Nol_hooLcTAU>J3YB6=3
+R8
+32
+R9
+!i10b 1
+R10
+Z31 !s90 -reportprogress|300|-work|work|-2002|-explicit|-vopt|-stats=none|/home/alumnos/e361902/Arquitectura-de-Ordenadores/Pr_1/Segmentado/rtl/processor.vhd|
+Z32 !s107 /home/alumnos/e361902/Arquitectura-de-Ordenadores/Pr_1/Segmentado/rtl/processor.vhd|
+!i113 0
+R13
+R14
+Artl
+R1
+R2
+R3
+R4
+DEx4 work 9 processor 0 22 FS@`^ATE_VSnafTH_XooA0
+l182
+L28
+V@zFgTZXjQ]LGZo<NR@BH<2
+!s100 `X5ocmf7ARaGSQLhhYE8M3
+R8
+32
+R9
+!i10b 1
+R10
+R31
+R32
+!i113 0
+R13
+R14
+Eprocessor_tb
+R0
+R2
+R1
+R3
+R4
+R5
+Z33 8/home/alumnos/e361902/Arquitectura-de-Ordenadores/Pr_1/Segmentado/sim/processor_tb.vhd
+Z34 F/home/alumnos/e361902/Arquitectura-de-Ordenadores/Pr_1/Segmentado/sim/processor_tb.vhd
+l0
+L14
+Vn`iYfnL@@TOSm@niYeVzi1
+!s100 TP3]zWZd=AR;5i]B7@Jo^2
+R8
+32
+R9
+!i10b 1
+R10
+Z35 !s90 -reportprogress|300|-work|work|-2002|-explicit|-vopt|-stats=none|/home/alumnos/e361902/Arquitectura-de-Ordenadores/Pr_1/Segmentado/sim/processor_tb.vhd|
+Z36 !s107 /home/alumnos/e361902/Arquitectura-de-Ordenadores/Pr_1/Segmentado/sim/processor_tb.vhd|
+!i113 0
+R13
+R14
+Atb
+R2
+R1
+R3
+R4
+DEx4 work 12 processor_tb 0 22 n`iYfnL@@TOSm@niYeVzi1
+l78
+L22
+VMKNYS5JSl1UokbX0DCbG:0
+!s100 4Y]CnD_T;Kj47b[VT>LIO0
+R8
+32
+R9
+!i10b 1
+R10
+R35
+R36
+!i113 0
+R13
+R14
+Ereg_bank
+R0
+R1
+R2
+R3
+R4
+R5
+Z37 8/home/alumnos/e361902/Arquitectura-de-Ordenadores/Pr_1/Segmentado/rtl/reg_bank.vhd
+Z38 F/home/alumnos/e361902/Arquitectura-de-Ordenadores/Pr_1/Segmentado/rtl/reg_bank.vhd
+l0
+L15
+VAS4<>LWTj`aXMj0]0EQlI0
+!s100 mcj_ZWF[]T]VE]XjFVS]T0
+R8
+32
+R9
+!i10b 1
+R10
+Z39 !s90 -reportprogress|300|-work|work|-2002|-explicit|-vopt|-stats=none|/home/alumnos/e361902/Arquitectura-de-Ordenadores/Pr_1/Segmentado/rtl/reg_bank.vhd|
+Z40 !s107 /home/alumnos/e361902/Arquitectura-de-Ordenadores/Pr_1/Segmentado/rtl/reg_bank.vhd|
+!i113 0
+R13
+R14
+Artl
+R1
+R2
+R3
+R4
+Z41 DEx4 work 8 reg_bank 0 22 AS4<>LWTj`aXMj0]0EQlI0
+l36
+L29
+Z42 V88<7Vj<nnJB2<f5;0Doa90
+Z43 !s100 PZ8BZD@N8hA;bQ<hIchmb1
+R8
+32
+R9
+!i10b 1
+R10
+R39
+R40
+!i113 0
+R13
+R14
