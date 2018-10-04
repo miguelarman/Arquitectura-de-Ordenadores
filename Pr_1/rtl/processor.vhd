@@ -62,9 +62,10 @@ architecture rtl of processor is
    signal RegDst   : std_logic;  -- 0=Reg. destino es rt, 1=rd
 
    --Señales intermedias
-   signal NextPC    : std_logic_vector(31 downto 0);
-   signal PC        : std_logic_vector(31 downto 0) := x"00000000";
-   signal DRead     : std_logic_vector(31 downto 0);
+   signal NextPC         : std_logic_vector(31 downto 0);
+   signal PC             : std_logic_vector(31 downto 0);
+   signal DRead          : std_logic_vector(31 downto 0);
+   signal ExtensionSigno : std_logic_vector(31 downto 0);
    
    --Declaración de ALU para instanciarla
    component alu 
@@ -205,8 +206,11 @@ Funct <= IDataIn(5 downto 0);
 OpA <= Rd1;
 
 --Multiplexor de OpB
+ExtensionSigno <=(others => IDataIn(15));
+ExtensionSigno(15 downto 0) <= IDataIn(15 downto 0);
+
 OpB <= Rd2 when ALUSrc = '0' else
-       (31 downto 16 => IDataIn(15), 15 downto 0 => IDataIn(15 downto 0));
+       ExtensionSigno;
 
 Control <= ALUcontrol;
 DAddr <= Result;
