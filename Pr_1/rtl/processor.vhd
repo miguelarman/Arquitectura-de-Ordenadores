@@ -180,56 +180,43 @@ procesador: process(Clk,Reset)
 	elsif rising_edge(Clk) then
 	   PC <= NextPC;
         end if;
+    end process;
 	   
-        --Actualización del valor del contador de programa
-	if (Branch = '1') and (ZFlag = '1') then
-	   NextPC <= (PC + 4 + BranchSum);
-	else
-	   NextPC <= PC + 4;
-	end if;
-	
-	--Extensión de signo y desplazamiento de dos bits a la izquierda de los 16 últimos bits de la instrucción
-        BranchSum <= (others => IDataIn(15));
-        BranchSum(17 downto 2) <= IDataIn(15 downto 0);
-        BranchSum(1 downto 0) <= "00";
+--Actualización del valor del contador de programa
+NextPC <= (PC + 4 + BranchSum) when (Branch = '1') and (ZFlag = '1') else
+          PC + 4;
 
-	IAddr <= PC;
-	We3 <= RegWrite;
-	OpCode <= IDataIn(31 downto 26);
-	A1 <= IDataIn(25 downto 21);
-	A2 <= IDataIn(20 downto 16);
+--Extensión de signo y desplazamiento de dos bits a la izquierda de los 16 últimos bits de la instrucción
+BranchSum <= (others => IDataIn(15));
+BranchSum(17 downto 2) <= IDataIn(15 downto 0);
+BranchSum(1 downto 0) <= "00";
 
-	--Multiplexor de A3
-	if RegDst = '0' then
-	   A3 <= IDataIn(20 downto 16);
-	else
-	   A3 <= IDataIn(15 downto 11);
-	end if;
-	
-        Funct <= IDataIn(5 downto 0);
-	OpA <= Rd1;
+IAddr <= PC;
+We3 <= RegWrite;
+OpCode <= IDataIn(31 downto 26);
+A1 <= IDataIn(25 downto 21);
+A2 <= IDataIn(20 downto 16);
 
-	--Multiplexor de OpB
-	if ALUSrc = '0' then
-	   OpB <= Rd2;
-	else
-	   OpB <= (others => IDataIn(15)); 
-	   OpB(15 downto 0) <= IDataIn(15 downto 0);
-	end if;
-	
-	Control <= ALUcontrol;
-	DAddr <= Result;
-	DDataOut <= Rd2;
-	DWrEn <= MemWrite;
-	DRdEn <= MemRead;
+--Multiplexor de A3
+A3 <= IDataIn(20 downto 16) when RegDst = '0' else
+      IDataIn(15 downto 11); 
 
-	--Multiplexor de Wd3    
-	if MemToReg = '0' then
-	   Wd3 <= Result;
-	else 
-	   Wd3 <= DRead;
-	end if;
-	
-   end process;
+Funct <= IDataIn(5 downto 0);
+OpA <= Rd1;
+
+--Multiplexor de OpB
+OpB <= Rd2 when ALUSrc = '0' else
+       (31 downto 16 => IDataIn(15), 15 downto 0 => IDataIn(15 downto 0));
+
+Control <= ALUcontrol;
+DAddr <= Result;
+DDataOut <= Rd2;
+DWrEn <= MemWrite;
+DRdEn <= MemRead;
+
+--Multiplexor de Wd3    
+Wd3 <= Result when MemToReg = '0' else
+       Dread;
+
 
 end architecture;
