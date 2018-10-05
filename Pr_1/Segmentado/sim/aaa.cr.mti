@@ -1,4 +1,14 @@
-/home/alumnos/e361902/Arquitectura-de-Ordenadores/Pr_1/Segmentado/rtl/processor.vhd {1 {vcom -work work -2002 -explicit -vopt -stats=none /home/alumnos/e361902/Arquitectura-de-Ordenadores/Pr_1/Segmentado/rtl/processor.vhd
+C:/Users/Alberto/Desktop/Arquitectura-de-Ordenadores/Pr_1/Segmentado/rtl/processor.vhd {1 {vcom -work work -2002 -explicit -stats=none C:/Users/Alberto/Desktop/Arquitectura-de-Ordenadores/Pr_1/Segmentado/rtl/processor.vhd
+Model Technology ModelSim - Intel FPGA Edition vcom 10.5b Compiler 2016.10 Oct  5 2016
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package std_logic_arith
+-- Loading package STD_LOGIC_UNSIGNED
+-- Compiling entity processor
+-- Compiling architecture rtl of processor
+
+} {} {}} /home/alumnos/e361902/Arquitectura-de-Ordenadores/Pr_1/Segmentado/rtl/processor.vhd {1 {vcom -work work -2002 -explicit -vopt -stats=none /home/alumnos/e361902/Arquitectura-de-Ordenadores/Pr_1/Segmentado/rtl/processor.vhd
 QuestaSim-64 vcom 10.6c Compiler 2017.07 Jul 25 2017
 -- Loading package STANDARD
 -- Loading package TEXTIO
@@ -18,36 +28,15 @@ QuestaSim-64 vcom 10.6c Compiler 2017.07 Jul 25 2017
 -- Compiling entity control_unit
 -- Compiling architecture rtl of control_unit
 
-} {} {}} /home/alumnos/e361902/Arquitectura-de-Ordenadores/Pr_1/Segmentado/sim/memory.vhd {1 {vcom -work work -2002 -explicit -vopt -stats=none /home/alumnos/e361902/Arquitectura-de-Ordenadores/Pr_1/Segmentado/sim/memory.vhd
-QuestaSim-64 vcom 10.6c Compiler 2017.07 Jul 25 2017
+} {} {}} C:/Users/Alberto/Desktop/Arquitectura-de-Ordenadores/Pr_1/Segmentado/rtl/control_unit.vhd {1 {vcom -work work -2002 -explicit -stats=none C:/Users/Alberto/Desktop/Arquitectura-de-Ordenadores/Pr_1/Segmentado/rtl/control_unit.vhd
+Model Technology ModelSim - Intel FPGA Edition vcom 10.5b Compiler 2016.10 Oct  5 2016
 -- Loading package STANDARD
 -- Loading package TEXTIO
 -- Loading package std_logic_1164
 -- Loading package std_logic_arith
 -- Loading package STD_LOGIC_UNSIGNED
--- Loading package std_logic_textio
--- Compiling entity memory
--- Compiling architecture Behavioral of memory
-
-} {} {}} /home/alumnos/e361902/Arquitectura-de-Ordenadores/Pr_1/Segmentado/sim/processor_tb.vhd {1 {vcom -work work -2002 -explicit -vopt -stats=none /home/alumnos/e361902/Arquitectura-de-Ordenadores/Pr_1/Segmentado/sim/processor_tb.vhd
-QuestaSim-64 vcom 10.6c Compiler 2017.07 Jul 25 2017
--- Loading package STANDARD
--- Loading package TEXTIO
--- Loading package std_logic_1164
--- Loading package std_logic_arith
--- Loading package STD_LOGIC_UNSIGNED
--- Compiling entity processor_tb
--- Compiling architecture tb of processor_tb
-
-} {} {}} /home/alumnos/e361902/Arquitectura-de-Ordenadores/Pr_1/Segmentado/rtl/reg_bank.vhd {1 {vcom -work work -2002 -explicit -vopt -stats=none /home/alumnos/e361902/Arquitectura-de-Ordenadores/Pr_1/Segmentado/rtl/reg_bank.vhd
-QuestaSim-64 vcom 10.6c Compiler 2017.07 Jul 25 2017
--- Loading package STANDARD
--- Loading package TEXTIO
--- Loading package std_logic_1164
--- Loading package std_logic_arith
--- Loading package STD_LOGIC_UNSIGNED
--- Compiling entity reg_bank
--- Compiling architecture rtl of reg_bank
+-- Compiling entity control_unit
+-- Compiling architecture rtl of control_unit
 
 } {} {}} /home/alumnos/e361902/Arquitectura-de-Ordenadores/Pr_1/Segmentado/rtl/alu_control.vhd {1 {vcom -work work -2002 -explicit -vopt -stats=none /home/alumnos/e361902/Arquitectura-de-Ordenadores/Pr_1/Segmentado/rtl/alu_control.vhd
 QuestaSim-64 vcom 10.6c Compiler 2017.07 Jul 25 2017
@@ -59,6 +48,68 @@ QuestaSim-64 vcom 10.6c Compiler 2017.07 Jul 25 2017
 -- Compiling entity alu_control
 -- Compiling architecture rtl of alu_control
 
+} {} {}} C:/Users/Alberto/Desktop/Arquitectura-de-Ordenadores/Pr_1/Segmentado/rtl/alu_control.vhd {1 {vcom -work work -2002 -explicit -stats=none C:/Users/Alberto/Desktop/Arquitectura-de-Ordenadores/Pr_1/Segmentado/rtl/alu_control.vhd
+Model Technology ModelSim - Intel FPGA Edition vcom 10.5b Compiler 2016.10 Oct  5 2016
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package std_logic_arith
+-- Loading package STD_LOGIC_UNSIGNED
+-- Compiling entity alu_control
+-- Compiling architecture rtl of alu_control
+
+} {} {}} C:/Users/Alberto/Desktop/Arquitectura-de-Ordenadores/Pr_1/Segmentado/sim/memory.vhd {1 {vcom -work work -2002 -explicit -stats=none C:/Users/Alberto/Desktop/Arquitectura-de-Ordenadores/Pr_1/Segmentado/sim/memory.vhd
+Model Technology ModelSim - Intel FPGA Edition vcom 10.5b Compiler 2016.10 Oct  5 2016
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package std_logic_arith
+-- Loading package STD_LOGIC_UNSIGNED
+-- Loading package std_logic_textio
+-- Compiling entity memory
+-- Compiling architecture Behavioral of memory
+
+} {} {}} /home/alumnos/e361902/Arquitectura-de-Ordenadores/Pr_1/Segmentado/sim/memory.vhd {1 {vcom -work work -2002 -explicit -vopt -stats=none /home/alumnos/e361902/Arquitectura-de-Ordenadores/Pr_1/Segmentado/sim/memory.vhd
+QuestaSim-64 vcom 10.6c Compiler 2017.07 Jul 25 2017
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package std_logic_arith
+-- Loading package STD_LOGIC_UNSIGNED
+-- Loading package std_logic_textio
+-- Compiling entity memory
+-- Compiling architecture Behavioral of memory
+
+} {} {}} /home/alumnos/e361902/Arquitectura-de-Ordenadores/Pr_1/Segmentado/rtl/reg_bank.vhd {1 {vcom -work work -2002 -explicit -vopt -stats=none /home/alumnos/e361902/Arquitectura-de-Ordenadores/Pr_1/Segmentado/rtl/reg_bank.vhd
+QuestaSim-64 vcom 10.6c Compiler 2017.07 Jul 25 2017
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package std_logic_arith
+-- Loading package STD_LOGIC_UNSIGNED
+-- Compiling entity reg_bank
+-- Compiling architecture rtl of reg_bank
+
+} {} {}} C:/Users/Alberto/Desktop/Arquitectura-de-Ordenadores/Pr_1/Segmentado/rtl/reg_bank.vhd {1 {vcom -work work -2002 -explicit -stats=none C:/Users/Alberto/Desktop/Arquitectura-de-Ordenadores/Pr_1/Segmentado/rtl/reg_bank.vhd
+Model Technology ModelSim - Intel FPGA Edition vcom 10.5b Compiler 2016.10 Oct  5 2016
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package std_logic_arith
+-- Loading package STD_LOGIC_UNSIGNED
+-- Compiling entity reg_bank
+-- Compiling architecture rtl of reg_bank
+
+} {} {}} C:/Users/Alberto/Desktop/Arquitectura-de-Ordenadores/Pr_1/Segmentado/rtl/alu.vhd {1 {vcom -work work -2002 -explicit -stats=none C:/Users/Alberto/Desktop/Arquitectura-de-Ordenadores/Pr_1/Segmentado/rtl/alu.vhd
+Model Technology ModelSim - Intel FPGA Edition vcom 10.5b Compiler 2016.10 Oct  5 2016
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package std_logic_arith
+-- Loading package STD_LOGIC_UNSIGNED
+-- Compiling entity alu
+-- Compiling architecture rtl of alu
+
 } {} {}} /home/alumnos/e361902/Arquitectura-de-Ordenadores/Pr_1/Segmentado/rtl/alu.vhd {1 {vcom -work work -2002 -explicit -vopt -stats=none /home/alumnos/e361902/Arquitectura-de-Ordenadores/Pr_1/Segmentado/rtl/alu.vhd
 QuestaSim-64 vcom 10.6c Compiler 2017.07 Jul 25 2017
 -- Loading package STANDARD
@@ -68,5 +119,25 @@ QuestaSim-64 vcom 10.6c Compiler 2017.07 Jul 25 2017
 -- Loading package STD_LOGIC_UNSIGNED
 -- Compiling entity alu
 -- Compiling architecture rtl of alu
+
+} {} {}} /home/alumnos/e361902/Arquitectura-de-Ordenadores/Pr_1/Segmentado/sim/processor_tb.vhd {1 {vcom -work work -2002 -explicit -vopt -stats=none /home/alumnos/e361902/Arquitectura-de-Ordenadores/Pr_1/Segmentado/sim/processor_tb.vhd
+QuestaSim-64 vcom 10.6c Compiler 2017.07 Jul 25 2017
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package std_logic_arith
+-- Loading package STD_LOGIC_UNSIGNED
+-- Compiling entity processor_tb
+-- Compiling architecture tb of processor_tb
+
+} {} {}} C:/Users/Alberto/Desktop/Arquitectura-de-Ordenadores/Pr_1/Segmentado/sim/processor_tb.vhd {1 {vcom -work work -2002 -explicit -stats=none C:/Users/Alberto/Desktop/Arquitectura-de-Ordenadores/Pr_1/Segmentado/sim/processor_tb.vhd
+Model Technology ModelSim - Intel FPGA Edition vcom 10.5b Compiler 2016.10 Oct  5 2016
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package std_logic_arith
+-- Loading package STD_LOGIC_UNSIGNED
+-- Compiling entity processor_tb
+-- Compiling architecture tb of processor_tb
 
 } {} {}}
