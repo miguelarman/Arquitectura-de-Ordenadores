@@ -34,7 +34,7 @@ architecture rtl of control_unit is
 
    -- Tipo para los codigos de operacion:
    subtype t_opCode is std_logic_vector (5 downto 0);
-   subtype t_aluOp  is std_logic_vector (2 downto 0)
+   subtype t_aluOp  is std_logic_vector (2 downto 0);
 
    -- Codigos de operacion para las diferentes instrucciones:
    constant OP_RTYPE  : t_opCode := "000000";
