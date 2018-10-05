@@ -117,6 +117,8 @@ architecture rtl of processor is
    signal Rd_ID              : std_logic_vector ( 4 downto 0);  -- Campo Rd de la instruccion en ID
    signal Rd_EX              : std_logic_vector ( 4 downto 0);  -- Campo Rd de la instruccion en EX
    
+   --Instanciación
+
    --Declaración de ALU para instanciarla
    component alu 
    port (
@@ -220,6 +222,12 @@ begin
        We3       => We3_WB
     );
 
+   --Fase IF
+   --Fase ID
+   --Fase EX
+   --Fase MEM
+   --Fase WB
+
    procesador: process(Clk,Reset)
    begin
       --Contador de programa
@@ -245,7 +253,6 @@ BranchAddress_EX <= (ExtensionSigno_EX(29 downto 0) & "00") + PCPlus4_EX;
 BranchSum_EX(31 downto 2) <= ExtensionSigno_EX(29 downto 0);
 BranchSum_EX(1 downto 0) <= "00";
 
---Cuidaoooooooooooooooooo
 PCPlus4_IF <= PC_IF + 4;
 JumpSum_MEM(31 downto 28) <= PCPlus4_MEM(31 downto 28);
 JumpSum_MEM(27 downto 2) <= IDataIn_MEM(25 downto 0);
