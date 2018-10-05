@@ -1,7 +1,8 @@
 --------------------------------------------------------------------------------
 -- Unidad de control principal del micro. Arq0 2018
 --
--- (INCLUIR AQUI LA INFORMACION SOBRE LOS AUTORES)
+-- Miguel Arconada Manteca        miguel.arconada@estudiante.uam.es
+-- Alberto González Klein         alberto.gonzalezk@estudiante.uam.es
 --
 --------------------------------------------------------------------------------
 

@@ -1,7 +1,8 @@
 --------------------------------------------------------------------------------
 -- Procesador MIPS con pipeline curso Arquitectura 2018-19
 --
--- (INCLUIR AQUI LA INFORMACION SOBRE LOS AUTORES)
+-- Miguel Arconada Manteca        miguel.arconada@estudiante.uam.es
+-- Alberto González Klein         alberto.gonzalezk@estudiante.uam.es
 --
 --------------------------------------------------------------------------------
 
@@ -113,10 +114,10 @@ architecture rtl of processor is
    signal Funct_EX          : std_logic_vector(5 downto 0);
    signal DDataIn_MEM          : std_logic_vector(31 downto 0);
    signal DDataIn_WB          : std_logic_vector(31 downto 0);
-   signal Rt_ID          : std_logic_vector(31 downto 0);
-   signal Rt_EX          : std_logic_vector(31 downto 0);
-   signal Rd_ID          : std_logic_vector(31 downto 0);
-   signal Rd_EX          : std_logic_vector(31 downto 0);
+   signal Rt_ID          : std_logic_vector(4 downto 0);
+   signal Rt_EX          : std_logic_vector(4 downto 0);
+   signal Rd_ID          : std_logic_vector(4 downto 0);
+   signal Rd_EX          : std_logic_vector(4 downto 0);
    
    --Declaración de ALU para instanciarla
    component alu 
@@ -234,6 +235,8 @@ procesador: process(Clk,Reset)
         end if;
     end process;
 	   
+IDataIn_IF <= IDataIn;
+
 --Actualización del valor del contador de programa
 NextPC_IF <= BranchAddress_MEM when (Branch_MEM = '1') and (ZFlag_MEM = '1') else
 	  JumpSum_MEM when (Jump_MEM = '1') else
@@ -255,6 +258,8 @@ JumpSum_MEM(1 downto 0) <= "00";
 IAddr <= IAddr_IF;
 IAddr_IF <= PC_IF;
 
+Rt_ID <= IDataIn(20 downto 16);
+Rd_ID <= IDataIn(15 downto 11);
 
 We3_WB <= RegWrite_WB;
 OpCode_ID <= IDataIn_ID(31 downto 26);
@@ -262,8 +267,8 @@ A1_ID <= IDataIn_ID(25 downto 21);
 A2_ID <= IDataIn_ID(20 downto 16);
 
 --Multiplexor de A3
-A3_EX <= IDataIn_EX(20 downto 16) when RegDst_EX = '0' else
-      IDataIn_EX(15 downto 11); 
+A3_EX <= Rt_EX when RegDst_EX = '0' else
+      Rd_EX; 
 
 Funct_EX <= IDataIn_EX(5 downto 0);
 OpA_EX <= Rd1_EX;
@@ -290,9 +295,10 @@ Wd3_WB <= Result_WB when MemToReg_WB = '0' else
 pipelineIFID: process(Clk, Reset)
    begin
       if Reset = '1' then
-         
+         PCPlus4_ID <= x"00000000";
+         IDataIn_ID <= x"00000000";
       elsif rising_edge(Clk) then
-         PCPlus4_IF <= PCPlus4_ID;
+         PCPlus4_ID <= PCPlus4_IF;
          IDataIn_ID <= IDataIn_IF;
       end if;
    end process;
@@ -302,7 +308,23 @@ pipelineIFID: process(Clk, Reset)
 pipelineIDEX: process(Clk, Reset)
    begin
       if Reset = '1' then
-         
+         RegWrite_EX <= '0';
+         Branch_EX <= '0';
+         RegDst_EX <= '0';
+         ALUOp_EX <= "000";
+         ALUSrc_EX <= '0';
+         PCPlus4_EX <= x"00000000";
+         Rd1_EX <= x"00000000";
+         Rd2_EX <= x"00000000";
+         ExtensionSigno_EX <= x"00000000";
+         Rt_EX <= "00000";
+         Rd_EX <= "00000";
+         IDataIn_EX <= x"00000000";
+         A3_EX <= "00000";
+         Wd3_EX <= x"00000000";
+         We3_EX <= '0';
+         MemRead_EX <= '0';
+         MemWrite_EX <= '0';
       elsif rising_edge(Clk) then
          RegWrite_EX <= RegWrite_ID;
          Branch_EX <= Branch_ID;
@@ -319,6 +341,8 @@ pipelineIDEX: process(Clk, Reset)
          A3_EX <= A3_ID;
          Wd3_EX <= Wd3_ID;
          We3_EX <= We3_ID;
+         MemRead_EX <= MemRead_ID;
+         MemWrite_EX <= MemWrite_ID;
       end if;
    end process;
 
@@ -326,7 +350,18 @@ pipelineIDEX: process(Clk, Reset)
 pipelineEXMEM: process(Clk, Reset)
    begin
       if Reset = '1' then
-         
+         RegWrite_MEM <= '0';
+         Branch_MEM <= '0';
+         ZFlag_MEM <= '0';
+         Result_MEM <= x"00000000";
+         Rd2_MEM <= x"00000000";
+         IDataIn_MEM <= x"00000000";
+         A3_MEM <= "00000";
+         Wd3_MEM <= x"00000000";
+         We3_MEM <= '0';
+         MemRead_MEM <= '0';
+         MemWrite_MEM <= '0';
+         BranchAddress_MEM <= x"00000000";
       elsif rising_edge(Clk) then
          RegWrite_MEM <= RegWrite_EX;
          Branch_MEM <= Branch_EX;
@@ -337,6 +372,9 @@ pipelineEXMEM: process(Clk, Reset)
          A3_MEM <= A3_EX;
          Wd3_MEM <= Wd3_EX;
          We3_MEM <= We3_EX;
+         MemRead_MEM <= MemRead_EX;
+         MemWrite_MEM <= MemWrite_EX;
+         BranchAddress_MEM <= BranchAddress_EX;
       end if;
    end process;
 
@@ -344,7 +382,13 @@ pipelineEXMEM: process(Clk, Reset)
 pipelineMEMWB: process(Clk, Reset)
    begin
       if Reset = '1' then
-         
+         RegWrite_WB <= '0';
+         DDataIn_WB <= x"00000000";
+         Result_WB <= x"00000000";
+         A3_WB <= "00000";
+         Wd3_WB <= x"00000000";
+         We3_WB <= '0';
+         DDataIn_WB <= DDataIn_MEM;
       elsif rising_edge(Clk) then
          RegWrite_WB <= RegWrite_MEM;
          DDataIn_WB <= DDataIn_MEM;

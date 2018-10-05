@@ -1,7 +1,8 @@
 --------------------------------------------------------------------------------
 -- Bloque de control para la ALU. Arq0 2018.
 --
--- (INCLUIR AQUI LA INFORMACION SOBRE LOS AUTORES, Quitar este mensaje)
+-- Miguel Arconada Manteca        miguel.arconada@estudiante.uam.es
+-- Alberto González Klein         alberto.gonzalezk@estudiante.uam.es
 --
 --------------------------------------------------------------------------------
 
