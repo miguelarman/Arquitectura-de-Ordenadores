@@ -145,12 +145,12 @@ architecture rtl of processor is
    port (
       Clk        : in  std_logic; -- Reloj activo en flanco de subida
       Reset      : in  std_logic; -- Reset asíncrono a nivel alto
-      A1         : in  std_logic_vector( 4 downto 0);   -- Dirección para el puerto Rd1
-      Rd1        : out std_logic_vector(31 downto 0); -- Dato del puerto Rd1
-      A2         : in  std_logic_vector( 4 downto 0);   -- Dirección para el puerto Rd2
-      Rd2        : out std_logic_vector(31 downto 0); -- Dato del puerto Rd2
-      A3         : in  std_logic_vector( 4 downto 0);   -- Dirección para el puerto Wd3
-      Wd3        : in  std_logic_vector(31 downto 0);  -- Dato de entrada Wd3
+      A1         : in  std_logic_vector ( 4 downto 0);   -- Dirección para el puerto Rd1
+      Rd1        : out std_logic_vector (31 downto 0); -- Dato del puerto Rd1
+      A2         : in  std_logic_vector ( 4 downto 0);   -- Dirección para el puerto Rd2
+      Rd2        : out std_logic_vector (31 downto 0); -- Dato del puerto Rd2
+      A3         : in  std_logic_vector ( 4 downto 0);   -- Dirección para el puerto Wd3
+      Wd3        : in  std_logic_vector (31 downto 0);  -- Dato de entrada Wd3
       We3        : in  std_logic -- Habilitación de la escritura de Wd3
    ); 
    end component;
