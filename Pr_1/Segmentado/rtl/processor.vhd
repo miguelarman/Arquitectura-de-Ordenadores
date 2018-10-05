@@ -29,93 +29,93 @@ end processor;
 architecture rtl of processor is 
 
    --Señales para instanciar ALU
-   signal BranchSum_EX  : std_logic_vector (31 downto 0);
+   signal BranchSum_EX  : std_logic_vector (31 downto 0);   -- Suma para la direccion de branch
    signal OpA_EX        : std_logic_vector (31 downto 0);   -- Operando A
    signal OpB_EX        : std_logic_vector (31 downto 0);   -- Operando B
    signal Control_EX    : std_logic_vector ( 3 downto 0);   -- Codigo de control=op. a ejecutar
-   signal Result_EX     : std_logic_vector (31 downto 0);   -- Resultado
-   signal Result_MEM    : std_logic_vector (31 downto 0);   -- Resultado
-   signal Result_WB     : std_logic_vector (31 downto 0);   -- Resultado
-   signal ZFlag_EX      : std_logic;                        -- Flag Z
-   signal ZFlag_MEM     : std_logic;                        -- Flag Z
+   signal Result_EX     : std_logic_vector (31 downto 0);   -- Resultado en EX
+   signal Result_MEM    : std_logic_vector (31 downto 0);   -- Resultado en MEM
+   signal Result_WB     : std_logic_vector (31 downto 0);   -- Resultado en WB
+   signal ZFlag_EX      : std_logic;                        -- Flag Z en EX
+   signal ZFlag_MEM     : std_logic;                        -- Flag Z en MEM
    
    --Señales para instanciar ALUcontrol
-   signal ALUOp_ID      : std_logic_vector (2 downto 0);    -- Codigo control desde la unidad de control
-   signal ALUOp_EX      : std_logic_vector (2 downto 0);    -- Codigo control desde la unidad de control
+   signal ALUOp_ID      : std_logic_vector (2 downto 0);    -- Codigo control desde la unidad de control en ID
+   signal ALUOp_EX      : std_logic_vector (2 downto 0);    -- Codigo control desde la unidad de control en EX
    signal ALUControl_EX : std_logic_vector (3 downto 0);    -- Define operacion a ejecutar por ALU
 
    --Señales para instanciar el banco de registros
    signal A1_ID         : std_logic_vector(4 downto 0);     -- Dirección para el puerto Rd1
-   signal Rd1_ID        : std_logic_vector(31 downto 0);    -- Dato del puerto Rd1
-   signal Rd1_EX        : std_logic_vector(31 downto 0);    -- Dato del puerto Rd1
+   signal Rd1_ID        : std_logic_vector(31 downto 0);    -- Dato del puerto Rd1 en ID
+   signal Rd1_EX        : std_logic_vector(31 downto 0);    -- Dato del puerto Rd1 en EX
    signal A2_ID         : std_logic_vector(4 downto 0);     -- Dirección para el puerto Rd2
-   signal Rd2_ID        : std_logic_vector(31 downto 0);    -- Dato del puerto Rd2
-   signal Rd2_EX        : std_logic_vector(31 downto 0);    -- Dato del puerto Rd2
-   signal Rd2_MEM       : std_logic_vector(31 downto 0);    -- Dato del puerto Rd2
-   signal A3_ID         : std_logic_vector(4 downto 0);     -- Dirección para el puerto Wd3
-   signal A3_EX         : std_logic_vector(4 downto 0);     -- Dirección para el puerto Wd3
-   signal A3_MEM        : std_logic_vector(4 downto 0);     -- Dirección para el puerto Wd3
-   signal A3_WB         : std_logic_vector(4 downto 0);     -- Dirección para el puerto Wd3
-   signal Wd3_ID        : std_logic_vector(31 downto 0);    -- Dato de entrada Wd3
-   signal Wd3_EX        : std_logic_vector(31 downto 0);    -- Dato de entrada Wd3
-   signal Wd3_MEM       : std_logic_vector(31 downto 0);    -- Dato de entrada Wd3
-   signal Wd3_WB        : std_logic_vector(31 downto 0);    -- Dato de entrada Wd3
-   signal We3_ID        : std_logic;                        -- Habilitación de la escritura de Wd3
-   signal We3_EX        : std_logic;                        -- Habilitación de la escritura de Wd3
-   signal We3_MEM       : std_logic;                        -- Habilitación de la escritura de Wd3
-   signal We3_WB        : std_logic;                        -- Habilitación de la escritura de Wd3
+   signal Rd2_ID        : std_logic_vector(31 downto 0);    -- Dato del puerto Rd2 en ID
+   signal Rd2_EX        : std_logic_vector(31 downto 0);    -- Dato del puerto Rd2 en EX
+   signal Rd2_MEM       : std_logic_vector(31 downto 0);    -- Dato del puerto Rd2 en MEM
+   signal A3_ID         : std_logic_vector(4 downto 0);     -- Dirección para el puerto Wd3 en ID
+   signal A3_EX         : std_logic_vector(4 downto 0);     -- Dirección para el puerto Wd3 en EX
+   signal A3_MEM        : std_logic_vector(4 downto 0);     -- Dirección para el puerto Wd3 en MEM
+   signal A3_WB         : std_logic_vector(4 downto 0);     -- Dirección para el puerto Wd3 en WB
+   signal Wd3_ID        : std_logic_vector(31 downto 0);    -- Dato de entrada Wd3 en ID
+   signal Wd3_EX        : std_logic_vector(31 downto 0);    -- Dato de entrada Wd3 en EX
+   signal Wd3_MEM       : std_logic_vector(31 downto 0);    -- Dato de entrada Wd3 en MEM
+   signal Wd3_WB        : std_logic_vector(31 downto 0);    -- Dato de entrada Wd3 em WB
+   signal We3_ID        : std_logic;                        -- Habilitación de la escritura de Wd3 en ID
+   signal We3_EX        : std_logic;                        -- Habilitación de la escritura de Wd3 en EX
+   signal We3_MEM       : std_logic;                        -- Habilitación de la escritura de Wd3 en MEM
+   signal We3_WB        : std_logic;                        -- Habilitación de la escritura de Wd3 en WB
 
    --Señales para instanciar la unidad de control
    signal OpCode_ID     : std_logic_vector (5 downto 0);    -- Codigo de operación de la instrucción
-   signal Branch_ID     : std_logic;                        -- 1=Ejecutandose instruccion branch
-   signal Branch_EX     : std_logic;                        -- 1=Ejecutandose instruccion branch
-   signal Branch_MEM    : std_logic;                        -- 1=Ejecutandose instruccion branch
-   signal MemToReg_ID   : std_logic;                        -- 1=Escribir en registro la salida de la mem.
-   signal MemToReg_EX   : std_logic;                        -- 1=Escribir en registro la salida de la mem.
-   signal MemToReg_MEM  : std_logic;                        -- 1=Escribir en registro la salida de la mem.
-   signal MemToReg_WB   : std_logic;                        -- 1=Escribir en registro la salida de la mem.
-   signal MemWrite_ID   : std_logic;                        -- Escribir la memoria
-   signal MemWrite_EX   : std_logic;                        -- Escribir la memoria
-   signal MemWrite_MEM  : std_logic;                        -- Escribir la memoria
-   signal MemRead_ID    : std_logic;                        -- Leer la memoria
-   signal MemRead_EX    : std_logic;                        -- Leer la memoria
-   signal MemRead_MEM   : std_logic;                        -- Leer la memoria
-   signal ALUSrc_ID     : std_logic;                        -- 0=oper.B es registro, 1=es valor inm.
-   signal ALUSrc_EX     : std_logic;                        -- 0=oper.B es registro, 1=es valor inm.
-   signal RegWrite_ID   : std_logic;                        -- 1=Escribir registro
-   signal RegWrite_EX   : std_logic;                        -- 1=Escribir registro
-   signal RegWrite_MEM  : std_logic;                        -- 1=Escribir registro
-   signal RegWrite_WB   : std_logic;                        -- 1=Escribir registro
-   signal RegDst_ID     : std_logic;                        -- 0=Reg. destino es rt, 1=rd
-   signal RegDst_EX     : std_logic;                        -- 0=Reg. destino es rt, 1=rd
-   signal Jump_ID       : std_logic;                        -- 1=Ejecutandose instruccion jump
-   signal Jump_EX       : std_logic;                        -- 1=Ejecutandose instruccion jump
-   signal Jump_MEM      : std_logic;                        -- 1=Ejecutandose instruccion jump
+   signal Branch_ID     : std_logic;                        -- 1=Ejecutandose instruccion branch en ID
+   signal Branch_EX     : std_logic;                        -- 1=Ejecutandose instruccion branch en EX
+   signal Branch_MEM    : std_logic;                        -- 1=Ejecutandose instruccion branch en MEM
+   signal MemToReg_ID   : std_logic;                        -- 1=Escribir en registro la salida de la mem. en ID
+   signal MemToReg_EX   : std_logic;                        -- 1=Escribir en registro la salida de la mem. en EX
+   signal MemToReg_MEM  : std_logic;                        -- 1=Escribir en registro la salida de la mem. en MEM
+   signal MemToReg_WB   : std_logic;                        -- 1=Escribir en registro la salida de la mem. en WB
+   signal MemWrite_ID   : std_logic;                        -- Escribir la memoria en ID
+   signal MemWrite_EX   : std_logic;                        -- Escribir la memoria en EX
+   signal MemWrite_MEM  : std_logic;                        -- Escribir la memoria en MEM
+   signal MemRead_ID    : std_logic;                        -- Leer la memoria en ID
+   signal MemRead_EX    : std_logic;                        -- Leer la memoria en EX
+   signal MemRead_MEM   : std_logic;                        -- Leer la memoria en MEM
+   signal ALUSrc_ID     : std_logic;                        -- 0=oper.B es registro, 1=es valor inm. en ID
+   signal ALUSrc_EX     : std_logic;                        -- 0=oper.B es registro, 1=es valor inm. en EX
+   signal RegWrite_ID   : std_logic;                        -- 1=Escribir registro en ID
+   signal RegWrite_EX   : std_logic;                        -- 1=Escribir registro en EX
+   signal RegWrite_MEM  : std_logic;                        -- 1=Escribir registro en MEM
+   signal RegWrite_WB   : std_logic;                        -- 1=Escribir registro en WB
+   signal RegDst_ID     : std_logic;                        -- 0=Reg. destino es rt, 1=rd en ID
+   signal RegDst_EX     : std_logic;                        -- 0=Reg. destino es rt, 1=rd en EX
+   signal Jump_ID       : std_logic;                        -- 1=Ejecutandose instruccion jump en ID
+   signal Jump_EX       : std_logic;                        -- 1=Ejecutandose instruccion jump en EX
+   signal Jump_MEM      : std_logic;                        -- 1=Ejecutandose instruccion jump en MEM
 
    --Señales intermedias
-   signal NextPC_IF          : std_logic_vector(31 downto 0); --
-   signal PC_IF              : std_logic_vector(31 downto 0); --
-   signal PCPlus4_IF         : std_logic_vector(31 downto 0); --
-   signal PCPlus4_ID         : std_logic_vector(31 downto 0); -- 
-   signal PCPlus4_EX         : std_logic_vector(31 downto 0); --
-   signal PCPlus4_MEM        : std_logic_vector(31 downto 0); -- 
-   signal ExtensionSigno_ID  : std_logic_vector(31 downto 0); --
-   signal ExtensionSigno_EX  : std_logic_vector(31 downto 0); --
-   signal JumpSum_MEM        : std_logic_vector(31 downto 0); --
-   signal IDataIn_IF         : std_logic_vector(31 downto 0); --
-   signal IDataIn_EX         : std_logic_vector(31 downto 0); --
-   signal IDataIn_ID         : std_logic_vector(31 downto 0); --
-   signal IDataIn_MEM        : std_logic_vector(31 downto 0); --
-   signal IAddr_IF           : std_logic_vector(31 downto 0); --
-   signal BranchAddress_EX   : std_logic_vector(31 downto 0); --
-   signal BranchAddress_MEM  : std_logic_vector(31 downto 0); --
-   signal Funct_EX           : std_logic_vector(5 downto 0);  --
-   signal DDataIn_MEM        : std_logic_vector(31 downto 0); --
-   signal DDataIn_WB         : std_logic_vector(31 downto 0); --
-   signal Rt_ID              : std_logic_vector(4 downto 0);  --
-   signal Rt_EX              : std_logic_vector(4 downto 0);  --
-   signal Rd_ID              : std_logic_vector(4 downto 0);  -- 
-   signal Rd_EX              : std_logic_vector(4 downto 0);  --
+   signal NextPC_IF          : std_logic_vector(31 downto 0); -- Senal que selecciona el PC siguiente entre pc+4 y el PC de salto 
+   signal PC_IF              : std_logic_vector(31 downto 0); -- Contador de programa
+   signal PCPlus4_IF         : std_logic_vector(31 downto 0); -- PC+4 en la etapa IF
+   signal PCPlus4_ID         : std_logic_vector(31 downto 0); -- PC+4 en la etapa ID
+   signal PCPlus4_EX         : std_logic_vector(31 downto 0); -- PC+4 en la etapa EX
+   signal PCPlus4_MEM        : std_logic_vector(31 downto 0); -- PC+4 en la etapa MEM
+   signal ExtensionSigno_ID  : std_logic_vector(31 downto 0); -- Exension en signo del dato inmediato en ID
+   signal ExtensionSigno_EX  : std_logic_vector(31 downto 0); -- Exension en signo del dato inmediato en EX
+   signal JumpSum_MEM        : std_logic_vector(31 downto 0); -- Valor a sumar para hallar la direccion de salto
+   signal IDataIn_IF         : std_logic_vector(31 downto 0); -- Instruccion leida en la etapa IF
+   signal IDataIn_EX         : std_logic_vector(31 downto 0); -- Instruccion leida en la etapa ID
+   signal IDataIn_ID         : std_logic_vector(31 downto 0); -- Instruccion leida en la etapa EX
+   signal IDataIn_MEM        : std_logic_vector(31 downto 0); -- Instruccion leida en la etapa MEM
+   signal IAddr_IF           : std_logic_vector(31 downto 0); -- Direccion de la que se lee la instruccion en IF
+   signal BranchAddress_EX   : std_logic_vector(31 downto 0); -- Direccion de branch si se da la condicion en EX
+   signal BranchAddress_MEM  : std_logic_vector(31 downto 0); -- Direccion de branch si se da la condicion en MEM
+   signal Funct_EX           : std_logic_vector(5 downto 0);  -- Campo Funct de la instruccion
+   signal DDataIn_MEM        : std_logic_vector(31 downto 0); -- Dato leido de la memoria en MEM
+   signal DDataIn_WB         : std_logic_vector(31 downto 0); -- Dato leido de la memoria en WB
+   signal Rt_ID              : std_logic_vector(4 downto 0);  -- Campo Rt de la instruccion en ID
+   signal Rt_EX              : std_logic_vector(4 downto 0);  -- Campo Rt de la instruccion en EX
+   signal Rd_ID              : std_logic_vector(4 downto 0);  -- Campo Rd de la instruccion en ID
+   signal Rd_EX              : std_logic_vector(4 downto 0);  -- Campo Rd de la instruccion en EX
    
    --Declaración de ALU para instanciarla
    component alu 
