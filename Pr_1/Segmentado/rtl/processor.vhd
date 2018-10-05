@@ -196,46 +196,47 @@ begin
 
    --Port map para la instanciación de la unidad de control
    control_unit_pm: control_unit PORT MAP (
-       OpCode => OpCode_ID,
-       Branch => Branch_ID,
-       MemToReg => MemToReg_ID,
-       MemWrite => MemWrite_ID,
-       MemRead => MemRead_ID,
-       AluSrc => AluSrc_ID,
-       AluOp => AluOp_ID,
-       RegWrite => RegWrite_ID,
-       RegDst => RegDst_ID
+       OpCode    => OpCode_ID,
+       Branch    => Branch_ID,
+       MemToReg  => MemToReg_ID,
+       MemWrite  => MemWrite_ID,
+       MemRead   => MemRead_ID,
+       AluSrc    => AluSrc_ID,
+       AluOp     => AluOp_ID,
+       RegWrite  => RegWrite_ID,
+       RegDst    => RegDst_ID
     );
 
     --Port map para la instanciación del banco de registros
     reg_bank_pm: reg_bank PORT MAP (
-       Clk => Clk,
-       Reset => Reset,
-       A1 => A1_ID,
-       Rd1 => Rd1_ID,
-       A2 => A2_ID,
-       Rd2 => Rd2_ID,
-       A3 => A3_WB,
-       Wd3 => Wd3_WB,
-       We3 => We3_WB
+       Clk       => Clk,
+       Reset     => Reset,
+       A1        => A1_ID,
+       Rd1       => Rd1_ID,
+       A2        => A2_ID,
+       Rd2       => Rd2_ID,
+       A3        => A3_WB,
+       Wd3       => Wd3_WB,
+       We3       => We3_WB
     );
 
-procesador: process(Clk,Reset)
-    begin
-	--Contador de programa
-	if Reset = '1' then
-	   PC_IF <=x"00000000";
-	elsif rising_edge(Clk) then
-	   PC_IF <= NextPC_IF;
-        end if;
-    end process;
-	   
-IDataIn_IF <= IDataIn;
+   procesador: process(Clk,Reset)
+   begin
+      --Contador de programa
+      if Reset = '1' then
+         PC_IF <=x"00000000";
+      elsif rising_edge(Clk) then
+	 PC_IF <= NextPC_IF;
+      end if;
 
---Actualización del valor del contador de programa
-NextPC_IF <= BranchAddress_MEM when (Branch_MEM = '1') and (ZFlag_MEM = '1') else
-	  JumpSum_MEM when (Jump_MEM = '1') else
-          PCPlus4_IF;
+   end process;
+	   
+   IDataIn_IF <= IDataIn;
+
+   --Actualización del valor del contador de programa
+   NextPC_IF  <= BranchAddress_MEM when (Branch_MEM = '1') and (ZFlag_MEM = '1') else
+	         JumpSum_MEM when (Jump_MEM = '1') else
+                 PCPlus4_IF;
 
 --Calculo de direccion de branch
 BranchAddress_EX <= (ExtensionSigno_EX(29 downto 0) & "00") + PCPlus4_EX;
