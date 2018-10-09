@@ -21,12 +21,12 @@ entity memory is
       MEM_SIZE        : integer := 1024            -- tamanio, en bytes
    );
    Port (
-      Clk     : in std_logic ;                     -- Reloj
-      Addr    : in std_logic_vector(31 downto 0);  -- Direccion de lectura o escritura
-      RdEn    : in std_logic ;                     -- Habilitacion de lectura (si =1)
-      WrEn    : in std_logic ;                     -- Habilitacion de escritura (si =1)
-      DataIn  : in std_logic_vector(31 downto 0);  -- Dato a escribir
-      DataOut : out std_logic_vector(31 downto 0)  -- Dato leido
+      Clk     : in  std_logic;                      -- Reloj
+      Addr    : in  std_logic_vector(31 downto 0);  -- Direccion de lectura o escritura
+      RdEn    : in  std_logic;                      -- Habilitacion de lectura (si =1)
+      WrEn    : in  std_logic;                      -- Habilitacion de escritura (si =1)
+      DataIn  : in  std_logic_vector(31 downto 0);  -- Dato a escribir
+      DataOut : out std_logic_vector(31 downto 0)   -- Dato leido
    );
 end memory;
 

@@ -28,10 +28,6 @@ end processor;
 
 architecture rtl of processor is 
 
-   -------------------------------------------
-   --Señales para instanciar los componentes--
-   -------------------------------------------
-
    --Señales para instanciar ALU
    signal OpA_EX        : std_logic_vector (31 downto 0);   -- Operando A
    signal OpB_EX        : std_logic_vector (31 downto 0);   -- Operando B
