@@ -208,12 +208,10 @@ begin
    OpCode <= IDataIn(31 downto 26);
    A1     <= IDataIn(25 downto 21);
    A2     <= IDataIn(20 downto 16);
-
    --Multiplexor de A3
    A3     <= IDataIn(20 downto 16) when RegDst = '0' else
              IDataIn(15 downto 11); 
    Funct  <= IDataIn(5 downto 0);
-
    --Extensión de signo de los últimos 16 bits de la instrucción
    ExtSigno(31 downto 16) <= (others => IDataIn(15));
    ExtSigno(15 downto 0)  <= IDataIn(15 downto 0);
@@ -223,7 +221,6 @@ begin
 
    --Conexión de las señales de la ALU
    OpA     <= Rd1;
-
    --Multiplexor de OpB
    OpB     <= Rd2 when ALUSrc = '0' else 
               ExtSigno;

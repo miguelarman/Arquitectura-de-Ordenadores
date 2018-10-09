@@ -13,10 +13,10 @@ use ieee.std_logic_unsigned.all;
 entity alu_control is
    port (
       -- Entradas:
-      ALUOp  : in std_logic_vector (2 downto 0); -- Codigo control desde la unidad de control
-      Funct  : in std_logic_vector (5 downto 0); -- Campo "funct" de la instruccion
+      ALUOp      : in  std_logic_vector (2 downto 0); -- Codigo control desde la unidad de control
+      Funct      : in  std_logic_vector (5 downto 0); -- Campo "funct" de la instruccion
       -- Salida de control para la ALU:
-      ALUControl : out std_logic_vector (3 downto 0) -- Define operacion a ejecutar por ALU
+      ALUControl : out std_logic_vector (3 downto 0)  -- Define operacion a ejecutar por ALU
    );
 end alu_control;
 
@@ -24,10 +24,10 @@ architecture rtl of alu_control is
 
    -- Codigos para ALUOp
    constant RTYPE : std_logic_vector (2 downto 0) := "000";
-   constant BEQ : std_logic_vector (2 downto 0) := "001";
-   constant ADDI : std_logic_vector (2 downto 0) := "010";
-   constant MEM : std_logic_vector (2 downto 0) := "011";
-   constant LUI : std_logic_vector (2 downto 0) := "100";
+   constant BEQ   : std_logic_vector (2 downto 0) := "001";
+   constant ADDI  : std_logic_vector (2 downto 0) := "010";
+   constant MEM   : std_logic_vector (2 downto 0) := "011";
+   constant LUI   : std_logic_vector (2 downto 0) := "100";
 
 
    -- Codigos de control

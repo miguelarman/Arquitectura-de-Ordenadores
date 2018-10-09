@@ -13,20 +13,20 @@ use ieee.std_logic_unsigned.all;
 entity control_unit is
    port (
       -- Entrada = codigo de operacion en la instruccion:
-      OpCode   : in  std_logic_vector (5 downto 0);
+      OpCode   : in  std_logic_vector (5 downto 0); --Codigo de operacion de la instruccion
       -- Seniales para el PC
-      Branch   : out  std_logic; -- 1=Ejecutandose instruccion branch
-      Jump     : out  std_logic; -- 1=Ejecutandose instruccion jump
+      Branch   : out  std_logic;                    -- 1=Ejecutandose instruccion branch
+      Jump     : out  std_logic;                    -- 1=Ejecutandose instruccion jump
       -- Seniales relativas a la memoria
-      MemToReg : out  std_logic; -- 1=Escribir en registro la salida de la mem.
-      MemWrite : out  std_logic; -- Escribir la memoria
-      MemRead  : out  std_logic; -- Leer la memoria
+      MemToReg : out  std_logic;                    -- 1=Escribir en registro la salida de la mem.
+      MemWrite : out  std_logic;                    -- 1=Escribir la memoria
+      MemRead  : out  std_logic;                    -- L1=eer la memoria
       -- Seniales para la ALU
-      ALUSrc : out  std_logic;                     -- 0=oper.B es registro, 1=es valor inm.
-      ALUOp  : out  std_logic_vector (2 downto 0); -- Tipo operacion para control de la ALU
+      ALUSrc : out  std_logic;                      -- 0=oper.B es registro, 1=es valor inm.
+      ALUOp  : out  std_logic_vector (2 downto 0);  -- Tipo operacion para control de la ALU
       -- Seniales para el GPR
-      RegWrite : out  std_logic; -- 1=Escribir registro
-      RegDst   : out  std_logic  -- 0=Reg. destino es rt, 1=rd
+      RegWrite : out  std_logic;                    -- 1=Escribir registro
+      RegDst   : out  std_logic                     -- 0=Reg. destino es rt, 1=rd
    );
 end control_unit;
 
@@ -56,73 +56,73 @@ begin
    begin
       case OPCode is
          when OP_RTYPE  =>
-            RegDst <= '1';
-            Branch <= '0';
-            MemRead <= '-';
+            RegDst   <= '1';
+            Branch   <= '0';
+            MemRead  <= '-';
             MemtoReg <= '0';
-            ALUOp <= RTYPE;
+            ALUOp    <= RTYPE;
             MemWrite <= '0';
-            ALUSrc <= '0';
+            ALUSrc   <= '0';
             RegWrite <= '1';
-	    Jump <= '0';
+	    Jump     <= '0';
          when OP_BEQ  =>
-            RegDst <= '0';
-            Branch <= '1';
-            MemRead <= '-';
+            RegDst   <= '0';
+            Branch   <= '1';
+            MemRead  <= '-';
             MemtoReg <= '-';
-            ALUOp <= BEQ;
+            ALUOp    <= BEQ;
             MemWrite <= '0';
-            ALUSrc <= '0';
+            ALUSrc   <= '0';
             RegWrite <= '0';
-	    Jump <= '0';
+	    Jump     <= '0';
          when OP_SW  =>
-            RegDst <= '0';
-            Branch <= '0';
-            MemRead <= '-';
+            RegDst   <= '0';
+            Branch   <= '0';
+            MemRead  <= '-';
             MemtoReg <= '-';
-            ALUOp <= MEM;
+            ALUOp    <= MEM;
             MemWrite <= '1';
-            ALUSrc <= '1';
+            ALUSrc   <= '1';
             RegWrite <= '0'; 
-            Jump <= '0';
+            Jump     <= '0';
          when OP_LW  =>
-            RegDst <= '0';
-            Branch <= '0';
-            MemRead <= '1';
+            RegDst   <= '0';
+            Branch   <= '0';
+            MemRead  <= '1';
             MemtoReg <= '1';
-            ALUOp <= MEM;
+            ALUOp    <= MEM;
             MemWrite <= '0';
-            ALUSrc <= '1';
+            ALUSrc   <= '1';
             RegWrite <= '1';
-            Jump <= '0'; 
+            Jump     <= '0'; 
          when OP_LUI  =>
-            RegDst <= '0';
-            Branch <= '0';
-            MemRead <= '-';
+            RegDst   <= '0';
+            Branch   <= '0';
+            MemRead  <= '-';
             MemtoReg <= '0';
-            ALUOp <= LUI;
+            ALUOp    <= LUI;
             MemWrite <= '0';
-            ALUSrc <= '1';
+            ALUSrc   <= '1';
             RegWrite <= '1';
-	    Jump <= '0'; 
+	    Jump     <= '0'; 
          when OP_JUMP =>   
-            RegDst <= '-';
-            Branch <= '0';
-            MemRead <= '-';
+            RegDst   <= '-';
+            Branch   <= '0';
+            MemRead  <= '-';
             MemtoReg <= '-';
-            ALUOp <= "---";
+            ALUOp    <= "---";
             MemWrite <= '0';
-            ALUSrc <= '-';
+            ALUSrc   <= '-';
             RegWrite <= '0';
-	    Jump <= '1';      
+	    Jump     <= '1';      
          when others =>
-            RegDst <= '-';
-            Branch <= '0';
-            MemRead <= '-';
+            RegDst   <= '-';
+            Branch   <= '0';
+            MemRead  <= '-';
             MemtoReg <= '-';
-            ALUOp <= "---";
+            ALUOp    <= "---";
             MemWrite <= '0';
-            ALUSrc <= '-';
+            ALUSrc   <= '-';
             RegWrite <= '0';
 
       end case;

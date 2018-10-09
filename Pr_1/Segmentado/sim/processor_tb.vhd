@@ -23,8 +23,8 @@ architecture tb of processor_tb is
 
    component processor
       port(
-         Clk        : in  std_logic; -- Reloj activo flanco subida
-         Reset      : in  std_logic; -- Reset asincrono activo nivel alto
+         Clk        : in  std_logic;                     -- Reloj activo flanco subida
+         Reset      : in  std_logic;                     -- Reset asincrono activo nivel alto
          -- Instruction memory
          IAddr      : out std_logic_vector(31 downto 0); -- Direccion
          IDataIn    : in  std_logic_vector(31 downto 0); -- Dato leido

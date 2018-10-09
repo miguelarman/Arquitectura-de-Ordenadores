@@ -42,11 +42,11 @@ architecture rtl of alu_control is
 
 
    -- Codifcacion de funct
-   constant F_ADD : std_logic_vector(5 downto 0) := "100000";
-   constant F_AND : std_logic_vector(5 downto 0) := "100100";
-   constant F_OR : std_logic_vector(5 downto 0) := "100101";
-   constant F_SUB : std_logic_vector(5 downto 0) := "100010";
-   constant F_XOR : std_logic_vector(5 downto 0) := "100110";
+   constant F_ADD : std_logic_vector (5 downto 0) := "100000";
+   constant F_AND : std_logic_vector (5 downto 0) := "100100";
+   constant F_OR  : std_logic_vector (5 downto 0) := "100101";
+   constant F_SUB : std_logic_vector (5 downto 0) := "100010";
+   constant F_XOR : std_logic_vector (5 downto 0) := "100110";
 
 begin
 
@@ -55,17 +55,17 @@ begin
       case ALUOp is
          when RTYPE  =>
             case Funct is
-               when F_ADD => ALUControl <= ALU_ADD;
-               when F_AND => ALUControl <= ALU_AND;
-               when F_OR => ALUControl <= ALU_OR;
-               when F_SUB => ALUControl <= ALU_SUB;
-               when F_XOR => ALUControl <= ALU_XOR;
+               when F_ADD  => ALUControl <= ALU_ADD;
+               when F_AND  => ALUControl <= ALU_AND;
+               when F_OR   => ALUControl <= ALU_OR;
+               when F_SUB  => ALUControl <= ALU_SUB;
+               when F_XOR  => ALUControl <= ALU_XOR;
                when others => ALUControl <= "----";
             end case;
-         when BEQ  => ALUControl <= ALU_SUB;
-         when ADDI  => ALUControl <= ALU_ADD;
-         when MEM  => ALUControl <= ALU_ADD;
-         when LUI  => ALUControl <= ALU_S16;
+         when BEQ    => ALUControl <= ALU_SUB;
+         when ADDI   => ALUControl <= ALU_ADD;
+         when MEM    => ALUControl <= ALU_ADD;
+         when LUI    => ALUControl <= ALU_S16;
          when others => ALUControl <= "----";
       end case;
    end process;
