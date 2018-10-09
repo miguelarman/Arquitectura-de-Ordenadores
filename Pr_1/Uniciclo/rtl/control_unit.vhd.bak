@@ -13,7 +13,7 @@ use ieee.std_logic_unsigned.all;
 entity control_unit is
    port (
       -- Entrada = codigo de operacion en la instruccion:
-      OpCode   : in  std_logic_vector (5 downto 0);   -- Codigo de operacion de la instruccion
+      OpCode   : in  std_logic_vector (5 downto 0);
       -- Seniales para el PC
       Branch   : out  std_logic;                      -- 1=Ejecutandose instruccion branch
       Jump     : out  std_logic;                      -- 1=Ejecutandose instruccion jump

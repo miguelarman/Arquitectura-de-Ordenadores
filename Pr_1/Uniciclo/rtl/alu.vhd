@@ -56,7 +56,7 @@ begin
          when ALU_ADD => sigResult <= OpA + OpB;
          when ALU_SLT => sigResult <= x"0000000" & "000" & subExt(32);
          when ALU_S16 => sigResult <= OpB (15 downto 0) & x"0000";
-         when others => sigResult <= (others => '0');
+         when others  => sigResult <= (others => '0');
       end case;
    end process;
 
