@@ -12,6 +12,8 @@ add wave -noupdate /processor_tb/dWrEn
 add wave -noupdate /processor_tb/dDataOut
 add wave -noupdate /processor_tb/dDataIn
 add wave -noupdate /processor_tb/endSimulation
+add wave -noupdate /processor_tb/i_processor/A2_ID
+add wave -noupdate /processor_tb/i_processor/Rd2_ID
 TreeUpdate [SetDefaultTree]
 WaveRestoreCursors {{Cursor 1} {390 ns} 0}
 quietly wave cursor active 1
@@ -29,4 +31,4 @@ configure wave -griddelta 40
 configure wave -timeline 0
 configure wave -timelineunits ns
 update
-WaveRestoreZoom {391 ns} {410 ns}
+WaveRestoreZoom {111 ns} {130 ns}

@@ -78,7 +78,7 @@ begin
          when OP_SW  =>
             RegDst   <= '0';
             Branch   <= '0';
-            MemRead  <= '-';
+            MemRead  <= '0';
             MemtoReg <= '-';
             ALUOp    <= MEM;
             MemWrite <= '1';
