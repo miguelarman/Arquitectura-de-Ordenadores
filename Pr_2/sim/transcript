@@ -21,8 +21,6 @@
 # Compile of processor.vhd was successful.
 # Compile of reg_bank.vhd was successful.
 # 7 compiles, 0 failed with no errors.
-# reading /opt/QuestaSim/questasim/linux_x86_64/../modelsim.ini
-# Loading project proyecto
 # Compile of memory.vhd was successful.
 # Compile of processor_tb.vhd was successful.
 # Compile of alu.vhd was successful.
@@ -34,7 +32,7 @@
 do wave.do
 do runsim.do
 # QuestaSim-64 vcom 10.6c Compiler 2017.07 Jul 25 2017
-# Start time: 14:36:09 on Oct 11,2018
+# Start time: 14:45:54 on Oct 11,2018
 # vcom -reportprogress 300 -work work -2002 -explicit -check_synthesis ../rtl/reg_bank.vhd 
 # -- Loading package STANDARD
 # -- Loading package TEXTIO
@@ -43,10 +41,10 @@ do runsim.do
 # -- Loading package STD_LOGIC_UNSIGNED
 # -- Compiling entity reg_bank
 # -- Compiling architecture rtl of reg_bank
-# End time: 14:36:09 on Oct 11,2018, Elapsed time: 0:00:00
+# End time: 14:45:54 on Oct 11,2018, Elapsed time: 0:00:00
 # Errors: 0, Warnings: 0
 # QuestaSim-64 vcom 10.6c Compiler 2017.07 Jul 25 2017
-# Start time: 14:36:09 on Oct 11,2018
+# Start time: 14:45:54 on Oct 11,2018
 # vcom -reportprogress 300 -work work -2002 -explicit -check_synthesis ../rtl/alu.vhd 
 # -- Loading package STANDARD
 # -- Loading package TEXTIO
@@ -55,10 +53,10 @@ do runsim.do
 # -- Loading package STD_LOGIC_UNSIGNED
 # -- Compiling entity alu
 # -- Compiling architecture rtl of alu
-# End time: 14:36:09 on Oct 11,2018, Elapsed time: 0:00:00
+# End time: 14:45:54 on Oct 11,2018, Elapsed time: 0:00:00
 # Errors: 0, Warnings: 0
 # QuestaSim-64 vcom 10.6c Compiler 2017.07 Jul 25 2017
-# Start time: 14:36:09 on Oct 11,2018
+# Start time: 14:45:54 on Oct 11,2018
 # vcom -reportprogress 300 -work work -2002 -explicit -check_synthesis ../rtl/alu_control.vhd 
 # -- Loading package STANDARD
 # -- Loading package TEXTIO
@@ -67,10 +65,10 @@ do runsim.do
 # -- Loading package STD_LOGIC_UNSIGNED
 # -- Compiling entity alu_control
 # -- Compiling architecture rtl of alu_control
-# End time: 14:36:09 on Oct 11,2018, Elapsed time: 0:00:00
+# End time: 14:45:54 on Oct 11,2018, Elapsed time: 0:00:00
 # Errors: 0, Warnings: 0
 # QuestaSim-64 vcom 10.6c Compiler 2017.07 Jul 25 2017
-# Start time: 14:36:09 on Oct 11,2018
+# Start time: 14:45:54 on Oct 11,2018
 # vcom -reportprogress 300 -work work -2002 -explicit -check_synthesis ../rtl/control_unit.vhd 
 # -- Loading package STANDARD
 # -- Loading package TEXTIO
@@ -79,10 +77,10 @@ do runsim.do
 # -- Loading package STD_LOGIC_UNSIGNED
 # -- Compiling entity control_unit
 # -- Compiling architecture rtl of control_unit
-# End time: 14:36:09 on Oct 11,2018, Elapsed time: 0:00:00
+# End time: 14:45:54 on Oct 11,2018, Elapsed time: 0:00:00
 # Errors: 0, Warnings: 0
 # QuestaSim-64 vcom 10.6c Compiler 2017.07 Jul 25 2017
-# Start time: 14:36:09 on Oct 11,2018
+# Start time: 14:45:54 on Oct 11,2018
 # vcom -reportprogress 300 -work work -2002 -explicit -check_synthesis ../rtl/processor.vhd 
 # -- Loading package STANDARD
 # -- Loading package TEXTIO
@@ -91,10 +89,10 @@ do runsim.do
 # -- Loading package STD_LOGIC_UNSIGNED
 # -- Compiling entity processor
 # -- Compiling architecture rtl of processor
-# End time: 14:36:09 on Oct 11,2018, Elapsed time: 0:00:00
+# End time: 14:45:54 on Oct 11,2018, Elapsed time: 0:00:00
 # Errors: 0, Warnings: 0
 # QuestaSim-64 vcom 10.6c Compiler 2017.07 Jul 25 2017
-# Start time: 14:36:09 on Oct 11,2018
+# Start time: 14:45:54 on Oct 11,2018
 # vcom -reportprogress 300 -work work -2002 -explicit memory.vhd 
 # -- Loading package STANDARD
 # -- Loading package TEXTIO
@@ -104,10 +102,10 @@ do runsim.do
 # -- Loading package std_logic_textio
 # -- Compiling entity memory
 # -- Compiling architecture Behavioral of memory
-# End time: 14:36:09 on Oct 11,2018, Elapsed time: 0:00:00
+# End time: 14:45:54 on Oct 11,2018, Elapsed time: 0:00:00
 # Errors: 0, Warnings: 0
 # QuestaSim-64 vcom 10.6c Compiler 2017.07 Jul 25 2017
-# Start time: 14:36:09 on Oct 11,2018
+# Start time: 14:45:54 on Oct 11,2018
 # vcom -reportprogress 300 -work work -2002 -explicit processor_tb.vhd 
 # -- Loading package STANDARD
 # -- Loading package TEXTIO
@@ -116,29 +114,29 @@ do runsim.do
 # -- Loading package STD_LOGIC_UNSIGNED
 # -- Compiling entity processor_tb
 # -- Compiling architecture tb of processor_tb
-# End time: 14:36:09 on Oct 11,2018, Elapsed time: 0:00:00
+# End time: 14:45:54 on Oct 11,2018, Elapsed time: 0:00:00
 # Errors: 0, Warnings: 0
 # vsim -novopt processor_tb -gN_CYCLES=100 -gINIT_FILENAME_DATA="datos" -gINIT_FILENAME_INST="instrucciones" 
-# Start time: 14:36:09 on Oct 11,2018
+# Start time: 14:45:54 on Oct 11,2018
 # ** Warning: (vsim-8891) All optimizations are turned off because the -novopt switch is in effect. This will cause your simulation to run very slowly. If you are using this switch to preserve visibility for Debug or PLI features please see the User's Manual section on Preserving Object Visibility with vopt.
 # Loading std.standard
-# Refreshing /home/alumnos/e361902/Arquitectura-de-Ordenadores/Pr_1/Segmentado/sim/work.processor_tb(tb)
+# Refreshing /home/alumnos/e361902/Arquitectura-de-Ordenadores/Pr_2/sim/work.processor_tb(tb)
 # Loading std.textio(body)
 # Loading ieee.std_logic_1164(body)
 # Loading ieee.std_logic_arith(body)
 # Loading ieee.std_logic_unsigned(body)
 # Loading work.processor_tb(tb)
-# Refreshing /home/alumnos/e361902/Arquitectura-de-Ordenadores/Pr_1/Segmentado/sim/work.processor(rtl)
+# Refreshing /home/alumnos/e361902/Arquitectura-de-Ordenadores/Pr_2/sim/work.processor(rtl)
 # Loading work.processor(rtl)
-# Refreshing /home/alumnos/e361902/Arquitectura-de-Ordenadores/Pr_1/Segmentado/sim/work.alu(rtl)
+# Refreshing /home/alumnos/e361902/Arquitectura-de-Ordenadores/Pr_2/sim/work.alu(rtl)
 # Loading work.alu(rtl)
-# Refreshing /home/alumnos/e361902/Arquitectura-de-Ordenadores/Pr_1/Segmentado/sim/work.alu_control(rtl)
+# Refreshing /home/alumnos/e361902/Arquitectura-de-Ordenadores/Pr_2/sim/work.alu_control(rtl)
 # Loading work.alu_control(rtl)
-# Refreshing /home/alumnos/e361902/Arquitectura-de-Ordenadores/Pr_1/Segmentado/sim/work.control_unit(rtl)
+# Refreshing /home/alumnos/e361902/Arquitectura-de-Ordenadores/Pr_2/sim/work.control_unit(rtl)
 # Loading work.control_unit(rtl)
-# Refreshing /home/alumnos/e361902/Arquitectura-de-Ordenadores/Pr_1/Segmentado/sim/work.reg_bank(rtl)
+# Refreshing /home/alumnos/e361902/Arquitectura-de-Ordenadores/Pr_2/sim/work.reg_bank(rtl)
 # Loading work.reg_bank(rtl)
-# Refreshing /home/alumnos/e361902/Arquitectura-de-Ordenadores/Pr_1/Segmentado/sim/work.memory(behavioral)
+# Refreshing /home/alumnos/e361902/Arquitectura-de-Ordenadores/Pr_2/sim/work.memory(behavioral)
 # Loading ieee.std_logic_textio(body)
 # Loading work.memory(behavioral)
 # 1
@@ -151,26 +149,4 @@ do runsim.do
 # 0
 # ** Note: SIMULACION FINALIZADA. COMPROBAR ONDAS.
 #    Time: 1055 ns  Iteration: 1  Instance: /processor_tb
-cd ..
-# Cannot change directory while a simulation is in progress.
-# Use the "quit -sim" command to unload the design first.
-quit -sim
-# End time: 14:42:01 on Oct 11,2018, Elapsed time: 0:05:52
-# Errors: 1, Warnings: 1
-cd ..
-# reading /opt/QuestaSim/questasim/linux_x86_64/../modelsim.ini
-cd ..
-pwd
-# /home/alumnos/e361902/Arquitectura-de-Ordenadores/Pr_1
- cd ../Pr_2
-ls
-# rtl
-# sim
-# transcript
-cd sim
-open proyecto.mpf
-# file12
-open proyecto.cr.mti
-# file14
-open proyecto.mpf
-# file15
+add wave -r /*

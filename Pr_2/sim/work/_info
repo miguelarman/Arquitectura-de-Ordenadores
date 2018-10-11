@@ -15,35 +15,35 @@ Z3 DPx4 ieee 18 std_logic_unsigned 0 22 ;eZjO2D4ZDz<]0>8AL<ne1
 Z4 DPx3 std 6 textio 0 22 zE1`LPoLg^DX3Oz^4Fj1K3
 Z5 DPx4 ieee 14 std_logic_1164 0 22 eNV`TJ_GofJTzYa?f<@Oe1
 R0
-Z6 8/home/alumnos/e361902/Arquitectura-de-Ordenadores/Pr_2/rtl/alu.vhd
-Z7 F/home/alumnos/e361902/Arquitectura-de-Ordenadores/Pr_2/rtl/alu.vhd
+Z6 8../rtl/alu.vhd
+Z7 F../rtl/alu.vhd
 l0
 L15
-VcBa>0[5]EgBPoF[SY0W:S3
+VbE4YMILN5ef:fc]m]KY001
 !s100 PZenWJ@F@Xc]_f<F91A7N1
 Z8 OL;C;10.6c;65
 32
-Z9 !s110 1539261294
+Z9 !s110 1539261954
 !i10b 1
-Z10 !s108 1539261294.000000
-Z11 !s90 -reportprogress|300|-work|work|-2002|-explicit|-vopt|-stats=none|/home/alumnos/e361902/Arquitectura-de-Ordenadores/Pr_2/rtl/alu.vhd|
-Z12 !s107 /home/alumnos/e361902/Arquitectura-de-Ordenadores/Pr_2/rtl/alu.vhd|
+Z10 !s108 1539261954.000000
+Z11 !s90 -reportprogress|300|-work|work|-2002|-explicit|-check_synthesis|../rtl/alu.vhd|
+Z12 !s107 ../rtl/alu.vhd|
 !i113 0
-Z13 o-work work -2002 -explicit
+Z13 o-work work -2002 -explicit -check_synthesis
 Z14 tExplicit 1 CvgOpt 0
 Artl
 R2
 R3
 R4
 R5
-DEx4 work 3 alu 0 22 cBa>0[5]EgBPoF[SY0W:S3
-l44
-L25
-VfX49[`ndffSe6a?oF?6^d1
-!s100 K9NLN<81bS`k@S61M4PJ;1
-R8
+DEx4 work 3 alu 0 22 bE4YMILN5ef:fc]m]KY001
 32
 R9
+l44
+L25
+VRzJ?=RIB0m1:XNdC5I[k73
+!s100 K9NLN<81bS`k@S61M4PJ;1
+R8
 !i10b 1
 R10
 R11
@@ -58,19 +58,19 @@ R3
 R4
 R5
 R0
-Z15 8/home/alumnos/e361902/Arquitectura-de-Ordenadores/Pr_2/rtl/alu_control.vhd
-Z16 F/home/alumnos/e361902/Arquitectura-de-Ordenadores/Pr_2/rtl/alu_control.vhd
+Z15 8../rtl/alu_control.vhd
+Z16 F../rtl/alu_control.vhd
 l0
 L13
-Vg4cZUei`zIj3SD3S4l;@23
+V[ReS>bYNJl:Y[^UE4KN[c1
 !s100 22aO[0nRMh;Qdo^IHMZf70
 R8
 32
 R9
 !i10b 1
 R10
-Z17 !s90 -reportprogress|300|-work|work|-2002|-explicit|-vopt|-stats=none|/home/alumnos/e361902/Arquitectura-de-Ordenadores/Pr_2/rtl/alu_control.vhd|
-Z18 !s107 /home/alumnos/e361902/Arquitectura-de-Ordenadores/Pr_2/rtl/alu_control.vhd|
+Z17 !s90 -reportprogress|300|-work|work|-2002|-explicit|-check_synthesis|../rtl/alu_control.vhd|
+Z18 !s107 ../rtl/alu_control.vhd|
 !i113 0
 R13
 R14
@@ -79,14 +79,14 @@ R2
 R3
 R4
 R5
-DEx4 work 11 alu_control 0 22 g4cZUei`zIj3SD3S4l;@23
-l51
-L23
-V5ZFR@z0EA32c7`APWOKQ<3
-!s100 `iRNR[XJi_X4j[E?n74O@2
-R8
+DEx4 work 11 alu_control 0 22 [ReS>bYNJl:Y[^UE4KN[c1
 32
 R9
+l51
+L23
+VKf94[m7AN0f1LfMW>cYf>3
+!s100 `iRNR[XJi_X4j[E?n74O@2
+R8
 !i10b 1
 R10
 R17
@@ -101,19 +101,19 @@ R3
 R4
 R5
 R0
-Z19 8/home/alumnos/e361902/Arquitectura-de-Ordenadores/Pr_2/rtl/control_unit.vhd
-Z20 F/home/alumnos/e361902/Arquitectura-de-Ordenadores/Pr_2/rtl/control_unit.vhd
+Z19 8../rtl/control_unit.vhd
+Z20 F../rtl/control_unit.vhd
 l0
 L13
-Ve45^]bbVC[6kI1:bhD5>U0
+VU^naM;zdSm@;Z_<Q?QRoD3
 !s100 9<4kfZeX[n[aT^AMBdc1]2
 R8
 32
 R9
 !i10b 1
 R10
-Z21 !s90 -reportprogress|300|-work|work|-2002|-explicit|-vopt|-stats=none|/home/alumnos/e361902/Arquitectura-de-Ordenadores/Pr_2/rtl/control_unit.vhd|
-Z22 !s107 /home/alumnos/e361902/Arquitectura-de-Ordenadores/Pr_2/rtl/control_unit.vhd|
+Z21 !s90 -reportprogress|300|-work|work|-2002|-explicit|-check_synthesis|../rtl/control_unit.vhd|
+Z22 !s107 ../rtl/control_unit.vhd|
 !i113 0
 R13
 R14
@@ -122,14 +122,14 @@ R2
 R3
 R4
 R5
-DEx4 work 12 control_unit 0 22 e45^]bbVC[6kI1:bhD5>U0
-l53
-L33
-V[]c1@hd>YIz8`77z[zF;m0
-!s100 aQEcZE;5:o6cPdVjLiYh<3
-R8
+DEx4 work 12 control_unit 0 22 U^naM;zdSm@;Z_<Q?QRoD3
 32
 R9
+l53
+L33
+V_Xdaidj6Fhok:^Ecj3km=0
+!s100 aQEcZE;5:o6cPdVjLiYh<3
+R8
 !i10b 1
 R10
 R21
@@ -145,8 +145,8 @@ R2
 R5
 R4
 R0
-Z24 8/home/alumnos/e361902/Arquitectura-de-Ordenadores/Pr_2/sim/memory.vhd
-Z25 F/home/alumnos/e361902/Arquitectura-de-Ordenadores/Pr_2/sim/memory.vhd
+Z24 8memory.vhd
+Z25 Fmemory.vhd
 l0
 L18
 V^iac4o:AOa[9gdDHggQ>]1
@@ -156,10 +156,10 @@ R8
 R9
 !i10b 1
 R10
-Z26 !s90 -reportprogress|300|-work|work|-2002|-explicit|-vopt|-stats=none|/home/alumnos/e361902/Arquitectura-de-Ordenadores/Pr_2/sim/memory.vhd|
-Z27 !s107 /home/alumnos/e361902/Arquitectura-de-Ordenadores/Pr_2/sim/memory.vhd|
+Z26 !s90 -reportprogress|300|-work|work|-2002|-explicit|memory.vhd|
+Z27 !s107 memory.vhd|
 !i113 0
-R13
+Z28 o-work work -2002 -explicit
 R14
 Abehavioral
 R23
@@ -168,40 +168,40 @@ R2
 R5
 R4
 DEx4 work 6 memory 0 22 ^iac4o:AOa[9gdDHggQ>]1
+32
+R9
 l40
 L33
 Vj11BKgXej7U4k_dh7cPUY1
 !s100 YaS_m8K5SeB=1=lOb5eXb1
 R8
-32
-R9
 !i10b 1
 R10
 R26
 R27
 !i113 0
-R13
+R28
 R14
 Eprocessor
-Z28 w1539260881
+Z29 w1539261938
 R2
 R3
 R4
 R5
 R0
-Z29 8/home/alumnos/e361902/Arquitectura-de-Ordenadores/Pr_2/rtl/processor.vhd
-Z30 F/home/alumnos/e361902/Arquitectura-de-Ordenadores/Pr_2/rtl/processor.vhd
+Z30 8../rtl/processor.vhd
+Z31 F../rtl/processor.vhd
 l0
 L13
-V6QC68P`96K`9>j0UJB<V_2
+V1bXQa8N0jQl?_8lQI1R;j3
 !s100 DeFRMge0?[BK<NAlFPVJ93
 R8
 32
 R9
 !i10b 1
 R10
-Z31 !s90 -reportprogress|300|-work|work|-2002|-explicit|-vopt|-stats=none|/home/alumnos/e361902/Arquitectura-de-Ordenadores/Pr_2/rtl/processor.vhd|
-Z32 !s107 /home/alumnos/e361902/Arquitectura-de-Ordenadores/Pr_2/rtl/processor.vhd|
+Z32 !s90 -reportprogress|300|-work|work|-2002|-explicit|-check_synthesis|../rtl/processor.vhd|
+Z33 !s107 ../rtl/processor.vhd|
 !i113 0
 R13
 R14
@@ -210,18 +210,18 @@ R2
 R3
 R4
 R5
-DEx4 work 9 processor 0 22 6QC68P`96K`9>j0UJB<V_2
-l191
-L29
-V]^H6a83Zbji008gGN4d:S2
-!s100 _>O[>2e6KA6KnZT]4C>nc2
-R8
+DEx4 work 9 processor 0 22 1bXQa8N0jQl?_8lQI1R;j3
 32
 R9
+l191
+L29
+V<NdoNEzCEO_QIX9ITio8V1
+!s100 1H_bjXZdKE=fKb7@GmMJ31
+R8
 !i10b 1
 R10
-R31
 R32
+R33
 !i113 0
 R13
 R14
@@ -232,8 +232,8 @@ R2
 R4
 R5
 R0
-Z33 8/home/alumnos/e361902/Arquitectura-de-Ordenadores/Pr_2/sim/processor_tb.vhd
-Z34 F/home/alumnos/e361902/Arquitectura-de-Ordenadores/Pr_2/sim/processor_tb.vhd
+Z34 8processor_tb.vhd
+Z35 Fprocessor_tb.vhd
 l0
 L14
 Vn`iYfnL@@TOSm@niYeVzi1
@@ -243,10 +243,10 @@ R8
 R9
 !i10b 1
 R10
-Z35 !s90 -reportprogress|300|-work|work|-2002|-explicit|-vopt|-stats=none|/home/alumnos/e361902/Arquitectura-de-Ordenadores/Pr_2/sim/processor_tb.vhd|
-Z36 !s107 /home/alumnos/e361902/Arquitectura-de-Ordenadores/Pr_2/sim/processor_tb.vhd|
+Z36 !s90 -reportprogress|300|-work|work|-2002|-explicit|processor_tb.vhd|
+Z37 !s107 processor_tb.vhd|
 !i113 0
-R13
+R28
 R14
 Atb
 R3
@@ -254,40 +254,40 @@ R2
 R4
 R5
 DEx4 work 12 processor_tb 0 22 n`iYfnL@@TOSm@niYeVzi1
+32
+R9
 l78
 L22
 VnN1dhKU@CeAWB;cR;l_V03
 !s100 85cGzL=U]3DlT?f>_7fMG0
 R8
-32
-R9
 !i10b 1
 R10
-R35
 R36
+R37
 !i113 0
-R13
+R28
 R14
 Ereg_bank
-Z37 w1539261025
+Z38 w1539261025
 R2
 R3
 R4
 R5
 R0
-Z38 8/home/alumnos/e361902/Arquitectura-de-Ordenadores/Pr_2/rtl/reg_bank.vhd
-Z39 F/home/alumnos/e361902/Arquitectura-de-Ordenadores/Pr_2/rtl/reg_bank.vhd
+Z39 8../rtl/reg_bank.vhd
+Z40 F../rtl/reg_bank.vhd
 l0
 L15
-VaFXNMmko5=TdWT=?ei6Ol1
+V:KZ<7E3G]2Gkj23844nTl3
 !s100 hZOz[lAz;U[1aZ;<22;iO0
 R8
 32
 R9
 !i10b 1
 R10
-Z40 !s90 -reportprogress|300|-work|work|-2002|-explicit|-vopt|-stats=none|/home/alumnos/e361902/Arquitectura-de-Ordenadores/Pr_2/rtl/reg_bank.vhd|
-!s107 /home/alumnos/e361902/Arquitectura-de-Ordenadores/Pr_2/rtl/reg_bank.vhd|
+Z41 !s90 -reportprogress|300|-work|work|-2002|-explicit|-check_synthesis|../rtl/reg_bank.vhd|
+Z42 !s107 ../rtl/reg_bank.vhd|
 !i113 0
 R13
 R14
@@ -296,18 +296,18 @@ R2
 R3
 R4
 R5
-DEx4 work 8 reg_bank 0 22 aFXNMmko5=TdWT=?ei6Ol1
-l36
-L29
-VHh23kHYH]2TK@djmOX`dj1
-Z41 !s100 9jnJTfe@[>73L0;_84l3>2
-R8
+DEx4 work 8 reg_bank 0 22 :KZ<7E3G]2Gkj23844nTl3
 32
 R9
+l36
+L29
+VZo1U3agZ5==00R`mG:LZL1
+!s100 9jnJTfe@[>73L0;_84l3>2
+R8
 !i10b 1
 R10
-R40
-Z42 !s107 /home/alumnos/e361902/Arquitectura-de-Ordenadores/Pr_2/rtl/reg_bank.vhd|
+R41
+R42
 !i113 0
 R13
 R14

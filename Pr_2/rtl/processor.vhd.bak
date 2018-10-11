@@ -444,7 +444,7 @@ begin
                MemRead_MEM       <= MemRead_EX;
                MemWrite_MEM      <= MemWrite_EX;
                MemToReg_MEM      <= MemToReg_EX;
-            else then
+            else
                RegWrite_MEM      <= '0';
                Branch_MEM        <= '0';
                Jump_MEM          <= '0';

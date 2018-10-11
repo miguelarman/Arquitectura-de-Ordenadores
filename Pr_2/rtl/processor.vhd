@@ -338,9 +338,9 @@ begin
    ------------------
    --Hazarding unit--
    ------------------
-   PCWrite <= '0' when OpCode_EX = LW_OPCODE else '1';
-   IFIDWrite <= '0' when OpCode_EX = LW_OPCODE else '1';
-   EXMEMStop <= '0' when OpCode_EX = LW_OPCODE else '1';
+   PCWrite <= '0' when (OpCode_EX = LW_OPCODE and (A2_ID = A3_MEM or A1_ID = A3_MEM)) else '1';
+   IFIDWrite <= '0' when (OpCode_EX = LW_OPCODE and (A2_ID = A3_MEM or A1_ID = A3_MEM)) else '1';
+   EXMEMStop <= '0' when (OpCode_EX = LW_OPCODE and (A2_ID = A3_MEM or A1_ID = A3_MEM)) else '1';
 
 
    --Proceso de reseteo del PC o de incremento del mismo
