@@ -7,9 +7,9 @@ z2
 !i10e 25
 !i10f 100
 cModel Technology
-Z0 d/home/alumnos/e361902/Arquitectura-de-Ordenadores/Pr_1/Segmentado/sim
+Z0 d/home/alumnos/e360958/Arquitectura-de-Ordenadores/Pr_1/Segmentado/sim
 Ealu
-Z1 w1539256354
+Z1 w1539862996
 Z2 DPx4 ieee 15 std_logic_arith 0 22 [G314=:2zXJ`VORJe1J@Z1
 Z3 DPx4 ieee 18 std_logic_unsigned 0 22 ;eZjO2D4ZDz<]0>8AL<ne1
 Z4 DPx3 std 6 textio 0 22 zE1`LPoLg^DX3Oz^4Fj1K3
@@ -23,9 +23,9 @@ VbE4YMILN5ef:fc]m]KY001
 !s100 PZenWJ@F@Xc]_f<F91A7N1
 Z8 OL;C;10.6c;65
 32
-Z9 !s110 1539261369
+Z9 !s110 1539863064
 !i10b 1
-Z10 !s108 1539261369.000000
+Z10 !s108 1539863064.000000
 Z11 !s90 -reportprogress|300|-work|work|-2002|-explicit|-check_synthesis|../rtl/alu.vhd|
 Z12 !s107 ../rtl/alu.vhd|
 !i113 0

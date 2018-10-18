@@ -117,11 +117,13 @@ architecture rtl of processor is
    signal IFIDWrite          : std_logic;                       -- Senal para parar el primer pipeline
    signal PCWrite            : std_logic;                       -- Senal para parar el PC
    signal EXMEMStop          : std_logic;                       -- Senal para parar el pipeline EX/MEM
+   signal IFIDStop           : std_logic;                       -- Senal para parar el pipeline IF/ID
    
    -----------------------------
    --Declaracion de constantes--
    -----------------------------
-   constant LW_OPCODE: std_logic_vector (5 downto 0) := "100011";
+   constant LW_OPCODE  : std_logic_vector (5 downto 0) := "100011";
+   constant BEQ_OPCODE : std_logic_vector (5 downto 0) := "000100";
 
 
    ------------------------------------
@@ -338,9 +340,10 @@ begin
    ------------------
    --Hazarding unit--
    ------------------
-   PCWrite <= '0' when (OpCode_EX = LW_OPCODE and (A2_ID = A3_MEM or A1_ID = A3_MEM)) else '1';
+   PCWrite   <= '0' when (OpCode_EX = LW_OPCODE and (A2_ID = A3_MEM or A1_ID = A3_MEM)) else '1';
    IFIDWrite <= '0' when (OpCode_EX = LW_OPCODE and (A2_ID = A3_MEM or A1_ID = A3_MEM)) else '1';
-   EXMEMStop <= '0' when (OpCode_EX = LW_OPCODE and (A2_ID = A3_MEM or A1_ID = A3_MEM)) else '1';
+   EXMEMStop <= '1' when (OpCode_EX = LW_OPCODE and (A2_ID = A3_MEM or A1_ID = A3_MEM)) else '0';
+   IFIDStop  <= '1' when (OpCode_EX = BEQ_OPCODE)                                       else '0';
 
 
    --Proceso de reseteo del PC o de incremento del mismo
@@ -363,9 +366,13 @@ begin
          if Reset = '1' then
             PCPlus4_ID <= x"00000000";
             IDataIn_ID <= x"00000000";
-         elsif (rising_edge(Clk) and IFIDWrite ='1') then
+         elsif rising_edge(Clk) then
             PCPlus4_ID <= PCPlus4_IF;
-            IDataIn_ID <= IDataIn_IF;
+            if IFIDWrite ='1' then
+               IDataIn_ID <= IDataIn_IF;
+            elsif IFIDStop = '1' then 
+               IDataIn_ID <= x"00000000";
+            end if;
          end if;
       end process;
 

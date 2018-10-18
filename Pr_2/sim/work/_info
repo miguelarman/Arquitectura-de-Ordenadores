@@ -7,9 +7,9 @@ z2
 !i10e 25
 !i10f 100
 cModel Technology
-Z0 d/home/alumnos/e361902/Arquitectura-de-Ordenadores/Pr_2/sim
+Z0 d/home/alumnos/e360958/Arquitectura-de-Ordenadores/Pr_2/sim
 Ealu
-Z1 w1539256354
+Z1 w1539862996
 Z2 DPx4 ieee 15 std_logic_arith 0 22 [G314=:2zXJ`VORJe1J@Z1
 Z3 DPx4 ieee 18 std_logic_unsigned 0 22 ;eZjO2D4ZDz<]0>8AL<ne1
 Z4 DPx3 std 6 textio 0 22 zE1`LPoLg^DX3Oz^4Fj1K3
@@ -23,9 +23,9 @@ VbE4YMILN5ef:fc]m]KY001
 !s100 PZenWJ@F@Xc]_f<F91A7N1
 Z8 OL;C;10.6c;65
 32
-Z9 !s110 1539261954
+Z9 !s110 1539863951
 !i10b 1
-Z10 !s108 1539261954.000000
+Z10 !s108 1539863951.000000
 Z11 !s90 -reportprogress|300|-work|work|-2002|-explicit|-check_synthesis|../rtl/alu.vhd|
 Z12 !s107 ../rtl/alu.vhd|
 !i113 0
@@ -183,14 +183,14 @@ R27
 R28
 R14
 Eprocessor
-Z29 w1539261938
+R1
 R2
 R3
 R4
 R5
 R0
-Z30 8../rtl/processor.vhd
-Z31 F../rtl/processor.vhd
+Z29 8../rtl/processor.vhd
+Z30 F../rtl/processor.vhd
 l0
 L13
 V1bXQa8N0jQl?_8lQI1R;j3
@@ -200,8 +200,8 @@ R8
 R9
 !i10b 1
 R10
-Z32 !s90 -reportprogress|300|-work|work|-2002|-explicit|-check_synthesis|../rtl/processor.vhd|
-Z33 !s107 ../rtl/processor.vhd|
+Z31 !s90 -reportprogress|300|-work|work|-2002|-explicit|-check_synthesis|../rtl/processor.vhd|
+Z32 !s107 ../rtl/processor.vhd|
 !i113 0
 R13
 R14
@@ -220,8 +220,8 @@ V<NdoNEzCEO_QIX9ITio8V1
 R8
 !i10b 1
 R10
+R31
 R32
-R33
 !i113 0
 R13
 R14
@@ -232,8 +232,8 @@ R2
 R4
 R5
 R0
-Z34 8processor_tb.vhd
-Z35 Fprocessor_tb.vhd
+Z33 8processor_tb.vhd
+Z34 Fprocessor_tb.vhd
 l0
 L14
 Vn`iYfnL@@TOSm@niYeVzi1
@@ -243,8 +243,8 @@ R8
 R9
 !i10b 1
 R10
-Z36 !s90 -reportprogress|300|-work|work|-2002|-explicit|processor_tb.vhd|
-Z37 !s107 processor_tb.vhd|
+Z35 !s90 -reportprogress|300|-work|work|-2002|-explicit|processor_tb.vhd|
+Z36 !s107 processor_tb.vhd|
 !i113 0
 R28
 R14
@@ -263,20 +263,20 @@ VnN1dhKU@CeAWB;cR;l_V03
 R8
 !i10b 1
 R10
+R35
 R36
-R37
 !i113 0
 R28
 R14
 Ereg_bank
-Z38 w1539261025
+R1
 R2
 R3
 R4
 R5
 R0
-Z39 8../rtl/reg_bank.vhd
-Z40 F../rtl/reg_bank.vhd
+Z37 8../rtl/reg_bank.vhd
+Z38 F../rtl/reg_bank.vhd
 l0
 L15
 V:KZ<7E3G]2Gkj23844nTl3
@@ -286,8 +286,8 @@ R8
 R9
 !i10b 1
 R10
-Z41 !s90 -reportprogress|300|-work|work|-2002|-explicit|-check_synthesis|../rtl/reg_bank.vhd|
-Z42 !s107 ../rtl/reg_bank.vhd|
+Z39 !s90 -reportprogress|300|-work|work|-2002|-explicit|-check_synthesis|../rtl/reg_bank.vhd|
+Z40 !s107 ../rtl/reg_bank.vhd|
 !i113 0
 R13
 R14
@@ -306,8 +306,8 @@ VZo1U3agZ5==00R`mG:LZL1
 R8
 !i10b 1
 R10
-R41
-R42
+R39
+R40
 !i113 0
 R13
 R14
