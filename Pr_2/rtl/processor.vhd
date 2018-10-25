@@ -297,14 +297,14 @@ begin
    Funct_EX <= ExtensionSigno_EX(5 downto 0);
 
    --Conexion del operando A de la ALU con adelantamiento
-   OpA_EX <= Result_MEM when (A1_ID = A3_MEM) else
-             Wd3_WB when (A1_ID = A3_WB) else
+   OpA_EX <= Result_MEM when (A1_ID = A3_MEM  and A3_MEM /= "00000") else
+             Wd3_WB when (A1_ID = A3_WB and A3_WB /= "00000") else
              Rd1_EX;
 
    --Multiplexor de OpB
    OpB_EX <= MUX_EX when ALUSrc_EX = '0' else ExtensionSigno_EX;
-   MUX_EX <= Result_MEM when (A2_ID = A3_MEM) else
-             Wd3_WB when (A2_ID = A3_WB) else
+   MUX_EX <= Result_MEM when (A2_ID = A3_MEM and A3_MEM /= "00000") else
+             Wd3_WB when (A2_ID = A3_WB and A3_WB /= "00000") else
              Rd2_EX;
 
    --Conexion de la senal control a la ALUControl
@@ -333,16 +333,17 @@ begin
    We3_WB <= RegWrite_WB;
 
    --Multiplexor de Wd3    
-   Wd3_WB <= Result_WB when MemToReg_WB = '0' else
-             DDataIn_WB;
+   Wd3_WB <= Result_WB when MemToReg_WB = '0' else DDataIn_WB;
 
 
    ------------------
    --Hazarding unit--
    ------------------
    PCWrite   <= '0' when (OpCode_EX = LW_OPCODE and (A2_ID = A3_MEM or A1_ID = A3_MEM)) else '1';
-   IFIDWrite <= '0' when (OpCode_EX = LW_OPCODE and (A2_ID = A3_MEM or A1_ID = A3_MEM)) else '1';
-   EXMEMStop <= '1' when (OpCode_EX = LW_OPCODE and (A2_ID = A3_MEM or A1_ID = A3_MEM)) else '0';
+   IFIDWrite <= '0' when (OpCode_EX = LW_OPCODE and (A2_ID = A3_MEM or A1_ID = A3_MEM)) else
+                '0' when (Branch_EX = '1' and ZFlag_EX = '1')                            else '1';
+   EXMEMStop <= '1' when (OpCode_EX = LW_OPCODE and (A2_ID = A3_MEM or A1_ID = A3_MEM)) else
+                '1' when (Branch_EX = '1' and ZFlag_EX = '1')                            else '0';
    IFIDStop  <= '1' when (OpCode_EX = BEQ_OPCODE)                                       else '0';
 
 
