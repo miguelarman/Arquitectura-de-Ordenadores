@@ -336,9 +336,9 @@ begin
    Wd3_WB <= Result_WB when MemToReg_WB = '0' else DDataIn_WB;
 
 
-   ------------------
-   --Hazarding unit--
-   ------------------
+   --------------------------------------------------
+   --Hazarding unit y deteccion de saltos efectivos--
+   --------------------------------------------------
    PCWrite   <= '0' when (OpCode_EX = LW_OPCODE and (A2_ID = A3_MEM or A1_ID = A3_MEM)) else '1';
    IFIDWrite <= '0' when (OpCode_EX = LW_OPCODE and (A2_ID = A3_MEM or A1_ID = A3_MEM)) else
                 '0' when (Branch_EX = '1' and ZFlag_EX = '1')                            else '1';

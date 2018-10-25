@@ -1,4 +1,4 @@
-# Prog de prueba para Práctica 2. Ej 1
+# Prog de prueba para Pr?ctica 2. Ej 1
 
 .data 0
 num0: .word 1 # posic 0
@@ -13,7 +13,7 @@ num8: .word 0 # posic 32
 num9: .word 0 # posic 36
 num10: .word 0 # posic 40
 num11: .word 0 # posic 44
-.text 0
+.text 0x00003000
 main:
   # carga num0 a num5 en los registros 9 a 14
   lw $t1, 0($zero) # lw $r9, 0($r0)
@@ -34,14 +34,14 @@ main:
   nop
   add $t3, $t1, $t2 # en r11 un 7 = 5 + 2
   nop
-  add $t2, $t4, $t3 #dependencia con la 2º anterior # en r10 un 15 = 7 + 8
+  add $t2, $t4, $t3 #dependencia con la 2? anterior # en r10 un 15 = 7 + 8
   nop
   nop
   nop
   add $t3, $t1, $t2  # en r11 un 20 = 5 + 15
   nop
   nop
-  add $t2, $t3, $t5 #dependencia con la 3º anterior  # en r10 un 36 = 20 + 16
+  add $t2, $t3, $t5 #dependencia con la 3? anterior  # en r10 un 36 = 20 + 16
   nop
   nop
   nop
@@ -60,14 +60,14 @@ main:
   nop
   add $t4, $t1, $t2 # en r11 un 41 = 5 + 36
   nop
-  sw $t4, 28($zero) # dependencia con la 2ª anterior
+  sw $t4, 28($zero) # dependencia con la 2? anterior
   nop
   nop
   nop
   add $t5, $t1, $t2 # en r11 un 41 = 5 + 36
   nop
   nop
-  sw $t5, 32($zero) # dependencia con la 3ª anterior
+  sw $t5, 32($zero) # dependencia con la 3? anterior
   nop
   nop
   nop
@@ -80,13 +80,13 @@ main:
   nop
   lw $t3, 4($zero) # en r9 un 2
   nop
-  add $t4, $t2, $t3 # dependencia con la 2ª anterior # en r12 38 = 36 + 2
+  add $t4, $t2, $t3 # dependencia con la 2? anterior # en r12 38 = 36 + 2
   nop
   nop
   lw $t3, 8($zero) # en r9 un 4
   nop
   nop
-  add $t4, $t2, $t3 # dependencia con la 3ª anterior # en r12 40 = 36 + 4
+  add $t4, $t2, $t3 # dependencia con la 3? anterior # en r12 40 = 36 + 4
   nop
   nop
   nop
@@ -99,4 +99,39 @@ main:
   nop
   lw $t2, 4($zero) # en r10 un 2
   sw $t2, 0($zero) # Guarda el 2 en posicion 0 de memoria
+  
+ # RIESGOS BRANCH
+  addi $t8, $t8, 0xFFFFFFFF #guardamos en r24 todo 1s para el control de errores
+  lw $t1, 0($zero) # en r9 guarda un 2
+  beq $t1, $t2, d1 # si r9 y r10 son iguales (salto efectivo) salta a d1
+  or $t9, $t9, $t8 # esta instruccion no deberia ejecutarse. Si r25 tiene 1s en vez de 0s es que ha fallado
+  or $t9, $t9, $t8 # esta instruccion no deberia ejecutarse. Si r25 tiene 1s en vez de 0s es que ha fallado
+  or $t9, $t9, $t8 # esta instruccion no deberia ejecutarse. Si r25 tiene 1s en vez de 0s es que ha fallado
+  nop
+  nop
+  nop
+  d1: lw $t1, 8($zero) # en r9 guarda un 4
+  beq $t1, $t2, d1 # si r9 y r10 son iguales (salto no efectivo) salta a d1
+  addi $t1, $zero, 1 # se guarda en r9 un 1
+  nop
+  nop
+  nop
+  add $t1, $t1, $t1 # se guarda en r9 un 2
+  beq $t1, $t2, d2 # si r9 y r10 son iguales (salto efectivo) salta a d3
+  or $t9, $t9, $t8 # esta instruccion no deberia ejecutarse. Si r25 tiene 1s en vez de 0s es que ha fallado
+  or $t9, $t9, $t8 # esta instruccion no deberia ejecutarse. Si r25 tiene 1s en vez de 0s es que ha fallado
+  or $t9, $t9, $t8 # esta instruccion no deberia ejecutarse. Si r25 tiene 1s en vez de 0s es que ha fallado
+  nop
+  nop
+  nop
+  d2: add $t1, $t1, $t1 # se guarda en r9 un 4
+  beq $t1, $t2, d1 # si r9 y r10 son iguales (salto no efectivo) salta a d1 (bucle infinito)
+  addi $s7, $zero, 0xFFFFFFFF # control de que el programa ha llegado al final (r23 = -1)
+  nop
+  nop
+  nop
+  d3: beq $r0, $r0, d3
+  nop
+  nop
+  
   
