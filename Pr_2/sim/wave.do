@@ -14,8 +14,9 @@ add wave -noupdate /processor_tb/dDataIn
 add wave -noupdate /processor_tb/endSimulation
 add wave -noupdate /processor_tb/i_processor/A2_ID
 add wave -noupdate /processor_tb/i_processor/Rd2_ID
+add wave -noupdate -expand /processor_tb/i_processor/reg_bank_pm/regs
 TreeUpdate [SetDefaultTree]
-WaveRestoreCursors {{Cursor 1} {390 ns} 0}
+WaveRestoreCursors {{Cursor 1} {322 ns} 0}
 quietly wave cursor active 1
 configure wave -namecolwidth 279
 configure wave -valuecolwidth 114
@@ -31,4 +32,4 @@ configure wave -griddelta 40
 configure wave -timeline 0
 configure wave -timelineunits ns
 update
-WaveRestoreZoom {111 ns} {130 ns}
+WaveRestoreZoom {0 ns} {1113 ns}
