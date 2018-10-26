@@ -45,9 +45,9 @@ main:
   nop
   nop
   nop
-  add $s0, $t1, $t2  # en r16 un 20 = 5 + 15
-  add $s0, $s0, $s0  # Dependencia con la anterior  # en r16 un 40 = 20 + 20. 
-  add $s1, $s0, $s0  # dependencia con la anterior  # en r16 un 80 = 40 + 40
+  add $s0, $t1, $t2  # en r16 un 41 = 36 + 5
+  add $s0, $s0, $s0  # Dependencia con la anterior  # en r16 un 82 = 41 + 41. 
+  add $s1, $s0, $s0  # dependencia con la anterior  # en r16 un 164 = 82 + 82
   nop
   nop
   nop
@@ -58,13 +58,13 @@ main:
   nop
   nop
   nop
-  add $t4, $t1, $t2 # en r11 un 41 = 5 + 36
+  add $t4, $t1, $t2 # en r12 un 41 = 5 + 36
   nop
   sw $t4, 28($zero) # dependencia con la 2? anterior
   nop
   nop
   nop
-  add $t5, $t1, $t2 # en r11 un 41 = 5 + 36
+  add $t5, $t1, $t2 # en r13 un 41 = 5 + 36
   nop
   nop
   sw $t5, 32($zero) # dependencia con la 3? anterior
@@ -73,7 +73,7 @@ main:
   nop
   nop
   # RIESGOS MEMORIA REGISTRO
-  lw $t3, 0($zero) # en r9 un 1
+  lw $t3, 0($zero) # en r11 un 1
   add $t4, $t2, $t3 # dependencia con la anterior # en r12 37 = 36 + 1
   nop
   nop
@@ -83,7 +83,7 @@ main:
   add $t4, $t2, $t3 # dependencia con la 2? anterior # en r12 38 = 36 + 2
   nop
   nop
-  lw $t3, 8($zero) # en r9 un 4
+  lw $t3, 8($zero) # en r11 un 4
   nop
   nop
   add $t4, $t2, $t3 # dependencia con la 3? anterior # en r12 40 = 36 + 4

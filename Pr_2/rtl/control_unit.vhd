@@ -116,7 +116,7 @@ begin
             RegWrite <= '0';
 	    Jump     <= '1';      
          when others =>
-            RegDst   <= '-';
+            RegDst   <= '0';
             Branch   <= '0';
             MemRead  <= '-';
             MemtoReg <= '0';

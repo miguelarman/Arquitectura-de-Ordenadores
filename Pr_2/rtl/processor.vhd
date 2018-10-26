@@ -118,7 +118,7 @@ architecture rtl of processor is
    signal OpCode_EX          : std_logic_vector ( 5 downto 0);  -- Codigo de operación de la instrucción
    signal IFIDWrite          : std_logic;                       -- Senal para parar el primer pipeline
    signal PCWrite            : std_logic;                       -- Senal para parar el PC
-   signal EXMEMStop          : std_logic;                       -- Senal para parar el pipeline EX/MEM
+   signal IDEXStop           : std_logic;                       -- Senal para parar el pipeline EX/MEM
    signal IFIDStop           : std_logic;                       -- Senal para parar el pipeline IF/ID
    
    -----------------------------
@@ -210,7 +210,7 @@ begin
    --Port map para la instanciación de ALUcontrol
    alu_control_pm: alu_control PORT MAP (
       AluOp      => AluOp_EX,
-      Funct      => IDataIn(5 downto 0),
+      Funct      => Funct_EX,
       AluControl => AluControl_EX
    );
 
@@ -267,8 +267,8 @@ begin
    -----------
 
    --Decodificacion de la instruccion 
-   Rt_ID     <= IDataIn(20 downto 16);
-   Rd_ID     <= IDataIn(15 downto 11);
+   Rt_ID     <= IDataIn_ID(20 downto 16);
+   Rd_ID     <= IDataIn_ID(15 downto 11);
    OpCode_ID <= IDataIn_ID(31 downto 26);
    A1_ID     <= IDataIn_ID(25 downto 21);
    A2_ID     <= IDataIn_ID(20 downto 16);
@@ -341,10 +341,10 @@ begin
    --------------------------------------------------
    --Hazarding unit y deteccion de saltos efectivos--
    --------------------------------------------------
-   PCWrite   <= '0' when (MemToReg_MEM = '1' and (A2_ID = A3_MEM or A1_ID = A3_MEM) and A3_MEM /= "00000") else '1';
-   IFIDWrite <= '0' when (MemToReg_MEM = '1' and (A2_ID = A3_MEM or A1_ID = A3_MEM) and A3_MEM /= "00000") or (Branch_EX = '1' and ZFlag_EX = '1') 
+   PCWrite   <= '0' when (MemToReg_EX = '1' and ((ALUSrc_ID = '0' and A2_ID = A3_EX) or A1_ID = A3_EX) and A3_EX /= "00000") else '1';
+   IFIDWrite <= '0' when (MemToReg_EX = '1' and ((ALUSrc_ID = '0' and A2_ID = A3_EX) or A1_ID = A3_EX) and A3_EX /= "00000") or (Branch_EX = '1' and ZFlag_EX = '1') 
 			    else '1';
-   EXMEMStop <= '1' when (MemToReg_MEM = '1' and (A2_ID = A3_MEM or A1_ID = A3_MEM)) or (Branch_EX = '1' and ZFlag_EX = '1')  
+   IDEXStop <= '1' when (MemToReg_EX = '1' and ((ALUSrc_ID = '0' and A2_ID = A3_EX) or A1_ID = A3_EX) and A3_EX /= "00000") or (Branch_EX = '1' and ZFlag_EX = '1')  
                 else '0';
    IFIDStop  <= '1' when (OpCode_EX = BEQ_OPCODE) else '0';
 
@@ -404,24 +404,46 @@ begin
 	        A1_EX             <= "00000";
 			A2_EX             <= "00000";
          elsif rising_edge(Clk) then
-            RegWrite_EX       <= RegWrite_ID;
-            MemToReg_EX       <= MemToReg_ID;
-            Branch_EX         <= Branch_ID;
-            Jump_EX           <= Jump_ID;
-            RegDst_EX         <= RegDst_ID;
-            ALUOp_EX          <= ALUOp_ID;
-            ALUSrc_EX         <= ALUSrc_ID;
-            PCPlus4_EX        <= PCPlus4_ID;
-            Rd1_EX            <= Rd1_ID;
-            Rd2_EX            <= Rd2_ID;
-            ExtensionSigno_EX <= ExtensionSigno_ID;
-            Rt_EX             <= Rt_ID;
-            Rd_EX             <= Rd_ID;
-            MemRead_EX        <= MemRead_ID;
-            MemWrite_EX       <= MemWrite_ID;
-            OpCode_EX         <= OpCode_ID;
-			A1_EX             <= A1_ID;
-			A2_EX             <= A2_ID;
+		 
+			if IDEXStop = '0' then 
+			   RegWrite_EX       <= RegWrite_ID;
+			   MemToReg_EX       <= MemToReg_ID;
+			   Branch_EX         <= Branch_ID;
+			   Jump_EX           <= Jump_ID;
+			   RegDst_EX         <= RegDst_ID;
+			   ALUOp_EX          <= ALUOp_ID;
+			   ALUSrc_EX         <= ALUSrc_ID;
+			   PCPlus4_EX        <= PCPlus4_ID;
+			   Rd1_EX            <= Rd1_ID;
+			   Rd2_EX            <= Rd2_ID;
+		       ExtensionSigno_EX <= ExtensionSigno_ID;
+			   Rt_EX             <= Rt_ID;
+			   Rd_EX             <= Rd_ID;
+			   MemRead_EX        <= MemRead_ID;
+			   MemWrite_EX       <= MemWrite_ID;
+			   OpCode_EX         <= OpCode_ID;
+			   A1_EX             <= A1_ID;
+			   A2_EX             <= A2_ID;
+			else
+				RegWrite_EX       <= '0';
+				MemToReg_EX       <= '0';
+				Branch_EX         <= '0';
+				RegDst_EX         <= '0';
+				ALUOp_EX          <= "000";
+				ALUSrc_EX         <= '0';
+				Jump_EX           <= '0';
+				PCPlus4_EX        <= x"00000000";
+				Rd1_EX            <= x"00000000";
+				Rd2_EX            <= x"00000000";
+				ExtensionSigno_EX <= x"00000000";
+				Rt_EX             <= "00000";
+				Rd_EX             <= "00000";
+				MemRead_EX        <= '0';
+				MemWrite_EX       <= '0';
+				OpCode_EX         <= "000000";
+				A1_EX             <= "00000";
+				A2_EX             <= "00000";
+			end if;
          end if;
       end process;
 
@@ -445,33 +467,19 @@ begin
             MemToReg_MEM      <= '0';
          elsif rising_edge(Clk) then
             
-            if EXMEMStop = '0' then 
-               RegWrite_MEM      <= RegWrite_EX;
-               Branch_MEM        <= Branch_EX;
-               Jump_MEM          <= Jump_EX;
-               MemRead_MEM       <= MemRead_EX;
-               MemWrite_MEM      <= MemWrite_EX;
-               MemToReg_MEM      <= MemToReg_EX;
-			   ZFlag_MEM         <= ZFlag_EX;
-               Result_MEM        <= Result_EX;
-               Rd2_MEM           <= Rd2_EX;
-               A3_MEM            <= A3_EX;
-               BranchAddress_MEM <= BranchAddress_EX;
-               JumpAddr_MEM      <= JumpAddr_EX;
-            else
-               RegWrite_MEM      <= '0';
-               Branch_MEM        <= '0';
-               Jump_MEM          <= '0';
-               MemRead_MEM       <= '0';
-               MemWrite_MEM      <= '0';
-               MemToReg_MEM      <= '0';
-			   ZFlag_MEM         <= '0';
-               Result_MEM        <= (others => '0');
-               Rd2_MEM           <= (others => '0');
-               A3_MEM            <= (others => '0');
-               BranchAddress_MEM <= (others => '0');
-               JumpAddr_MEM      <= (others => '0');
-            end if;
+		   RegWrite_MEM      <= RegWrite_EX;
+		   Branch_MEM        <= Branch_EX;
+		   Jump_MEM          <= Jump_EX;
+		   MemRead_MEM       <= MemRead_EX;
+		   MemWrite_MEM      <= MemWrite_EX;
+		   MemToReg_MEM      <= MemToReg_EX;
+		   ZFlag_MEM         <= ZFlag_EX;
+		   Result_MEM        <= Result_EX;
+		   Rd2_MEM           <= Rd2_EX;
+		   A3_MEM            <= A3_EX;
+		   BranchAddress_MEM <= BranchAddress_EX;
+		   JumpAddr_MEM      <= JumpAddr_EX;
+
          end if;
       end process;
 

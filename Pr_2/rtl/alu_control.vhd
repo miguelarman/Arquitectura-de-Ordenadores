@@ -60,13 +60,13 @@ begin
                when F_OR   => ALUControl <= ALU_OR;
                when F_SUB  => ALUControl <= ALU_SUB;
                when F_XOR  => ALUControl <= ALU_XOR;
-               when others => ALUControl <= "----";
+               when others => ALUControl <= "1111";
             end case;
          when BEQ    => ALUControl <= ALU_SUB;
          when ADDI   => ALUControl <= ALU_ADD;
          when MEM    => ALUControl <= ALU_ADD;
          when LUI    => ALUControl <= ALU_S16;
-         when others => ALUControl <= "----";
+         when others => ALUControl <= "1110";
       end case;
    end process;
 
