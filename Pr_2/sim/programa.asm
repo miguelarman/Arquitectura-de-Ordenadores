@@ -130,7 +130,7 @@ main:
   nop
   nop
   nop
-  d3: beq $r0, $r0, d3
+  d3: beq $zero, $zero, d3
   nop
   nop
   

@@ -69,7 +69,7 @@ begin
             RegDst   <= '0';
             Branch   <= '1';
             MemRead  <= '-';
-            MemtoReg <= '-';
+            MemtoReg <= '0';
             ALUOp    <= BEQ;
             MemWrite <= '0';
             ALUSrc   <= '0';
@@ -79,7 +79,7 @@ begin
             RegDst   <= '0';
             Branch   <= '0';
             MemRead  <= '0';
-            MemtoReg <= '-';
+            MemtoReg <= '0';
             ALUOp    <= MEM;
             MemWrite <= '1';
             ALUSrc   <= '1';
@@ -109,7 +109,7 @@ begin
             RegDst   <= '-';
             Branch   <= '0';
             MemRead  <= '-';
-            MemtoReg <= '-';
+            MemtoReg <= '0';
             ALUOp    <= "---";
             MemWrite <= '0';
             ALUSrc   <= '-';
@@ -119,7 +119,7 @@ begin
             RegDst   <= '-';
             Branch   <= '0';
             MemRead  <= '-';
-            MemtoReg <= '-';
+            MemtoReg <= '0';
             ALUOp    <= "---";
             MemWrite <= '0';
             ALUSrc   <= '-';

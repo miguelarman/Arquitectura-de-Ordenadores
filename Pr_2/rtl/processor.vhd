@@ -49,9 +49,11 @@ architecture rtl of processor is
 
    --Señales para instanciar el banco de registros
    signal A1_ID         : std_logic_vector ( 4 downto 0);   -- Dirección para el puerto Rd1
+   signal A1_EX         : std_logic_vector ( 4 downto 0);   -- Dirección para el puerto Rd1
    signal Rd1_ID        : std_logic_vector (31 downto 0);   -- Dato del puerto Rd1 en ID
    signal Rd1_EX        : std_logic_vector (31 downto 0);   -- Dato del puerto Rd1 en EX
    signal A2_ID         : std_logic_vector ( 4 downto 0);   -- Dirección para el puerto Rd2
+   signal A2_EX         : std_logic_vector ( 4 downto 0);   -- Dirección para el puerto Rd2
    signal Rd2_ID        : std_logic_vector (31 downto 0);   -- Dato del puerto Rd2 en ID
    signal Rd2_EX        : std_logic_vector (31 downto 0);   -- Dato del puerto Rd2 en EX
    signal Rd2_MEM       : std_logic_vector (31 downto 0);   -- Dato del puerto Rd2 en MEM
@@ -297,14 +299,14 @@ begin
    Funct_EX <= ExtensionSigno_EX(5 downto 0);
 
    --Conexion del operando A de la ALU con adelantamiento
-   OpA_EX <= Result_MEM when (A1_ID = A3_MEM  and A3_MEM /= "00000") else
-             Wd3_WB when (A1_ID = A3_WB and A3_WB /= "00000") else
+   OpA_EX <= Result_MEM when (A1_EX = A3_MEM  and A3_MEM /= "00000") else
+             Wd3_WB when (A1_EX = A3_WB and A3_WB /= "00000") else
              Rd1_EX;
 
    --Multiplexor de OpB
    OpB_EX <= MUX_EX when ALUSrc_EX = '0' else ExtensionSigno_EX;
-   MUX_EX <= Result_MEM when (A2_ID = A3_MEM and A3_MEM /= "00000") else
-             Wd3_WB when (A2_ID = A3_WB and A3_WB /= "00000") else
+   MUX_EX <= Result_MEM when (A2_EX = A3_MEM and A3_MEM /= "00000") else
+             Wd3_WB when (A2_EX = A3_WB and A3_WB /= "00000") else
              Rd2_EX;
 
    --Conexion de la senal control a la ALUControl
@@ -339,12 +341,12 @@ begin
    --------------------------------------------------
    --Hazarding unit y deteccion de saltos efectivos--
    --------------------------------------------------
-   PCWrite   <= '0' when (OpCode_EX = LW_OPCODE and (A2_ID = A3_MEM or A1_ID = A3_MEM)) else '1';
-   IFIDWrite <= '0' when (OpCode_EX = LW_OPCODE and (A2_ID = A3_MEM or A1_ID = A3_MEM)) else
-                '0' when (Branch_EX = '1' and ZFlag_EX = '1')                           else '1';
-   EXMEMStop <= '1' when (OpCode_EX = LW_OPCODE and (A2_ID = A3_MEM or A1_ID = A3_MEM)) else
-                '1' when (Branch_EX = '1' and ZFlag_EX = '1')                           else '0';
-   IFIDStop  <= '1' when (OpCode_EX = BEQ_OPCODE)                                       else '0';
+   PCWrite   <= '0' when (MemToReg_MEM = '1' and (A2_ID = A3_MEM or A1_ID = A3_MEM) and A3_MEM /= "00000") else '1';
+   IFIDWrite <= '0' when (MemToReg_MEM = '1' and (A2_ID = A3_MEM or A1_ID = A3_MEM) and A3_MEM /= "00000") or (Branch_EX = '1' and ZFlag_EX = '1') 
+			    else '1';
+   EXMEMStop <= '1' when (MemToReg_MEM = '1' and (A2_ID = A3_MEM or A1_ID = A3_MEM)) or (Branch_EX = '1' and ZFlag_EX = '1')  
+                else '0';
+   IFIDStop  <= '1' when (OpCode_EX = BEQ_OPCODE) else '0';
 
 
    --Proceso de reseteo del PC o de incremento del mismo
@@ -354,7 +356,7 @@ begin
       if Reset = '1' then
          PC_IF <= x"00000000";
       elsif (rising_edge(Clk) and PCWrite = '1') then
-	 PC_IF <= NextPC_IF;
+	     PC_IF <= NextPC_IF;
       end if;
 
    end process;
@@ -399,6 +401,8 @@ begin
             MemRead_EX        <= '0';
             MemWrite_EX       <= '0';
             OpCode_EX         <= "000000";
+	        A1_EX             <= "00000";
+			A2_EX             <= "00000";
          elsif rising_edge(Clk) then
             RegWrite_EX       <= RegWrite_ID;
             MemToReg_EX       <= MemToReg_ID;
@@ -416,6 +420,8 @@ begin
             MemRead_EX        <= MemRead_ID;
             MemWrite_EX       <= MemWrite_ID;
             OpCode_EX         <= OpCode_ID;
+			A1_EX             <= A1_ID;
+			A2_EX             <= A2_ID;
          end if;
       end process;
 
@@ -438,12 +444,6 @@ begin
             JumpAddr_MEM      <= x"00000000";
             MemToReg_MEM      <= '0';
          elsif rising_edge(Clk) then
-            ZFlag_MEM         <= ZFlag_EX;
-            Result_MEM        <= Result_EX;
-            Rd2_MEM           <= Rd2_EX;
-            A3_MEM            <= A3_EX;
-            BranchAddress_MEM <= BranchAddress_EX;
-            JumpAddr_MEM      <= JumpAddr_EX;
             
             if EXMEMStop = '0' then 
                RegWrite_MEM      <= RegWrite_EX;
@@ -452,6 +452,12 @@ begin
                MemRead_MEM       <= MemRead_EX;
                MemWrite_MEM      <= MemWrite_EX;
                MemToReg_MEM      <= MemToReg_EX;
+			   ZFlag_MEM         <= ZFlag_EX;
+               Result_MEM        <= Result_EX;
+               Rd2_MEM           <= Rd2_EX;
+               A3_MEM            <= A3_EX;
+               BranchAddress_MEM <= BranchAddress_EX;
+               JumpAddr_MEM      <= JumpAddr_EX;
             else
                RegWrite_MEM      <= '0';
                Branch_MEM        <= '0';
@@ -459,6 +465,12 @@ begin
                MemRead_MEM       <= '0';
                MemWrite_MEM      <= '0';
                MemToReg_MEM      <= '0';
+			   ZFlag_MEM         <= '0';
+               Result_MEM        <= (others => '0');
+               Rd2_MEM           <= (others => '0');
+               A3_MEM            <= (others => '0');
+               BranchAddress_MEM <= (others => '0');
+               JumpAddr_MEM      <= (others => '0');
             end if;
          end if;
       end process;
