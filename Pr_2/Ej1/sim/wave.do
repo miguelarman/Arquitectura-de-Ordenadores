@@ -13,7 +13,7 @@ add wave -noupdate /processor_tb/i_processor/ALUControl_EX
 add wave -noupdate /processor_tb/i_processor/ALUOp_EX
 add wave -noupdate /processor_tb/i_processor/Funct_EX
 TreeUpdate [SetDefaultTree]
-WaveRestoreCursors {{Cursor 1} {169019 ps} 0}
+WaveRestoreCursors {{Cursor 1} {870684 ps} 0}
 quietly wave cursor active 1
 configure wave -namecolwidth 279
 configure wave -valuecolwidth 114
@@ -29,4 +29,4 @@ configure wave -griddelta 40
 configure wave -timeline 0
 configure wave -timelineunits ns
 update
-WaveRestoreZoom {131404 ps} {186860 ps}
+WaveRestoreZoom {844992 ps} {955904 ps}

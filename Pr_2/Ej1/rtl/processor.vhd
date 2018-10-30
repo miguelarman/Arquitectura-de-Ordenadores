@@ -40,7 +40,6 @@ architecture rtl of processor is
    signal Result_MEM    : std_logic_vector (31 downto 0);   -- Resultado en MEM
    signal Result_WB     : std_logic_vector (31 downto 0);   -- Resultado en WB
    signal ZFlag_EX      : std_logic;                        -- Flag Z en EX
-   signal ZFlag_MEM     : std_logic;                        -- Flag Z en MEM
    
    --Señales para instanciar ALUcontrol
    signal ALUOp_ID      : std_logic_vector ( 2 downto 0);   -- Codigo control desde la unidad de control en ID
@@ -67,7 +66,6 @@ architecture rtl of processor is
    signal OpCode_ID     : std_logic_vector ( 5 downto 0);   -- Codigo de operación de la instrucción
    signal Branch_ID     : std_logic;                        -- 1=Ejecutandose instruccion branch en ID
    signal Branch_EX     : std_logic;                        -- 1=Ejecutandose instruccion branch en EX
-   signal Branch_MEM    : std_logic;                        -- 1=Ejecutandose instruccion branch en MEM
    signal MemToReg_ID   : std_logic;                        -- 1=Escribir en registro la salida de la mem. en ID
    signal MemToReg_EX   : std_logic;                        -- 1=Escribir en registro la salida de la mem. en EX
    signal MemToReg_MEM  : std_logic;                        -- 1=Escribir en registro la salida de la mem. en MEM
@@ -87,8 +85,6 @@ architecture rtl of processor is
    signal RegDst_ID     : std_logic;                        -- 0=Reg. destino es rt, 1=rd en ID
    signal RegDst_EX     : std_logic;                        -- 0=Reg. destino es rt, 1=rd en EX
    signal Jump_ID       : std_logic;                        -- 1=Ejecutandose instruccion jump en ID
-   signal Jump_EX       : std_logic;                        -- 1=Ejecutandose instruccion jump en EX
-   signal Jump_MEM      : std_logic;                        -- 1=Ejecutandose instruccion jump en MEM
 
    --------------------------------------
    --Declaracion de señales intermedias--
@@ -100,13 +96,11 @@ architecture rtl of processor is
    signal PCPlus4_EX         : std_logic_vector (31 downto 0);  -- PC+4 en la etapa EX
    signal ExtensionSigno_ID  : std_logic_vector (31 downto 0);  -- Exension en signo del dato inmediato en ID
    signal ExtensionSigno_EX  : std_logic_vector (31 downto 0);  -- Exension en signo del dato inmediato en EX
-   signal JumpAddr_EX        : std_logic_vector (31 downto 0);  -- Valor a sumar para hallar la direccion de salto
-   signal JumpAddr_MEM       : std_logic_vector (31 downto 0);  -- Valor a sumar para hallar la direccion de salto
+   signal JumpAddr_ID        : std_logic_vector (31 downto 0);  -- Valor a sumar para hallar la direccion de salto
    signal IDataIn_IF         : std_logic_vector (31 downto 0);  -- Instruccion leida en la etapa IF
    signal IDataIn_ID         : std_logic_vector (31 downto 0);  -- Instruccion leida en la etapa EX
    signal IAddr_IF           : std_logic_vector (31 downto 0);  -- Direccion de la que se lee la instruccion en IF
    signal BranchAddress_EX   : std_logic_vector (31 downto 0);  -- Direccion de branch si se da la condicion en EX
-   signal BranchAddress_MEM  : std_logic_vector (31 downto 0);  -- Direccion de branch si se da la condicion en MEM
    signal Funct_EX           : std_logic_vector ( 5 downto 0);  -- Campo Funct de la instruccion
    signal DDataIn_MEM        : std_logic_vector (31 downto 0);  -- Dato leido de la memoria en MEM
    signal DDataIn_WB         : std_logic_vector (31 downto 0);  -- Dato leido de la memoria en WB
@@ -119,15 +113,7 @@ architecture rtl of processor is
    signal IFIDWrite          : std_logic;                       -- Senal para parar el primer pipeline
    signal PCWrite            : std_logic;                       -- Senal para parar el PC
    signal IDEXStop           : std_logic;                       -- Senal para parar el pipeline EX/MEM
-   signal IFIDStop           : std_logic;                       -- Senal para parar el pipeline IF/ID
    
-   -----------------------------
-   --Declaracion de constantes--
-   -----------------------------
-   constant LW_OPCODE  : std_logic_vector (5 downto 0) := "100011";
-   constant BEQ_OPCODE : std_logic_vector (5 downto 0) := "000100";
-
-
    ------------------------------------
    --Instanciacion de los componentes--
    ------------------------------------
@@ -253,8 +239,8 @@ begin
    PCPlus4_IF <= PC_IF + 4;
    
    --Calculo del siguiente contador de programa
-   NextPC_IF <= BranchAddress_MEM when (Branch_MEM = '1') and (ZFlag_MEM = '1') else
-                JumpAddr_MEM      when (Jump_MEM = '1')                         else
+   NextPC_IF <= BranchAddress_EX when (Branch_EX = '1') and (ZFlag_EX = '1') else
+                JumpAddr_ID      when (Jump_ID = '1')                        else
                 PCPlus4_IF;
    
    -- Conexion de la direccion de la instruccion
@@ -287,9 +273,9 @@ begin
    BranchAddress_EX <= (ExtensionSigno_EX(29 downto 0) & "00") + PCPlus4_EX;
 
    -- Calculo de direccion de salto
-   JumpAddr_EX(31 downto 28) <= PCPlus4_EX(31 downto 28);
-   JumpAddr_EX(27 downto  2) <= ExtensionSigno_EX(25 downto 0);
-   JumpAddr_EX( 1 downto  0) <= "00";
+   JumpAddr_ID(31 downto 28) <= PCPlus4_ID(31 downto 28);
+   JumpAddr_ID(27 downto  2) <= ExtensionSigno_ID(25 downto 0);
+   JumpAddr_ID( 1 downto  0) <= "00";
 
    --Multiplexor de A3
    A3_EX <= Rt_EX when RegDst_EX = '0' else
@@ -341,12 +327,9 @@ begin
    --------------------------------------------------
    --Hazarding unit y deteccion de saltos efectivos--
    --------------------------------------------------
-   PCWrite   <= '0' when (MemToReg_EX = '1' and ((ALUSrc_ID = '0' and A2_ID = A3_EX) or A1_ID = A3_EX) and A3_EX /= "00000") else '1';
-   IFIDWrite <= '0' when (MemToReg_EX = '1' and ((ALUSrc_ID = '0' and A2_ID = A3_EX) or A1_ID = A3_EX) and A3_EX /= "00000") or (Branch_EX = '1' and ZFlag_EX = '1') 
-			    else '1';
-   IDEXStop <= '1' when (MemToReg_EX = '1' and ((ALUSrc_ID = '0' and A2_ID = A3_EX) or A1_ID = A3_EX) and A3_EX /= "00000") or (Branch_EX = '1' and ZFlag_EX = '1')  
-                else '0';
-   IFIDStop  <= '1' when (OpCode_EX = BEQ_OPCODE) else '0';
+   PCWrite   <= '0' when (MemToReg_EX = '1' and (((ALUSrc_ID = '0' or MemWrite_ID = '1') and A2_ID = A3_EX) or A1_ID = A3_EX) and A3_EX /= "00000") else '1';
+   IFIDWrite <= '0' when (MemToReg_EX = '1' and (((ALUSrc_ID = '0' or MemWrite_ID = '1') and A2_ID = A3_EX) or A1_ID = A3_EX) and A3_EX /= "00000") else '1';
+   IDEXStop <= '1' when (MemToReg_EX = '1' and (((ALUSrc_ID = '0' or MemWrite_ID = '1') and A2_ID = A3_EX) or A1_ID = A3_EX) and A3_EX /= "00000")  else '0';
 
 
    --Proceso de reseteo del PC o de incremento del mismo
@@ -370,12 +353,10 @@ begin
             PCPlus4_ID <= x"00000000";
             IDataIn_ID <= x"00000000";
          elsif rising_edge(Clk) then
-            PCPlus4_ID <= PCPlus4_IF;
             if IFIDWrite ='1' then
                IDataIn_ID <= IDataIn_IF;
-            elsif IFIDStop = '1' then 
-               IDataIn_ID <= x"00000000";
-            end if;
+			   PCPlus4_ID <= PCPlus4_IF;
+			end if;
          end if;
       end process;
 
@@ -391,7 +372,6 @@ begin
             RegDst_EX         <= '0';
             ALUOp_EX          <= "000";
             ALUSrc_EX         <= '0';
-            Jump_EX           <= '0';
             PCPlus4_EX        <= x"00000000";
             Rd1_EX            <= x"00000000";
             Rd2_EX            <= x"00000000";
@@ -409,7 +389,6 @@ begin
 			   RegWrite_EX       <= RegWrite_ID;
 			   MemToReg_EX       <= MemToReg_ID;
 			   Branch_EX         <= Branch_ID;
-			   Jump_EX           <= Jump_ID;
 			   RegDst_EX         <= RegDst_ID;
 			   ALUOp_EX          <= ALUOp_ID;
 			   ALUSrc_EX         <= ALUSrc_ID;
@@ -431,7 +410,6 @@ begin
 				RegDst_EX         <= '0';
 				ALUOp_EX          <= "000";
 				ALUSrc_EX         <= '0';
-				Jump_EX           <= '0';
 				PCPlus4_EX        <= x"00000000";
 				Rd1_EX            <= x"00000000";
 				Rd2_EX            <= x"00000000";
@@ -454,31 +432,21 @@ begin
       begin
          if Reset = '1' then
             RegWrite_MEM      <= '0';
-            Branch_MEM        <= '0';
-            Jump_MEM          <= '0';
-            ZFlag_MEM         <= '0';
             Result_MEM        <= x"00000000";
             Rd2_MEM           <= x"00000000";
             A3_MEM            <= "00000";
             MemRead_MEM       <= '0';
             MemWrite_MEM      <= '0';
-            BranchAddress_MEM <= x"00000000";
-            JumpAddr_MEM      <= x"00000000";
             MemToReg_MEM      <= '0';
          elsif rising_edge(Clk) then
             
 		   RegWrite_MEM      <= RegWrite_EX;
-		   Branch_MEM        <= Branch_EX;
-		   Jump_MEM          <= Jump_EX;
 		   MemRead_MEM       <= MemRead_EX;
 		   MemWrite_MEM      <= MemWrite_EX;
 		   MemToReg_MEM      <= MemToReg_EX;
-		   ZFlag_MEM         <= ZFlag_EX;
 		   Result_MEM        <= Result_EX;
-		   Rd2_MEM           <= Rd2_EX;
+		   Rd2_MEM           <= MUX_EX;
 		   A3_MEM            <= A3_EX;
-		   BranchAddress_MEM <= BranchAddress_EX;
-		   JumpAddr_MEM      <= JumpAddr_EX;
 
          end if;
       end process;

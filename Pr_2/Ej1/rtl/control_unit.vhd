@@ -37,6 +37,7 @@ architecture rtl of control_unit is
 
    -- Codigos de operacion para las diferentes instrucciones:
    constant OP_RTYPE  : t_opCode := "000000";
+   constant OP_ADDI   : t_opCode := "001000";
    constant OP_JUMP   : t_opCode := "000010";
    constant OP_BEQ    : t_opCode := "000100";
    constant OP_SW     : t_opCode := "101011";
@@ -64,7 +65,17 @@ begin
             MemWrite <= '0';
             ALUSrc   <= '0';
             RegWrite <= '1';
-	    Jump     <= '0';
+	        Jump     <= '0';
+		when OP_ADDI =>
+			Branch    <= '0';
+			Jump      <= '0';
+			MemToReg  <= '0';
+			MemWrite  <= '0';
+			MemRead   <= '-'; 
+			ALUSrc    <= '1';
+			ALUOp     <= ADDI;
+			RegWrite  <= '1';
+			RegDst    <= '0';
          when OP_BEQ  =>
             RegDst   <= '0';
             Branch   <= '1';

@@ -99,39 +99,7 @@ main:
   nop
   lw $t2, 4($zero) # en r10 un 2
   sw $t2, 0($zero) # Guarda el 2 en posicion 0 de memoria
-  
- # RIESGOS BRANCH
-  addi $t8, $t8, 0xFFFFFFFF #guardamos en r24 todo 1s para el control de errores
-  lw $t1, 0($zero) # en r9 guarda un 2
-  beq $t1, $t2, d1 # si r9 y r10 son iguales (salto efectivo) salta a d1
-  or $t9, $t9, $t8 # esta instruccion no deberia ejecutarse. Si r25 tiene 1s en vez de 0s es que ha fallado
-  or $t9, $t9, $t8 # esta instruccion no deberia ejecutarse. Si r25 tiene 1s en vez de 0s es que ha fallado
-  or $t9, $t9, $t8 # esta instruccion no deberia ejecutarse. Si r25 tiene 1s en vez de 0s es que ha fallado
   nop
   nop
   nop
-  d1: lw $t1, 8($zero) # en r9 guarda un 4
-  beq $t1, $t2, d1 # si r9 y r10 son iguales (salto no efectivo) salta a d1
-  addi $t1, $zero, 1 # se guarda en r9 un 1
-  nop
-  nop
-  nop
-  add $t1, $t1, $t1 # se guarda en r9 un 2
-  beq $t1, $t2, d2 # si r9 y r10 son iguales (salto efectivo) salta a d3
-  or $t9, $t9, $t8 # esta instruccion no deberia ejecutarse. Si r25 tiene 1s en vez de 0s es que ha fallado
-  or $t9, $t9, $t8 # esta instruccion no deberia ejecutarse. Si r25 tiene 1s en vez de 0s es que ha fallado
-  or $t9, $t9, $t8 # esta instruccion no deberia ejecutarse. Si r25 tiene 1s en vez de 0s es que ha fallado
-  nop
-  nop
-  nop
-  d2: add $t1, $t1, $t1 # se guarda en r9 un 4
-  beq $t1, $t2, d1 # si r9 y r10 son iguales (salto no efectivo) salta a d1 (bucle infinito)
-  addi $s7, $zero, 0xFFFFFFFF # control de que el programa ha llegado al final (r23 = -1)
-  nop
-  nop
-  nop
-  d3: beq $zero, $zero, d3
-  nop
-  nop
-  
   
