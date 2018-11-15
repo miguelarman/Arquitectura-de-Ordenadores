@@ -6,7 +6,7 @@ Npaso=64
 Nfinal=$((Ninicio + 1024))
 fDAT=slow_fast_time.dat
 fPNG=slow_fast_time.png
-NIteraciones=3
+NIteraciones=1
 
 # creamos arrays para repetir las mediciones de tiempo
 declare -a slowArray
@@ -62,11 +62,11 @@ done
 for ((N = Ninicio ; N <= Nfinal ; N += Npaso)); do
   indice=$(((N-Ninicio)/Npaso))
 
-  # dividimos para calvular la media
-  #slowArray[$indice]=$((${slowArray[$indice]}/$NIteraciones))
-  #fastArray[$indice]=$((${fastArray[$indice]}/$NIteraciones))
+  # dividimos para calcular la media
+  slowArray[$indice]=$((${slowArray[$indice]}/$NIteraciones))
+  fastArray[$indice]=$((${fastArray[$indice]}/$NIteraciones))
 
-
+  echo "$N	${slowArray[$indice]}	${fastArray[$indice]}"
   echo "$N	${slowArray[$indice]}	${fastArray[$indice]}" >> $fDAT
 done
 
