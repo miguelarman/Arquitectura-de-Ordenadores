@@ -6,7 +6,7 @@ Npaso=64
 Nfinal=$((Ninicio + 1024))
 fDAT=time_slow_fast.dat
 fPNG=time_slow_fast.png
-NIteraciones=5
+NIteraciones=10
 
 # creamos arrays para repetir las mediciones de tiempo
 declare -a slowArray
