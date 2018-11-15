@@ -43,7 +43,7 @@ for ((NAux = 1 ; NAux <= NIteraciones; NAux += 1)); do
 
   echo
 
-  #bucle fast
+  #bucle para fast
   for ((N = Ninicio ; N <= Nfinal ; N += Npaso)); do
     echo "Running fast $N"
 
@@ -51,7 +51,7 @@ for ((NAux = 1 ; NAux <= NIteraciones; NAux += 1)); do
 
     indice=$(((N-Ninicio)/Npaso))
 
-    fastArray[$indice]+=$slowTime
+    fastArray[$indice]+=$fastTime
   done
 
   echo "Iteración $NAux de $NIteraciones completada"
@@ -65,6 +65,7 @@ for ((N = Ninicio ; N <= Nfinal ; N += Npaso)); do
   # dividimos para calcular la media
   slowArray[$indice]=$((${slowArray[$indice]}/$NIteraciones))
   fastArray[$indice]=$((${fastArray[$indice]}/$NIteraciones))
+
 
   echo "$N	${slowArray[$indice]}	${fastArray[$indice]}"
   echo "$N	${slowArray[$indice]}	${fastArray[$indice]}" >> $fDAT
