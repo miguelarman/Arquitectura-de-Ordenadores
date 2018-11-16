@@ -4,9 +4,12 @@
 Ninicio=10000+1024*5
 Npaso=64
 Nfinal=$((Ninicio + 1024))
-fDAT=time_slow_fast.dat
-fPNG=time_slow_fast.png
+fDAT=ej1/time_slow_fast.dat
+fPNG=ej1/time_slow_fast.png
 NIteraciones=10
+fSlow=src/slow
+fFast=src/fast
+fFPOps=src/opsFloat
 
 # creamos arrays para repetir las mediciones de tiempo
 declare -a slowArray
@@ -34,11 +37,11 @@ for ((NAux = 1 ; NAux <= NIteraciones; NAux += 1)); do
   for ((N = Ninicio ; N <= Nfinal ; N += Npaso)); do
     echo "Running slow $N"
 
-    slowTime=$(./slow $N | grep 'time' | awk '{print $3}')
+    slowTime=$(./$fSlow $N | grep 'time' | awk '{print $3}')
 
     indice=$(((N-Ninicio)/Npaso))
 
-    slowArray[$indice]=$(./opsFloat -s $slowTime ${slowArray[$indice]} | awk '{print $1}')
+    slowArray[$indice]=$(./$fFPOps -s $slowTime ${slowArray[$indice]} | awk '{print $1}')
   done
 
   echo
@@ -47,11 +50,11 @@ for ((NAux = 1 ; NAux <= NIteraciones; NAux += 1)); do
   for ((N = Ninicio ; N <= Nfinal ; N += Npaso)); do
     echo "Running fast $N"
 
-    fastTime=$(./fast $N | grep 'time' | awk '{print $3}')
+    fastTime=$(./$fFast $N | grep 'time' | awk '{print $3}')
 
     indice=$(((N-Ninicio)/Npaso))
 
-    fastArray[$indice]=$(./opsFloat -s $fastTime ${fastArray[$indice]} | awk '{print $1}')
+    fastArray[$indice]=$(./$fFPOps -s $fastTime ${fastArray[$indice]} | awk '{print $1}')
   done
 
   echo "Iteración $NAux de $NIteraciones completada"
@@ -63,8 +66,8 @@ for ((N = Ninicio ; N <= Nfinal ; N += Npaso)); do
   indice=$(((N-Ninicio)/Npaso))
 
   # dividimos para calcular la media
-  slowArray[$indice]=$(./opsFloat -d ${slowArray[$indice]} $NIteraciones | awk '{print $1}')
-  fastArray[$indice]=$(./opsFloat -d ${fastArray[$indice]} $NIteraciones | awk '{print $1}')
+  slowArray[$indice]=$(./$fFPOps -d ${slowArray[$indice]} $NIteraciones | awk '{print $1}')
+  fastArray[$indice]=$(./$fFPOps -d ${fastArray[$indice]} $NIteraciones | awk '{print $1}')
 
   echo "$N	${slowArray[$indice]}	${fastArray[$indice]}" >> $fDAT
 done
