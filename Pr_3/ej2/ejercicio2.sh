@@ -1,91 +1,114 @@
 #!/bin/bash
 
-# inicializar variables
-Ninicio=10000+1024*5
-Npaso=1
-Nfinal=$((Ninicio + 1024))
-fDAT=time_slow_fast.dat
-fPNG=time_slow_fast.png
-NIteraciones=1
-fSlow=../src/slow
-fFast=../src/fast
+fileAux=salidaAux.dat
+
+Ninicio=10
+Nfinal=$((Ninicio + 90))
+Npaso=10
+NIteraciones=10
+
+TamsCacheN1=( 1024 2048 4096 8192 )
+TamCacheSup=$((8*1024*1024))
+TamLinea=64
+NVias=1
+
+ejecutableSlow=../src/slow
+ejecutableFast=../src/fast
 fFPOps=../src/opsFloat
 
-# creamos arrays para repetir las mediciones de tiempo
-declare -a slowArray
-declare -a fastArray
+# creamos arrays
+declare -a D1mrSlowArray
+declare -a D1mwSlowArray
+declare -a D1mrFastArray
+declare -a D1mwFastArray
 
-# borrar el fichero DAT y el fichero PNG
-rm -f $fDAT fPNG
 
-# generar el fichero DAT vacío
-touch $fDAT
+for TamCacheN1 in "${TamsCacheN1[@]}"; do
 
-# inicializar arrays a 0
-for ((N = Ninicio ; N <= Nfinal ; N += Npaso)); do
-  indice=$(((N-Ninicio)/Npaso))
-
-  slowArray[$indice]=0
-  fastArray[$indice]=0
-done
-
-#for N in $(seq $Ninicio $Npaso $Nfinal);
-for ((NAux = 1 ; NAux <= NIteraciones; NAux += 1)); do
-  echo "Iteración $NAux de $NIteraciones empezada"
-
-  #bucle para slow
+  # inicializar arrays
   for ((N = Ninicio ; N <= Nfinal ; N += Npaso)); do
-    echo "Running slow $N"
-
-    slowTime=$(./$fSlow $N | grep 'time' | awk '{print $3}')
-
     indice=$(((N-Ninicio)/Npaso))
 
-    slowArray[$indice]=$(./$fFPOps -s $slowTime ${slowArray[$indice]} | awk '{print $1}')
+    D1mrSlowArray[$indice]=0
+    D1mwSlowArray[$indice]=0
+    D1mrFastArray[$indice]=0
+    D1mwFastArray[$indice]=0
   done
 
-  echo
+  for ((NAux = 1 ; NAux <= NIteraciones; NAux += 1)); do
+    echo "Iteración $NAux de $NIteraciones para caché de $TamCacheN1 empezada"
 
-  #bucle para fast
+    #bucle para slow
+    ejecutable=$ejecutableSlow
+
+    for ((N = Ninicio ; N <= Nfinal ; N += Npaso)); do
+      echo "Running slow $N"
+
+      indice=$(((N-Ninicio)/Npaso))
+
+      rm -f $fileAux
+      touch $fileAux
+
+      valgrind --tool=cachegrind --I1=$TamCacheN1,$NVias,$TamLinea --D1=$TamCacheN1,$NVias,$TamLinea --LL=$TamCacheSup,$NVias,$TamLinea --cachegrind-out-file=$fileAux ./$ejecutable $N > salida.txt
+
+      # leemos los fallos de pagina
+      D1mr=$(cg_annotate $fileAux | head -n 30 | grep 'PROGRAM TOTALS' | awk '{print $5}')
+      D1mrSlowArray[$indice]=$(./$fFPOps -s ${D1mrSlowArray[$indice]} $D1mr | awk '{print $1}')
+
+      D1mw=$(cg_annotate $fileAux | head -n 30 | grep 'PROGRAM TOTALS' | awk '{print $8}')
+      D1mwSlowArray[$indice]=$(./$fFPOps -s ${D1mwSlowArray[$indice]} $D1mw | awk '{print $1}')
+    done
+
+    echo
+
+
+    #bucle para fast
+    ejecutable=$ejecutableFast
+
+    for ((N = Ninicio ; N <= Nfinal ; N += Npaso)); do
+      echo "Running fast $N"
+
+      indice=$(((N-Ninicio)/Npaso))
+
+      rm -f $fileAux
+      touch $fileAux
+
+      valgrind --tool=cachegrind --I1=$TamCacheN1,$NVias,$TamLinea --D1=$TamCacheN1,$NVias,$TamLinea --LL=$TamCacheSup,$NVias,$TamLinea --cachegrind-out-file=$fileAux ./$ejecutable $N > salida.txt
+
+      # leemos los fallos de pagina
+      D1mr=$(cg_annotate $fileAux | head -n 30 | grep 'PROGRAM TOTALS' | awk '{print $5}')
+      D1mrFastArray[$indice]=$(./$fFPOps -s ${D1mrFastArray[$indice]} $D1mr | awk '{print $1}')
+
+      D1mw=$(cg_annotate $fileAux | head -n 30 | grep 'PROGRAM TOTALS' | awk '{print $8}')
+      D1mwFastArray[$indice]=$(./$fFPOps -s ${D1mwFastArray[$indice]} $D1mw | awk '{print $1}')
+
+    done
+
+    echo "Iteración $NAux de $NIteraciones para caché de $TamCacheN1 completada"
+    echo
+  done
+
+  # imprimimos los datos
+  fDatos=cache_$TamCacheN1.dat
+  rm -f $fDatos
+  touch $fDatos
+
   for ((N = Ninicio ; N <= Nfinal ; N += Npaso)); do
-    echo "Running fast $N"
-
-    fastTime=$(./$fFast $N | grep 'time' | awk '{print $3}')
-
     indice=$(((N-Ninicio)/Npaso))
 
-    fastArray[$indice]=$(./$fFPOps -s $fastTime ${fastArray[$indice]} | awk '{print $1}')
+    # dividimos para calcular la media
+    D1mrSlowArray[$indice]=$(./$fFPOps -d ${D1mrSlowArray[$indice]} $NIteraciones | awk '{print $1}')
+    D1mwSlowArray[$indice]=$(./$fFPOps -d ${D1mwSlowArray[$indice]} $NIteraciones | awk '{print $1}')
+    D1mrFastArray[$indice]=$(./$fFPOps -d ${D1mrFastArray[$indice]} $NIteraciones | awk '{print $1}')
+    D1mwFastArray[$indice]=$(./$fFPOps -d ${D1mwFastArray[$indice]} $NIteraciones | awk '{print $1}')
+
+    echo "$N	${D1mrSlowArray[$indice]}	${D1mwSlowArray[$indice]}	${D1mrFastArray[$indice]}	${D1mwFastArray[$indice]}" >> $fDatos
   done
 
-  echo "Iteración $NAux de $NIteraciones completada"
-  echo
 done
 
-# calcular la media e imprimir
-for ((N = Ninicio ; N <= Nfinal ; N += Npaso)); do
-  indice=$(((N-Ninicio)/Npaso))
+#ploteamos las graficas
+chmod +x plotScript.sh
+./plotScript.sh ${TamsCacheN1[@]}
 
-  # dividimos para calcular la media
-  slowArray[$indice]=$(./$fFPOps -d ${slowArray[$indice]} $NIteraciones | awk '{print $1}')
-  fastArray[$indice]=$(./$fFPOps -d ${fastArray[$indice]} $NIteraciones | awk '{print $1}')
-
-  echo "$N	${slowArray[$indice]}	${fastArray[$indice]}" >> $fDAT
-done
-
-echo
-echo "Generating plot..."
-# llamar a gnuplot para generar el gráfico y pasarle directamente por la entrada
-# estándar el script que está entre "<< END_GNUPLOT" y "END_GNUPLOT"
-gnuplot << END_GNUPLOT
-set title "Slow-Fast Execution Time"
-set ylabel "Execution time (s)"
-set xlabel "Matrix Size"
-set key right bottom
-set grid
-set term png
-set output "$fPNG"
-plot "$fDAT" using 1:2 with lines lw 2 title "slow", \
-     "$fDAT" using 1:3 with lines lw 2 title "fast"
-replot
-quit
-END_GNUPLOT
+rm -f $fileAux salida.txt
