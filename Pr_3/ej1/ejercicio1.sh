@@ -1,15 +1,15 @@
 #!/bin/bash
 
 # inicializar variables
-Ninicio=10000+1024*5
+Ninicio=1024*5
 Npaso=64
 Nfinal=$((Ninicio + 1024))
-fDAT=ej1/time_slow_fast.dat
-fPNG=ej1/time_slow_fast.png
-NIteraciones=10
-fSlow=src/slow
-fFast=src/fast
-fFPOps=src/opsFloat
+fDAT=time_slow_fast_2.dat
+fPNG=time_slow_fast_2.png
+NIteraciones=5
+fSlow=../src/slow
+fFast=../src/fast
+fFPOps=../src/opsFloat
 
 # creamos arrays para repetir las mediciones de tiempo
 declare -a slowArray
