@@ -17,6 +17,19 @@ ejecutableTrasp=../src/exes/multiplicarMatricesTrasp
 ejecutablePlotScript=../src/scripts/plotScript.sh
 fFPOps=../src/exes/opsFloat
 
+plotXColumn=1
+plotYColumnCache="3 4 6 7"
+plotYColumnTime="2 5"
+plotCachePng=./png/mult_cache.png
+plotTimePng=./png/mult_time.png
+plotCacheTitle="Comparison Betweem Cache Misses"
+plotTimeTitle="Comparison Between Times"
+plotXLabel="Matrix Size"
+plotYLabelCache="Number of cache misses"
+plotYLabelTime="Execution Time"
+plotCacheEtiquetas="FallosLecturaNormal FallosEscrituraNormal FallosLecturaTrap FallosEscrituraTrasp"
+plotTimeEtiquetas="NormalTime TraspTime"
+
 fDatos=./dat/mult.dat
 
 # creamos arrays
@@ -109,9 +122,9 @@ done
 rm -f $fileAux
 #ploteamos las graficas
 chmod +x $ejecutablePlotScript
-./$ejecutablePlotScript -f $fDatos -o 1 -d "3 4 6 7" -p ./png/mult_cache.png -t "Comparison Betweem Cache Misses" -y "Number of cache misses" -x "Matrix Size" -l "FallosLecturaNormal FallosEscrituraNormal FallosLecturaTrap FallosEscrituraTrasp"
-./$ejecutablePlotScript -f $fDatos -o 1 -d "2 5" -p ./png/mult_time.png -t "Comparison Between Times" -y "Execution Time" -x "Matrix Size" -l "NormalTime TraspTime"
+./$ejecutablePlotScript -f $fDatos -o $plotXColumn -d "$plotYColumnCache" -p $plotCachePng -t "$plotCacheTitle" -y "$plotYLabelCache" -x "$plotXLabel" -l "$plotCacheEtiquetas"
+./$ejecutablePlotScript -f $fDatos -o $plotXColumn -d "$plotYColumnTime" -p $plotTimePng -t "$plotTimeTitle" -y "$plotYLabelTime" -x "$plotXLabel" -l "$plotTimeEtiquetas"
 
 # abrimos las imagenes
-xdg-open png/mult_cache.png
-xdg-open png/mult_time.png
+#xdg-open png/mult_cache.png
+#xdg-open png/mult_time.png

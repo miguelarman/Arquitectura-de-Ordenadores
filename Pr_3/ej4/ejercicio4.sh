@@ -17,6 +17,23 @@ ejecutableTrasp=../src/exes/multiplicarMatricesTrasp
 ejecutablePlotScript=../src/scripts/plotScript.sh
 fFPOps=../src/exes/opsFloat
 
+plotFiles="./dat/mult_1024.dat ./dat/mult_2048.dat ./dat/mult_4096.dat ./dat/mult_8192.dat"
+plotXColumn=1
+plotYColumnNorm="3 6"
+plotYColumnTrasp="4 7"
+plotYColumnTime="2 5"
+plotNormPng=./png/multNorm_cache.png
+plotTraspPng=./png/multTrasp_cache.png
+plotTimePng=./png/mult_time.png
+plotNormTitle="Comparison Betweem Cache Misses Normal"
+plotTraspTitle="Comparison Betweem Cache Misses Trasp"
+plotTimeTitle="Comparison Between Times"
+plotYLabelCache="Number of cache misses"
+plotYLabelTime="Execution Time"
+plotXLabel="Matrix Size"
+plotNormEtiquetas="FallosRdNormal-1024 FallosWrNormal-1024 FallosRdNormal-2048 FallosWrNormal-2048 FallosRdNormal-4096 FallosWrNormal-4096 FallosRdNormal-8192 FallosWrNormal-8192"
+plotTraspEtiquetas="FallosRdTrasp-1024 FallosWrTrasp-1024 FallosRdTrasp-2048 FallosWrTrasp-2048 FallosRdTrasp-4096 FallosWrTrasp-4096 FallosRdTrasp-8192 FallosWrTrasp-8192"
+plotTimeEtiquetas="NormalTime-1024 TraspTime-1024 NormalTime-2048 TraspTime-2048 NormalTime-4096 TraspTime-4096 NormalTime-8192 TraspTime-8192"
 
 # creamos arrays
 declare -a D1mrNormalArray
@@ -110,11 +127,11 @@ done
 rm -f $fileAux
 #ploteamos las graficas
 chmod +x $ejecutablePlotScript
-./$ejecutablePlotScript -f "./dat/mult_1024.dat ./dat/mult_2048.dat ./dat/mult_4096.dat ./dat/mult_8192.dat" -o 1 -d "3 6" -p ./png/multNorm_cache.png -t "Comparison Betweem Cache Misses Normal" -y "Number of cache misses" -x "Matrix Size" -l "FallosRdNormal-1024 FallosWrNormal-1024 FallosRdNormal-2048 FallosWrNormal-2048 FallosRdNormal-4096 FallosWrNormal-4096 FallosRdNormal-8192 FallosWrNormal-8192"
-./$ejecutablePlotScript -f "./dat/mult_1024.dat ./dat/mult_2048.dat ./dat/mult_4096.dat ./dat/mult_8192.dat" -o 1 -d "4 7" -p ./png/multTrasp_cache.png -t "Comparison Betweem Cache Misses Trasp" -y "Number of cache misses" -x "Matrix Size" -l "FallosRdTrasp-1024 FallosWrTrasp-1024 FallosRdTrasp-2048 FallosWrTrasp-2048 FallosRdTrasp-4096 FallosWrTrasp-4096 FallosRdTrasp-8192 FallosWrTrasp-8192"
-./$ejecutablePlotScript -f "./dat/mult_1024.dat ./dat/mult_2048.dat ./dat/mult_4096.dat ./dat/mult_8192.dat" -o 1 -d "2 5" -p ./png/mult_time.png -t "Comparison Between Times" -y "Execution Time" -x "Matrix Size" -l "NormalTime-1024 TraspTime-1024 NormalTime-2048 TraspTime-2048 NormalTime-4096 TraspTime-4096 NormalTime-8192 TraspTime-8192"
+./$ejecutablePlotScript -f "$plotFiles" -o $plotXColumn -d "$plotYColumnNorm" -p $plotNormPng -t "$plotNormTitle" -y "$plotYLabelCache" -x "$plotXLabel" -l "$plotNormEtiquetas"
+./$ejecutablePlotScript -f "$plotFiles" -o $plotXColumn -d "$plotYColumnTrasp" -p $plotTraspPng -t "$plotTraspTitle" -y "$plotYLabelCache" -x "$plotXLabel" -l "$plotTraspEtiquetas"
+./$ejecutablePlotScript -f "$plotFiles" -o $plotXColumn -d "$plotYColumnTime" -p $plotTimePng -t "$plotTimeTitle" -y "$plotYLabelTime" -x "$plotXLabel" -l "$plotTimeEtiquetas"
 
 # abrimos las imagenes
-xdg-open png/multNorm_cache.png
-xdg-open png/multTrasp_cache.png
-xdg-open png/mult_time.png
+#xdg-open png/multNorm_cache.png
+#xdg-open png/multTrasp_cache.png
+#xdg-open png/mult_time.png
