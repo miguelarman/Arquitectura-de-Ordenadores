@@ -1,21 +1,21 @@
 #!/bin/bash
 
-fileAux=salidaAux.dat
+fileAux=./dat/salidaAux.dat
 
-Ninicio=10
-Nfinal=$((Ninicio + 90))
+Ninicio=1
+Nfinal=$((Ninicio + 3))
 Npaso=1
-NIteraciones=2
+NIteraciones=1
 
 TamsCacheN1=( 1024 2048 4096 8192 )
 TamCacheSup=$((8*1024*1024))
 TamLinea=64
 NVias=1
 
-ejecutableSlow=../src/slow
-ejecutableFast=../src/fast
-ejecutablePlotScript=../src/plotScriptAux.sh
-fFPOps=../src/opsFloat
+ejecutableSlow=../src/exes/slow
+ejecutableFast=../src/exes/fast
+ejecutablePlotScript=../src/scripts/plotScript.sh
+fFPOps=../src/exes/opsFloat
 
 # creamos arrays
 declare -a D1mrSlowArray
@@ -85,7 +85,7 @@ for TamCacheN1 in "${TamsCacheN1[@]}"; do
   done
 
   # imprimimos los datos
-  fDatos=cache_$TamCacheN1.dat
+  fDatos=./dat/cache_$TamCacheN1.dat
   rm -f $fDatos
   touch $fDatos
 
@@ -102,7 +102,8 @@ for TamCacheN1 in "${TamsCacheN1[@]}"; do
   done
 
 done
+rm -f $fileAux
 #ploteamos las graficas
 chmod +x $ejecutablePlotScript
-./$ejecutablePlotScript -f "cache_1024.dat cache_2048.dat cache_4096.dat cache_8192.dat" -o 1 -d "2 4" -p cache_lectura.png -t "Slow-Fast Reading Cache Misses" -y "Number of cache misses" -x "Matrix Size" -l "Cache:1024B-slow Cache:1024B-fast Cache:2048B-slow Cache:2048B-fast Cache:4096B-slow Cache:4096B-fast Cache:8192B-slow Cache:8192B-fast"
-./$ejecutablePlotScript -f "cache_1024.dat cache_2048.dat cache_4096.dat cache_8192.dat" -o 1 -d "3 5" -p cache_escritura.png -t "Slow-Fast Writing Cache Misses" -y "Number of cache misses" -x "Matrix Size" -l "Cache:1024B-slow Cache:1024B-fast Cache:2048B-slow Cache:2048B-fast Cache:4096B-slow Cache:4096B-fast Cache:8192B-slow Cache:8192B-fast"
+./$ejecutablePlotScript -f "./dat/cache_1024.dat ./dat/cache_2048.dat ./dat/cache_4096.dat ./dat/cache_8192.dat" -o 1 -d "2 4" -p ./png/cache_lectura.png -t "Slow-Fast Reading Cache Misses" -y "Number of cache misses" -x "Matrix Size" -l "Cache:1024B-slow Cache:1024B-fast Cache:2048B-slow Cache:2048B-fast Cache:4096B-slow Cache:4096B-fast Cache:8192B-slow Cache:8192B-fast"
+./$ejecutablePlotScript -f "./dat/cache_1024.dat ./dat/cache_2048.dat ./dat/cache_4096.dat ./dat/cache_8192.dat" -o 1 -d "3 5" -p ./png/cache_escritura.png -t "Slow-Fast Writing Cache Misses" -y "Number of cache misses" -x "Matrix Size" -l "Cache:1024B-slow Cache:1024B-fast Cache:2048B-slow Cache:2048B-fast Cache:4096B-slow Cache:4096B-fast Cache:8192B-slow Cache:8192B-fast"

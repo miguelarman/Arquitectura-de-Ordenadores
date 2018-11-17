@@ -4,13 +4,22 @@ FLAGS = -g -Wall -D_GNU_SOURCE
 
 .PHONY: clean all
 
-all: fast slow opsFloat
+all: ./exes/fast ./exes/slow ./exes/opsFloat ./exes/multiplicarMatrices ./exes/multiplicarMatricesTrasp
 
-fast: fast.c arqo3.c
+./exes/fast: ./c/fast.c ./c/arqo3.c
 	gcc $(FLAGS) $(LIB_DIR) -o $@ $^ $(LIBS)
 
-slow: slow.c arqo3.c
+./exes/slow: ./c/slow.c ./c/arqo3.c
+	gcc $(FLAGS) $(LIB_DIR) -o $@ $^ $(LIBS)
+
+./exes/opsFloat: ./c/opsFloat.c
+	gcc $(FLAGS) $(LIB_DIR) -o $@ $^ $(LIBS)
+
+./exes/multiplicarMatrices: ./c/multiplicarMatrices.c ./c/arqo3.c
+	gcc $(FLAGS) $(LIB_DIR) -o $@ $^ $(LIBS)
+
+./exes/multiplicarMatricesTrasp: ./c/multiplicarMatricesTrasp.c ./c/arqo3.c
 	gcc $(FLAGS) $(LIB_DIR) -o $@ $^ $(LIBS)
 
 clean:
-	rm -f *.o *~ fast slow
+	rm -f *.o *~ ./exes/fast ./exes/slow ./exes/opsFloat ./exes/multiplicarMatrices ./exes/multiplicarMatricesTrasp

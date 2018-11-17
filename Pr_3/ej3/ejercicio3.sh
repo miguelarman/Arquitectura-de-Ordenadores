@@ -1,8 +1,8 @@
 #!/bin/bash
 
-fileAux=salidaAux.dat
+fileAux=./dat/salidaAux.dat
 
-Ninicio=10
+Ninicio=1
 Nfinal=$((Ninicio + 5))
 Npaso=1
 NIteraciones=1
@@ -12,10 +12,12 @@ TamCacheSup=$((8*1024*1024))
 TamLinea=64
 NVias=1
 
-ejecutableNormal=multiplicarMatrices
-ejecutableTrasp=multiplicarMatricesTrasp
-ejecutablePlotScript=../src/plotScriptAux.sh
-fFPOps=../src/opsFloat
+ejecutableNormal=../src/exes/multiplicarMatrices
+ejecutableTrasp=../src/exes/multiplicarMatricesTrasp
+ejecutablePlotScript=../src/scripts/plotScript.sh
+fFPOps=../src/exes/opsFloat
+
+fDatos=./dat/mult.dat
 
 # creamos arrays
 declare -a D1mrNormalArray
@@ -88,7 +90,6 @@ for ((NAux = 1 ; NAux <= NIteraciones; NAux += 1)); do
 done
 
 # imprimimos los datos
-fDatos=mult.dat
 rm -f $fDatos
 touch $fDatos
 
@@ -105,8 +106,8 @@ for ((N = Ninicio ; N <= Nfinal ; N += Npaso)); do
   echo "$N	${TimeNormalArray[$indice]} ${D1mrNormalArray[$indice]}	${D1mwNormalArray[$indice]}	${TimeTraspArray[$indice]} ${D1mrTraspArray[$indice]}	${D1mwTraspArray[$indice]}" >> $fDatos
 done
 
-
+rm -f $fileAux
 #ploteamos las graficas
 chmod +x $ejecutablePlotScript
-./$ejecutablePlotScript -f $fDatos -o 1 -d "3 4 6 7" -p mult_cache.png -t "Comparison Betweem Cache Misses" -y "Number of cache misses" -x "Matrix Size" -l "FallosLecturaNormal FallosEscrituraNormal FallosLecturaTrap FallosEscrituraTrasp"
-./$ejecutablePlotScript -f $fDatos -o 1 -d "2 5" -p mult_time.png -t "Comparison Between Times" -y "Execution Time" -x "Matrix Size" -l "NormalTime TraspTime"
+./$ejecutablePlotScript -f $fDatos -o 1 -d "3 4 6 7" -p ./png/mult_cache.png -t "Comparison Betweem Cache Misses" -y "Number of cache misses" -x "Matrix Size" -l "FallosLecturaNormal FallosEscrituraNormal FallosLecturaTrap FallosEscrituraTrasp"
+./$ejecutablePlotScript -f $fDatos -o 1 -d "2 5" -p ./png/mult_time.png -t "Comparison Between Times" -y "Execution Time" -x "Matrix Size" -l "NormalTime TraspTime"
