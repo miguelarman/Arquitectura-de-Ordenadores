@@ -2,10 +2,10 @@
 
 fileAux=salidaAux.dat
 
-Ninicio=1
-Nfinal=$((Ninicio + 1))
+Ninicio=10
+Nfinal=$((Ninicio + 90))
 Npaso=1
-NIteraciones=1
+NIteraciones=2
 
 TamsCacheN1=( 1024 2048 4096 8192 )
 TamCacheSup=$((8*1024*1024))
@@ -37,20 +37,20 @@ for TamCacheN1 in "${TamsCacheN1[@]}"; do
   done
 
   for ((NAux = 1 ; NAux <= NIteraciones; NAux += 1)); do
-    echo "Iteración $NAux de $NIteraciones para caché de $TamCacheN1 empezada"
+    #echo "Iteración $NAux de $NIteraciones para caché de $TamCacheN1 empezada"
 
     #bucle para slow
     ejecutable=$ejecutableSlow
 
     for ((N = Ninicio ; N <= Nfinal ; N += Npaso)); do
-      echo "Running slow $N"
+      #echo "Running slow $N"
 
       indice=$(((N-Ninicio)/Npaso))
 
       rm -f $fileAux
       touch $fileAux
 
-      valgrind --tool=cachegrind --I1=$TamCacheN1,$NVias,$TamLinea --D1=$TamCacheN1,$NVias,$TamLinea --LL=$TamCacheSup,$NVias,$TamLinea --cachegrind-out-file=$fileAux ./$ejecutable $N > salida.txt
+      valgrind --tool=cachegrind --I1=$TamCacheN1,$NVias,$TamLinea --D1=$TamCacheN1,$NVias,$TamLinea --LL=$TamCacheSup,$NVias,$TamLinea --cachegrind-out-file=$fileAux --log-file=/dev/null ./$ejecutable $N > /dev/null
 
       # leemos los fallos de pagina
       D1mr=$(cg_annotate $fileAux | head -n 30 | grep 'PROGRAM TOTALS' | awk '{print $5}')
@@ -59,23 +59,18 @@ for TamCacheN1 in "${TamsCacheN1[@]}"; do
       D1mw=$(cg_annotate $fileAux | head -n 30 | grep 'PROGRAM TOTALS' | awk '{print $8}')
       D1mwSlowArray[$indice]=$(./$fFPOps -s ${D1mwSlowArray[$indice]} $D1mw | awk '{print $1}')
     done
-
-    echo
-
-
     #bucle para fast
     ejecutable=$ejecutableFast
 
     for ((N = Ninicio ; N <= Nfinal ; N += Npaso)); do
-      echo "Running fast $N"
+      #echo "Running fast $N"
 
       indice=$(((N-Ninicio)/Npaso))
 
       rm -f $fileAux
       touch $fileAux
 
-      valgrind --tool=cachegrind --I1=$TamCacheN1,$NVias,$TamLinea --D1=$TamCacheN1,$NVias,$TamLinea --LL=$TamCacheSup,$NVias,$TamLinea --cachegrind-out-file=$fileAux ./$ejecutable $N > salida.txt
-
+      valgrind --tool=cachegrind --I1=$TamCacheN1,$NVias,$TamLinea --D1=$TamCacheN1,$NVias,$TamLinea --LL=$TamCacheSup,$NVias,$TamLinea --cachegrind-out-file=$fileAux --log-file=/dev/null ./$ejecutable $N > /dev/null
       # leemos los fallos de pagina
       D1mr=$(cg_annotate $fileAux | head -n 30 | grep 'PROGRAM TOTALS' | awk '{print $5}')
       D1mrFastArray[$indice]=$(./$fFPOps -s ${D1mrFastArray[$indice]} $D1mr | awk '{print $1}')
@@ -85,8 +80,8 @@ for TamCacheN1 in "${TamsCacheN1[@]}"; do
 
     done
 
-    echo "Iteración $NAux de $NIteraciones para caché de $TamCacheN1 completada"
-    echo
+    #echo "Iteración $NAux de $NIteraciones para caché de $TamCacheN1 completada"
+    #echo
   done
 
   # imprimimos los datos
@@ -111,4 +106,3 @@ done
 chmod +x $ejecutablePlotScript
 ./$ejecutablePlotScript -f "cache_1024.dat cache_2048.dat cache_4096.dat cache_8192.dat" -o 1 -d "2 4" -p cache_lectura.png -t "Slow-Fast Reading Cache Misses" -y "Number of cache misses" -x "Matrix Size" -l "Cache:1024B-slow Cache:1024B-fast Cache:2048B-slow Cache:2048B-fast Cache:4096B-slow Cache:4096B-fast Cache:8192B-slow Cache:8192B-fast"
 ./$ejecutablePlotScript -f "cache_1024.dat cache_2048.dat cache_4096.dat cache_8192.dat" -o 1 -d "3 5" -p cache_escritura.png -t "Slow-Fast Writing Cache Misses" -y "Number of cache misses" -x "Matrix Size" -l "Cache:1024B-slow Cache:1024B-fast Cache:2048B-slow Cache:2048B-fast Cache:4096B-slow Cache:4096B-fast Cache:8192B-slow Cache:8192B-fast"
-rm -f $fileAux salida.txt
