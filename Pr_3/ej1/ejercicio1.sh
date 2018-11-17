@@ -69,3 +69,6 @@ done
 # llamar a gnuplot para generar el gráfico y pasarle directamente por la entrada
 chmod +x $ejecutablePlotScript
 ./$ejecutablePlotScript -f $fDAT -o 1 -d "2 3" -p $fPNG -t "Slow-Fast Execution Time" -y "Execution time (s)" -x "Matrix Size" -l "slow fast"
+
+# abrimos las imagenes
+xdg-open $fPNG

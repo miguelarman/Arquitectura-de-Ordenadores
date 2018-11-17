@@ -111,3 +111,7 @@ rm -f $fileAux
 chmod +x $ejecutablePlotScript
 ./$ejecutablePlotScript -f $fDatos -o 1 -d "3 4 6 7" -p ./png/mult_cache.png -t "Comparison Betweem Cache Misses" -y "Number of cache misses" -x "Matrix Size" -l "FallosLecturaNormal FallosEscrituraNormal FallosLecturaTrap FallosEscrituraTrasp"
 ./$ejecutablePlotScript -f $fDatos -o 1 -d "2 5" -p ./png/mult_time.png -t "Comparison Between Times" -y "Execution Time" -x "Matrix Size" -l "NormalTime TraspTime"
+
+# abrimos las imagenes
+xdg-open png/mult_cache.png
+xdg-open png/mult_time.png

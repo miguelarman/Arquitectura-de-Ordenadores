@@ -113,3 +113,8 @@ chmod +x $ejecutablePlotScript
 ./$ejecutablePlotScript -f "./dat/mult_1024.dat ./dat/mult_2048.dat ./dat/mult_4096.dat ./dat/mult_8192.dat" -o 1 -d "3 6" -p ./png/multNorm_cache.png -t "Comparison Betweem Cache Misses Normal" -y "Number of cache misses" -x "Matrix Size" -l "FallosRdNormal-1024 FallosWrNormal-1024 FallosRdNormal-2048 FallosWrNormal-2048 FallosRdNormal-4096 FallosWrNormal-4096 FallosRdNormal-8192 FallosWrNormal-8192"
 ./$ejecutablePlotScript -f "./dat/mult_1024.dat ./dat/mult_2048.dat ./dat/mult_4096.dat ./dat/mult_8192.dat" -o 1 -d "4 7" -p ./png/multTrasp_cache.png -t "Comparison Betweem Cache Misses Trasp" -y "Number of cache misses" -x "Matrix Size" -l "FallosRdTrasp-1024 FallosWrTrasp-1024 FallosRdTrasp-2048 FallosWrTrasp-2048 FallosRdTrasp-4096 FallosWrTrasp-4096 FallosRdTrasp-8192 FallosWrTrasp-8192"
 ./$ejecutablePlotScript -f "./dat/mult_1024.dat ./dat/mult_2048.dat ./dat/mult_4096.dat ./dat/mult_8192.dat" -o 1 -d "2 5" -p ./png/mult_time.png -t "Comparison Between Times" -y "Execution Time" -x "Matrix Size" -l "NormalTime-1024 TraspTime-1024 NormalTime-2048 TraspTime-2048 NormalTime-4096 TraspTime-4096 NormalTime-8192 TraspTime-8192"
+
+# abrimos las imagenes
+xdg-open png/multNorm_cache.png
+xdg-open png/multTrasp_cache.png
+xdg-open png/mult_time.png
