@@ -2,10 +2,10 @@
 
 fileAux=salidaAux.dat
 
-Ninicio=10
-Nfinal=$((Ninicio + 90))
-Npaso=10
-NIteraciones=10
+Ninicio=1
+Nfinal=$((Ninicio + 1))
+Npaso=1
+NIteraciones=1
 
 TamsCacheN1=( 1024 2048 4096 8192 )
 TamCacheSup=$((8*1024*1024))
@@ -14,6 +14,7 @@ NVias=1
 
 ejecutableSlow=../src/slow
 ejecutableFast=../src/fast
+ejecutablePlotScript=../src/plotScriptAux.sh
 fFPOps=../src/opsFloat
 
 # creamos arrays
@@ -106,9 +107,8 @@ for TamCacheN1 in "${TamsCacheN1[@]}"; do
   done
 
 done
-
 #ploteamos las graficas
-chmod +x plotScript.sh
-./plotScript.sh ${TamsCacheN1[@]}
-
+chmod +x $ejecutablePlotScript
+./$ejecutablePlotScript -f "cache_1024.dat cache_2048.dat cache_4096.dat cache_8192.dat" -o 1 -d "2 4" -p cache_lectura.png -t "Slow-Fast Reading Cache Misses" -y "Number of cache misses" -x "Matrix Size" -l "Cache:1024B-slow Cache:1024B-fast Cache:2048B-slow Cache:2048B-fast Cache:4096B-slow Cache:4096B-fast Cache:8192B-slow Cache:8192B-fast"
+./$ejecutablePlotScript -f "cache_1024.dat cache_2048.dat cache_4096.dat cache_8192.dat" -o 1 -d "3 5" -p cache_escritura.png -t "Slow-Fast Writing Cache Misses" -y "Number of cache misses" -x "Matrix Size" -l "Cache:1024B-slow Cache:1024B-fast Cache:2048B-slow Cache:2048B-fast Cache:4096B-slow Cache:4096B-fast Cache:8192B-slow Cache:8192B-fast"
 rm -f $fileAux salida.txt
