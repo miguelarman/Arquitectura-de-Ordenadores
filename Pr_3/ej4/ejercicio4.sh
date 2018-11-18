@@ -2,10 +2,10 @@
 
 fileAux=./dat/salidaAux.dat
 
-Ninicio=1
-Nfinal=$((Ninicio + 5))
-Npaso=1
-NIteraciones=1
+Ninicio=64+64*5
+Nfinal=$((Ninicio + 64))
+Npaso=4
+NIteraciones=25
 
 TamsCacheN1=( 1024 2048 4096 8192 )
 TamCacheSup=$((8*1024*1024))
@@ -25,8 +25,8 @@ plotYColumnTime="2 5"
 plotNormPng=./png/multNorm_cache.png
 plotTraspPng=./png/multTrasp_cache.png
 plotTimePng=./png/mult_time.png
-plotNormTitle="Comparison Betweem Cache Misses Normal"
-plotTraspTitle="Comparison Betweem Cache Misses Trasp"
+plotNormTitle="Comparison Between Cache Misses Normal"
+plotTraspTitle="Comparison Between Cache Misses Trasp"
 plotTimeTitle="Comparison Between Times"
 plotYLabelCache="Number of cache misses"
 plotYLabelTime="Execution Time"

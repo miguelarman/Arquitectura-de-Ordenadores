@@ -1,0 +1,23 @@
+$ time ./ejercicio1.sh
+
+real	63m53,691s
+user	57m39,945s
+sys	6m15,564s
+
+$ time ./ejercicio2.sh
+
+real	96m31,251s
+user	95m6,225s
+sys	1m45,775s
+
+$ time ./ejercicio3.sh
+
+real	131m41,008s
+user	131m25,284s
+sys	0m22,660s
+
+$ time ./ejercicio4.sh
+
+real	546m7,944s
+user	545m4,852s
+sys	1m31,440s

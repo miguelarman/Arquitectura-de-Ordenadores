@@ -2,10 +2,10 @@
 
 fileAux=./dat/salidaAux.dat
 
-Ninicio=1
-Nfinal=$((Ninicio + 5))
-Npaso=1
-NIteraciones=1
+Ninicio=64+64*5
+Nfinal=$((Ninicio + 64))
+Npaso=4
+NIteraciones=25
 
 TamCacheN1=8192
 TamCacheSup=$((8*1024*1024))
@@ -22,7 +22,7 @@ plotYColumnCache="3 4 6 7"
 plotYColumnTime="2 5"
 plotCachePng=./png/mult_cache.png
 plotTimePng=./png/mult_time.png
-plotCacheTitle="Comparison Betweem Cache Misses"
+plotCacheTitle="Comparison Between Cache Misses"
 plotTimeTitle="Comparison Between Times"
 plotXLabel="Matrix Size"
 plotYLabelCache="Number of cache misses"
