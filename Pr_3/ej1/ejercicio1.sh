@@ -1,12 +1,12 @@
 #!/bin/bash
 
 # inicializar variables
-Ninicio=1
-Npaso=1
-Nfinal=$((Ninicio + 6))
+Ninicio=10000+1024*5
+Npaso=64
+Nfinal=$((Ninicio + 1024))
 fDAT=./dat/time_slow_fast.dat
 fPNG=./png/time_slow_fast.png
-NIteraciones=1
+NIteraciones=25
 fSlow=../src/exes/slow
 fFast=../src/exes/fast
 fFPOps=../src/exes/opsFloat

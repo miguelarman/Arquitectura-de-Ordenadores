@@ -2,10 +2,10 @@
 
 fileAux=./dat/salidaAux.dat
 
-Ninicio=1
-Nfinal=$((Ninicio + 5))
-Npaso=1
-NIteraciones=1
+Ninicio=64+64*5
+Nfinal=$((Ninicio + 64))
+Npaso=4
+NIteraciones=25
 
 TamsCacheN1=( 1024 2048 4096 8192 )
 TamCacheSup=$((8*1024*1024))

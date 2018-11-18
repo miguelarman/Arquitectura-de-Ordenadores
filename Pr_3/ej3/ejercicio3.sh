@@ -2,10 +2,10 @@
 
 fileAux=./dat/salidaAux.dat
 
-Ninicio=1
-Nfinal=$((Ninicio + 5))
-Npaso=1
-NIteraciones=1
+Ninicio=64+64*5
+Nfinal=$((Ninicio + 64))
+Npaso=4
+NIteraciones=25
 
 TamCacheN1=8192
 TamCacheSup=$((8*1024*1024))
@@ -110,7 +110,7 @@ rm -f $fileAux
 #ploteamos las graficas
 chmod +x $ejecutablePlotScript
 ./$ejecutablePlotScript -f $fDatos -o 1 -d "3 4 6 7" -p ./png/mult_cache.png -t "Comparison Betweem Cache Misses" -y "Number of cache misses" -x "Matrix Size" -l "FallosLecturaNormal FallosEscrituraNormal FallosLecturaTrap FallosEscrituraTrasp"
-./$ejecutablePlotScript -f $fDatos -o 1 -d "2 5" -p ./png/mult_time.png -t "Comparison Between Times" -y "Execution Time" -x "Matrix Size" -l "NormalTime TraspTime"
+./$ejecutablePlotScript -f $fDatos -o 1 -d "2 5" -p ./png/mult_time.png -t "Comparison Between Times" -y "Execution Time (s)" -x "Matrix Size" -l "NormalTime TraspTime"
 
 # abrimos las imagenes
 xdg-open png/mult_cache.png
