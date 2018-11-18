@@ -17,6 +17,19 @@ ejecutableFast=../src/exes/fast
 ejecutablePlotScript=../src/scripts/plotScript.sh
 fFPOps=../src/exes/opsFloat
 
+plotFiles="./dat/cache_1024.dat ./dat/cache_2048.dat ./dat/cache_4096.dat ./dat/cache_8192.dat"
+plotRdPng=./png/cache_lectura.png
+plotWrPng=./png/cache_escritura.png
+plotRdTitle="Slow-Fast Reading Cache Misses"
+plotWrTitle="Slow-Fast Writing Cache Misses"
+plotYLabel="Number of cache misses"
+plotXLabel="Matrix Size"
+plotXColumn=1
+plotYColumnRd="2 4"
+plotYColumnWr="3 5"
+plotEtiquetas="Cache:1024B-slow Cache:1024B-fast Cache:2048B-slow Cache:2048B-fast Cache:4096B-slow Cache:4096B-fast Cache:8192B-slow Cache:8192B-fast"
+
+
 # creamos arrays
 declare -a D1mrSlowArray
 declare -a D1mwSlowArray
@@ -105,9 +118,9 @@ done
 rm -f $fileAux
 #ploteamos las graficas
 chmod +x $ejecutablePlotScript
-./$ejecutablePlotScript -f "./dat/cache_1024.dat ./dat/cache_2048.dat ./dat/cache_4096.dat ./dat/cache_8192.dat" -o 1 -d "2 4" -p ./png/cache_lectura.png -t "Slow-Fast Reading Cache Misses" -y "Number of cache misses" -x "Matrix Size" -l "Cache:1024B-slow Cache:1024B-fast Cache:2048B-slow Cache:2048B-fast Cache:4096B-slow Cache:4096B-fast Cache:8192B-slow Cache:8192B-fast"
-./$ejecutablePlotScript -f "./dat/cache_1024.dat ./dat/cache_2048.dat ./dat/cache_4096.dat ./dat/cache_8192.dat" -o 1 -d "3 5" -p ./png/cache_escritura.png -t "Slow-Fast Writing Cache Misses" -y "Number of cache misses" -x "Matrix Size" -l "Cache:1024B-slow Cache:1024B-fast Cache:2048B-slow Cache:2048B-fast Cache:4096B-slow Cache:4096B-fast Cache:8192B-slow Cache:8192B-fast"
+./$ejecutablePlotScript -f "$plotFiles" -o $plotXColumn -d "$plotYColumnRd" -p $plotRdPng -t "$plotRdTitle" -y "$plotYLabel" -x "$plotXLabel" -l "$plotEtiquetas"
+./$ejecutablePlotScript -f "$plotFiles" -o $plotXColumn -d "$plotYColumnWr" -p $plotWrPng -t "$plotWrTitle" -y "$plotYLabel" -x "$plotXLabel" -l "$plotEtiquetas"
 
 # abrimos las imagenes
-xdg-open png/cache_lectura.png
-xdg-open png/cache_escritura.png
+#xdg-open png/cache_lectura.png
+#xdg-open png/cache_escritura.png
