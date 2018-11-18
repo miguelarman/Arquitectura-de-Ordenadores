@@ -16,7 +16,6 @@ real	131m41,008s
 user	131m25,284s
 sys	0m22,660s
 
-
 $ time ./ejercicio4.sh
 
 real	546m7,944s
