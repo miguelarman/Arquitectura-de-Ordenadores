@@ -10,7 +10,7 @@ scriptPlot=src/scripts/plotScript.sh
 
 # Compilamos todo
 cd src
-echo ('make')
+make
 cd ..
 
 
