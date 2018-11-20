@@ -1,23 +1,21 @@
 #!/bin/bash
 
-
-scriptej1=ej1/ejercicio1.sh
-scriptej2=ej2/ejercicio2.sh
-scriptej3=ej3/ejercicio3.sh
-scriptej4=ej4/ejercicio4.sh
-scriptPlot=src/scripts/plotScript.sh
+pathMakefile='src'
+scriptsPaths=( 'ej1/ejercicio1.sh' 'ej2/ejercicio2.sh' 'ej3/ejercicio3.sh' 'ej4/ejercicio4.sh' 'src/scripts/plotScript.sh' )
 
 
-# Compilamos todo
-cd src
+# Compilando todo
+
+echo "-----> Compilando todo de nuevo"
+cd $pathMakefile
+make clean
 make
-cd ..
+cd - > /dev/null
 
 
-# Damos permiso de ejecución a todos los scripts
-chmod +x $scriptej1
-chmod +x $scriptej2
-chmod +x $scriptej3
-chmod +x $scriptej4
+# Damos permisos de ejecución a todos los scripts usados
 
-chmod +x $scriptPlot
+for script in "${scriptsPaths[@]}"; do
+  echo; echo "-----> Dando permisos de ejecución a $script"
+  chmod +x $script
+done
