@@ -31,6 +31,4 @@ void _eliminar_comas(char *s) {
       memmove(&s[i], &s[i + 1], strlen(s) - i);
     }
   }
-
-
 }
