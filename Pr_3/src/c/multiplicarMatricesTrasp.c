@@ -3,7 +3,8 @@
 #include <stdlib.h>
 #include <sys/time.h>
 
-#include "../h/arqo3.h"
+#include "arqo3.h"
+
 void compute(tipo **m1,tipo **m2, tipo **res, int n);
 void trasponer(tipo **m2, tipo **m2_trasp, int n);
 
@@ -60,7 +61,7 @@ void compute(tipo **m1,tipo **m2, tipo **res, int n) {
 		for(j=0;j<n;j++) {
       resultado = (tipo)0;
       for(k=0;k<n;k++) {
-        resultado += (int)m1[i][k]*(int)m2[k][j];
+        resultado += m1[i][k]*m2[k][j];
       }
 			res[i][j]=resultado;
 		}
@@ -71,7 +72,7 @@ void trasponer(tipo **m2, tipo **m2_trasp, int n){
   int i,j;
   for(i=0;i<n;i++) {
     for(j=0;j<n;j++) {
-      m2_trasp[j][i] += m2[i][j];
+      m2_trasp[j][i] = m2[i][j];
     }
   }
 }

@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <sys/time.h>
 
-#include "../h/arqo3.h"
+#include "arqo3.h"
 
 tipo compute(tipo **matrix,int n);
 

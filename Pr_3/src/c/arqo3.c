@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <sys/time.h>
 
-#include "../h/arqo3.h"
+#include "arqo3.h"
 
 tipo ** generateMatrix(int size);
 void freeMatrix(tipo **matrix);
