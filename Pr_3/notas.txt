@@ -30,7 +30,7 @@ qu´e se deben los efectos observados?
 
 Se puede observar que los tiempos de ejecución sifuen una tendencia lineal en ambos cálculos, de forma que la diferencia entre ambos crece de forma lineal. Por otra parte, en los falls de caché la relación entre el acceso en el cáclulo con la traspuesta son tan inferiores, que para la gráfica son demasiado pequeños.
 A priori, podríamos pensar que los accesos a memoria, y por lo tanto los tiempos de ejecución, deberían variar con el tamaño de la matriz de forma cuadrática, puesto que ambas dimensiones varían. Sin embargo, en la gráfica de los tiempos se puede ver que esto no es correcto. Estos se puede deber a varias cosas:
-- Los tiempos de ejecución no son una medida fija, puesto que dependen del ordenador y los otros proseos
+- Los tiempos de ejecución no son una medida fija, puesto que dependen del ordenador y los otros procesos
 - La ejecución con la traspuesta implica también el coste de trasponer la matriz, que se añade al tiempo de cálculo
 - Puede que la variación de tamaño de matriz no sea lo suficientemente grande para apreciar el comportamiento cuaadrático, y lo que apreciamos es una curva muy amplificada que parece recta. Esto se puede deber a que como nos indicó el profesor, reducimos el amaño de las matrices, y la variación de los mismos, ppuesto que el tiempo de ejeución si no se disparaba.
 
