@@ -1,10 +1,10 @@
 Por hacer:
 
-[x] Poner cursiva en slow y fast
-[x] Itemizes en las listas
-[x] Hacer ejercicio 0
-[x] Releer todo
-[ ] Hacer zip y subir a Moodle
+- [x] Poner cursiva en slow y fast
+- [x] Itemizes en las listas
+- [x] Hacer ejercicio 0
+- [x] Releer todo
+- [ ] Hacer zip y subir a Moodle
 
 
 $ cat /proc/cpuinfo
