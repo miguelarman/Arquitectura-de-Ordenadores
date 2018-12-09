@@ -1,12 +1,12 @@
 #!/bin/bash
 
 # inicializar variables
-Ninicio=30000000
-Npaso=10000000
-Nfinal=500000000
-fDAT=./dat/time.dat
-fPNG=./png/time.png
-NIteraciones=10
+Ninicio=1000000
+Npaso=1000000
+Nfinal=10000000
+fDAT=./dat/time_peq.dat
+fPNG=./png/time_peq.png
+NIteraciones=15
 fSerie=../src/exes/pescalar_serie
 fCores=../src/exes/getNCores
 fParallel=../src/exes/pescalar_par2
