@@ -4,8 +4,8 @@
 Ninicio=1000
 Npaso=500
 Nfinal=2000
-fDAT=./dat/time_parte1.dat
-fPNG=./png/time_parte1.png
+fDAT=./dat/time_parte1_cambiada.dat
+fPNG=./png/time_parte1_cambiada.png
 NIteraciones=10
 fMult=../src/exes/mult
 fMult1=../src/exes/mult1
@@ -73,12 +73,10 @@ for ((NAux = 1 ; NAux <= NIteraciones; NAux += 1)); do
     done
   done
 
-  for ((i = 1 ; i <= 4 ; i++)); do
-    for ((N = Ninicio ; N <= Nfinal ; N += Npaso)); do
-      multTime=$(./$fMult $N | grep 'time' | awk '{print $3}')
-      indice=$(((N-Ninicio)/Npaso))
-      multArray[$indice]=$(./$fFPOps -s $multTime ${multArray[$indice]} | awk '{print $1}')
-    done
+  for ((N = Ninicio ; N <= Nfinal ; N += Npaso)); do
+    multTime=$(./$fMult $N | grep 'time' | awk '{print $3}')
+    indice=$(((N-Ninicio)/Npaso))
+    multArray[$indice]=$(./$fFPOps -s $multTime ${multArray[$indice]} | awk '{print $1}')
   done
 
 done
