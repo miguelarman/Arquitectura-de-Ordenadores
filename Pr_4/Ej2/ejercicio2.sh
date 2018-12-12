@@ -94,4 +94,4 @@ chmod +x $exePlotScript
 ./$exePlotScript -f $fDAT -o 1 -d "$dAux" -p $fPNG -t "Serie-Paralelo Execution Time" -y "Execution time (s)" -x "Vector Size" -l "$etiquetas"
 ./$exePlotScript -f $fDAT -o 1 -d "$dAuxSu" -p $fPNGSu -t "Comparación SpeedUp entre Hilos" -y "Aceleración" -x "Vector Size" -l "$etiquetasAux"
 # abrimos las imagenes
-#xdg-open $fPNG
+xdg-open $fPNG

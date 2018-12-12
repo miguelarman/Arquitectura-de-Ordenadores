@@ -1,7 +1,7 @@
 #!/bin/bash
 
 pathMakefile='src'
-scriptsPaths=( 'Ej2/ejercicio2.sh' 'Ej3/ejercicio3.sh' 'Ej3/ejercicio3parte1.sh' 'Ej3/ejercicio3parte2.sh' 'src/scripts/plotScript.sh' )
+scriptsPaths=( 'ej1/ejercicio1.sh' 'ej2/ejercicio2.sh' 'ej3/ejercicio3.sh' 'ej4/ejercicio4.sh' 'src/scripts/plotScript.sh' )
 
 
 # Compilando todo

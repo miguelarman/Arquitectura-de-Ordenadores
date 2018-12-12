@@ -4,8 +4,8 @@
 Ninicio=1000
 Npaso=500
 Nfinal=2000
-fDAT=./dat/time_parte1_cambiada.dat
-fPNG=./png/time_parte1_cambiada.png
+fDAT=./dat/time_parte1.dat
+fPNG=./png/time_parte1.png
 NIteraciones=10
 fMult=../src/exes/mult
 fMult1=../src/exes/mult1
@@ -113,4 +113,4 @@ done
 chmod +x $exePlotScript
 ./$exePlotScript -f $fDAT -o 1 -d "2 3 4 5 6 7 8 9 10 11 12 13 14" -p $fPNG -t "Mult Paralelo Execution Time" -y "Execution time (s)" -x "Vector Size" -l "$etiquetas"
 # abrimos las imagenes
-#xdg-open $fPNG
+xdg-open $fPNG
